@@ -90,24 +90,155 @@ body {
 .envelope-container.open .envelope-paper { transform: translateY(-80px); z-index: 2; }
 
 /* =========================================
-   NAVIGATION HEADER
+   NAVIGATION HEADER (Frosted Vellum Style)
    ========================================= */
-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: rgba(253, 246, 227, 0.98); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(62, 39, 35, 0.08); border-bottom: 1px solid rgba(191, 54, 12, 0.1); animation: slideDown 0.8s ease-out; }
-.brand-container { display: flex; align-items: center; gap: 15px; cursor: pointer; }
-.nav-logo-img { width: 50px; height: auto; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2)); transition: transform 0.3s ease; }
-.brand-container:hover .nav-logo-img { transform: rotate(15deg) scale(1.1); }
-.logo-text { display: flex; flex-direction: column; justify-content: center; }
-.main-logo { font-family: var(--font-display); font-size: 2rem; color: var(--accent-rust); line-height: 1; letter-spacing: 0.5px; }
-.tagline { font-family: var(--font-hand); font-size: 1.1rem; color: var(--text-secondary); margin-top: -2px; margin-left: 2px; }
-.nav-links { list-style: none; display: flex; align-items: center; gap: 35px; }
-.nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 600; font-size: 1rem; position: relative; padding: 5px 0; transition: color 0.3s; }
-.nav-links a::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--accent-rust); transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-radius: 2px; }
-.nav-links a:hover { color: var(--accent-rust); }
-.nav-links a:hover::before { width: 100%; }
-.nav-links a.active::after { content: '✒️'; position: absolute; top: -12px; right: -10px; font-size: 0.8rem; animation: floatPen 2s ease-in-out infinite; }
-.cart-link { border: 1px solid var(--text-secondary); padding: 8px 18px !important; border-radius: 30px; transition: 0.3s; }
-.cart-link:hover { background: var(--accent-rust); border-color: var(--accent-rust); color: white !important; }
-.cart-link:hover::before { width: 0 !important; }
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    
+    /* NEW: Clean White with slight transparency (Vellum effect) */
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px); /* Blurs content behind it */
+    
+    /* NEW: Perforated "Stamp" Border */
+    border-bottom: 2px dashed rgba(191, 54, 12, 0.25); 
+    
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); /* Very soft shadow */
+    animation: slideDown 0.8s ease-out;
+    transition: all 0.3s ease;
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.nav-logo-img {
+    width: 50px;
+    height: auto;
+    /* Soft shadow to lift it off the white */
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1)); 
+    transition: transform 0.3s ease;
+}
+
+.brand-container:hover .nav-logo-img {
+    transform: rotate(15deg) scale(1.05);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-logo {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: #3e2723; /* Dark Brown for contrast against white */
+    line-height: 1;
+    letter-spacing: 0.5px;
+}
+
+.tagline {
+    font-family: var(--font-hand);
+    font-size: 1rem;
+    color: #bf360c; /* Rust Orange for a pop of color */
+    margin-top: 2px;
+    margin-left: 2px;
+}
+
+/* --- LINKS --- */
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #5d4037; /* Medium Brown */
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s;
+}
+
+/* Ink Animation (Rust Color) */
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #bf360c;
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 2px;
+}
+
+.nav-links a:hover {
+    color: #bf360c;
+}
+
+.nav-links a:hover::before {
+    width: 100%;
+}
+
+.nav-links a.active {
+    color: #bf360c;
+}
+
+.nav-links a.active::after {
+    content: '✒️';
+    position: absolute;
+    top: -12px;
+    right: -10px;
+    font-size: 0.8rem;
+    animation: floatPen 2s ease-in-out infinite;
+}
+
+/* --- CART BUTTON (Clean Style) --- */
+.cart-link {
+    border: 1px solid #a1887f;
+    padding: 8px 20px !important;
+    border-radius: 30px;
+    color: #5d4037 !important;
+    transition: 0.3s;
+    background: transparent;
+}
+
+.cart-link:hover {
+    background: #bf360c;
+    border-color: #bf360c;
+    color: #fff !important;
+    box-shadow: 0 3px 8px rgba(191, 54, 12, 0.2);
+}
+
+.cart-link:hover::before {
+    width: 0 !important;
+}
+
+/* Mobile Menu Adjustment */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+    .nav-links {
+        gap: 20px;
+        font-size: 0.9rem;
+    }
+}
 
 /* =========================================
    HERO SECTION (Window Seat + Stationery)
