@@ -5,30 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Sulat Kamay</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <!-- Background Animation -->
-    <div class="autumn-bg">
-        <div class="leaf"></div>
-        <div class="leaf"></div>
-        <div class="leaf"></div>
+    <!-- Atmospheric Background -->
+    <div class="autumn-atmosphere">
+        <div class="bg-item leaf l1">🍂</div>
+        <div class="bg-item bird b1">🕊️</div>
     </div>
 
-    <!-- Navigation -->
     <nav>
         <div class="brand-container" onclick="window.location.href='index.html'">
-            <div class="wax-seal-logo">SK</div>
+            <img src="assets/sk-seal.png" class="nav-logo-img" alt="SK Logo">
             <div class="logo-text">
                 <h1 class="main-logo">Sulat Kamay</h1>
                 <span class="tagline">Handcrafted Memories</span>
             </div>
         </div>
-
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="shop.html">Shop</a></li>
@@ -38,29 +31,24 @@
         </ul>
     </nav>
 
-    <!-- 1. JOSIE'S JOURNEY (Animated Map) -->
+    <!-- JOSIE'S JOURNEY (Animated Ink Map) -->
     <section class="bio-section">
         
-        <!-- LEFT: The Visual Journey Map -->
+        <!-- Visual Map -->
         <div class="bio-visuals">
-            <!-- The Line Drawing -->
+            <!-- The Ink Line -->
             <svg class="journey-svg" viewBox="0 0 400 300">
-                <!-- A path that goes up a mountain and down to a desk -->
-                <path class="journey-path" d="M20,250 
-                         Q60,250 80,200 
-                         T150,120 
-                         T250,80 
-                         T350,200" />
+                <path class="journey-path" d="M20,250 Q60,250 80,200 T150,120 T250,80 T350,200" />
             </svg>
 
-            <!-- The Milestones (Pop up as line passes) -->
+            <!-- Pop-up Milestones -->
             <div class="journey-icon icon-1" data-label="XU Cum Laude">🎓</div>
             <div class="journey-icon icon-2" data-label="Licensed Teacher">🍎</div>
             <div class="journey-icon icon-3" data-label="Hiker at Heart">🏔️</div>
             <div class="journey-icon icon-4" data-label="Sulat Kamay">💌</div>
         </div>
 
-        <!-- RIGHT: The Narrative -->
+        <!-- Narrative -->
         <div class="bio-text">
             <h2>Josie Mae Nuena</h2>
             <span class="bio-subtitle">The Heart Behind the Handwriting</span>
@@ -80,57 +68,34 @@
                 </p>
                 <br>
                 <p>
-                    <strong>Sulat Kamay</strong> is the summit of these passions. I bring the patience of a teacher and the peace of a hiker into every box I pack. I am here to help you capture a moment in time, sealed with wax and warmth.
+                    <strong>Sulat Kamay</strong> is the summit of these passions. I bring the patience of a teacher and the peace of a hiker into every box I pack.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- 2. CONTACT POSTCARD -->
+    <!-- Contact Postcard -->
     <section class="contact-postcard">
         <div class="postcard-left">
-            <h3 style="font-family:'Dancing Script'; font-size:2rem; margin-bottom:20px; color:var(--accent-rust);">Let's Collaborate!</h3>
+            <h3 style="font-family:'Dancing Script'; font-size:2rem; color:var(--accent-rust);">Let's Collaborate!</h3>
             <p>Based in <strong>Cagayan de Oro City, PH</strong>.</p>
-            <br>
-            <p>For orders and custom requests, message us directly on our social media channels.</p>
-            <br>
             <button class="add-btn" onclick="alert('Open Instagram/Facebook to DM!')">Message @SulatKamayPH</button>
         </div>
         <div class="postcard-right">
-            <!-- Stamp -->
-            <div class="stamp-box">
-                <span>🏔️</span>
-            </div>
-            <!-- Address Lines -->
+            <div class="stamp-box"><span>🏔️</span></div>
             <div style="width:100%; border-bottom:1px solid #ccc; margin:15px 0;"></div>
             <div style="width:100%; border-bottom:1px solid #ccc; margin:15px 0;"></div>
-            <div style="width:100%; border-bottom:1px solid #ccc; margin:15px 0;"></div>
-            <p style="font-family:'Dancing Script'; color:#aaa; margin-top:10px; align-self:flex-end;">To: The Dreamers</p>
+            <p style="font-family:'Dancing Script'; color:#aaa; margin-top:10px;">To: The Dreamers</p>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Sulat Kamay. <br>Handmade with love in Cagayan de Oro.</p>
-    </footer>
-
-    <!-- Cart Modal -->
+    <!-- Cart Modal (Same as Index) -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div class="modal-header">
-                <h2>Your Keepsake Box</h2>
-                <p>Memories collected so far...</p>
-            </div>
-            <ul id="cart-items">
-                <!-- JS will inject items here -->
-            </ul>
-            <div class="cart-summary">
-                <div class="total-row">
-                    <span>Total:</span>
-                    <strong>P<span id="cart-total">0.00</span></strong>
-                </div>
-                <button class="cta-button" style="width:100%" onclick="alert('Screenshot this list and DM it to us on Instagram!')">Checkout via DM</button>
-            </div>
+            <div class="modal-header"><h2>Your Keepsake Box</h2></div>
+            <ul id="cart-items"></ul>
+            <div class="cart-summary"><button class="cta-button" style="width:100%">Checkout via DM</button></div>
         </div>
     </div>
 

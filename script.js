@@ -24,8 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('addons-container')) renderShop();
     if (document.getElementById('letter-preview')) initLetterBuilder();
 
-    const typingElement = document.getElementById('typing-text');
-    if (typingElement) setTimeout(() => typeWriter(textToType, 0), 1000); 
+    // Intro Sequence logic only for Home page
+    const introOverlay = document.getElementById('intro-overlay');
+    if (introOverlay) {
+        // Open envelope
+        setTimeout(() => {
+            document.querySelector('.envelope-container').classList.add('open');
+        }, 800);
+
+        // Hide overlay & Start typing
+        setTimeout(() => {
+            introOverlay.style.opacity = '0';
+            setTimeout(() => { introOverlay.style.display = 'none'; }, 800);
+            setTimeout(() => { typeWriter(textToType, 0); }, 500);
+        }, 3000);
+    }
 });
 
 /* =========================================
@@ -40,6 +53,7 @@ function addToCart(id, customItem = null) {
     }
     saveCart();
     updateCartUI();
+    // Simple feedback
     alert("Added to your Keepsake Box! 🍂");
 }
 
@@ -92,7 +106,7 @@ function updateCartUI() {
     }
 }
 
-// Modal Event Listeners
+// Modal Listeners
 const modal = document.getElementById('cart-modal');
 const btn = document.getElementById('cart-btn');
 const close = document.querySelector('.close');
@@ -130,7 +144,7 @@ function renderShop() {
    5. HOME PAGE ANIMATION
    ========================================= */
 const textToType = "My dearest, \n\nI just wanted to remind you that memories with the right people will always remain priceless. \n\nLet's keep this moment forever.";
-const typingSpeed = 60;
+const typingSpeed = 50;
 
 function typeWriter(text, i) {
     const elem = document.getElementById('typing-text');
@@ -139,19 +153,32 @@ function typeWriter(text, i) {
     if (i < text.length) {
         elem.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
         let delay = typingSpeed;
-        if (text.charAt(i) === ',') delay = 400;
-        if (text.charAt(i) === '.') delay = 500;
+        if (text.charAt(i) === ',') delay = 300;
+        if (text.charAt(i) === '.') delay = 400;
         setTimeout(() => typeWriter(text, i + 1), delay);
     } else {
-        const staticSection = document.querySelector('.static-hero-text');
-        const cursor = document.querySelector('.cursor');
-        if(staticSection) staticSection.classList.add('visible');
-        if(cursor) cursor.style.display = 'none';
+        stampTheLetter();
+        setTimeout(() => {
+            const staticSection = document.querySelector('.static-hero-text');
+            const cursor = document.querySelector('.cursor');
+            if(staticSection) staticSection.classList.add('visible');
+            if(cursor) cursor.style.display = 'none';
+        }, 1000);
     }
 }
 
+function stampTheLetter() {
+    const container = document.getElementById('final-stamp-container');
+    if(!container) return;
+    const stampImg = document.createElement('img');
+    stampImg.src = 'assets/sk-seal.png';
+    stampImg.alt = 'Sulat Kamay Seal';
+    stampImg.className = 'sk-stamp-img stamp-animation';
+    container.appendChild(stampImg);
+}
+
 /* =========================================
-   6. BUILDER LOGIC (Customize Page)
+   6. BUILDER LOGIC
    ========================================= */
 let builderState = { selectedBox: null, addons: [], letter: { to: '', body: '' } };
 
@@ -170,7 +197,7 @@ function initLetterBuilder() {
 function selectBox(id, price, theme) {
     builderState.selectedBox = { id, name: `Curated Box "${theme}"`, price, theme };
     document.querySelectorAll('.selection-card').forEach(card => card.classList.remove('selected'));
-    // Handle Flowers plural/singular
+    
     let themeClass = `.theme-${theme.toLowerCase()}`;
     if(theme === 'Flowers') themeClass = '.theme-flowers'; 
     
