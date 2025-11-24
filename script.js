@@ -170,9 +170,9 @@ function initLetterBuilder() {
 function selectBox(id, price, theme) {
     builderState.selectedBox = { id, name: `Curated Box "${theme}"`, price, theme };
     document.querySelectorAll('.selection-card').forEach(card => card.classList.remove('selected'));
-    // Logic to find matching theme class (plural or singular handling)
+    // Handle Flowers plural/singular
     let themeClass = `.theme-${theme.toLowerCase()}`;
-    if(theme === 'Flowers') themeClass = '.theme-flowers'; // Fix for plural issue
+    if(theme === 'Flowers') themeClass = '.theme-flowers'; 
     
     const card = document.querySelector(themeClass);
     if(card) card.classList.add('selected');

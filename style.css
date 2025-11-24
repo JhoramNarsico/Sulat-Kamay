@@ -19,6 +19,7 @@
 body {
     font-family: var(--font-serif);
     background-color: var(--bg-paper);
+    /* Subtle paper grain texture */
     background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
     color: var(--text-primary);
     overflow-x: hidden;
@@ -39,6 +40,9 @@ body {
 @keyframes blink { 50% { opacity: 0; } }
 @keyframes drawInk { to { stroke-dashoffset: 0; } }
 @keyframes slideUpFade { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes drawPath { to { stroke-dashoffset: 0; } }
+@keyframes popIn { to { opacity: 1; transform: scale(1); } }
+@keyframes floatIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
 /* =========================================
    BACKGROUND & DECOR
@@ -94,7 +98,7 @@ nav {
 .cart-link:hover::before { width: 0 !important; }
 
 /* =========================================
-   HOME: HERO SECTION (Desk Flatlay)
+   HOME: HERO SECTION
    ========================================= */
 .hero {
     min-height: 90vh; display: flex; align-items: center; justify-content: center;
@@ -312,20 +316,24 @@ h2::after { content: "🍂"; display: block; font-size: 1.5rem; margin-top: 10px
    ABOUT PAGE: JOSIE'S JOURNEY
    ========================================= */
 .bio-section { max-width: 1100px; margin: 0 auto; padding: 80px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 60px; position: relative; }
-.bio-image-wrapper { flex: 1; min-width: 300px; position: relative; display: flex; justify-content: center; z-index: 2; }
-.bio-photo { width: 320px; height: auto; background: #fff; padding: 15px 15px 60px 15px; box-shadow: 5px 10px 25px rgba(62, 39, 35, 0.15); transform: rotate(-3deg); transition: 0.5s; }
-.bio-photo:hover { transform: rotate(0deg) scale(1.02); }
-.bio-tape { position: absolute; width: 140px; height: 40px; background-color: rgba(191, 54, 12, 0.8); top: -15px; left: 50%; transform: translateX(-50%) rotate(2deg); opacity: 0.9; z-index: 3; clip-path: polygon(0% 10%, 5% 0%, 10% 10%, 95% 0%, 100% 10%, 100% 90%, 95% 100%, 5% 100%, 0% 90%); }
-.bio-text { flex: 1.3; min-width: 300px; z-index: 2; }
-.bio-text h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 5px; }
+/* Left side visual map */
+.bio-visuals { flex: 1; min-width: 300px; height: 400px; position: relative; background: #fff; border-radius: 5px; box-shadow: 10px 10px 30px rgba(62, 39, 35, 0.1); border: 1px solid #e0e0e0; overflow: hidden; background-image: linear-gradient(#e0e0e0 1px, transparent 1px), linear-gradient(90deg, #e0e0e0 1px, transparent 1px); background-size: 40px 40px; transform: rotate(-2deg); }
+/* Washi Tape on map */
+.bio-visuals::before { content: ''; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 120px; height: 35px; background-color: rgba(191, 54, 12, 0.7); clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%); z-index: 10; }
+.journey-svg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+.journey-path { fill: none; stroke: var(--text-primary); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawPath 4s linear forwards 0.5s; }
+.journey-icon { position: absolute; font-size: 2.5rem; background: #fff; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 3px 3px 10px rgba(0,0,0,0.1); border: 2px dashed var(--accent-rust); opacity: 0; transform: scale(0); animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, floatIcon 3s ease-in-out infinite; }
+.icon-1 { top: 60%; left: 10%; animation-delay: 1s, 1.5s; }
+.icon-2 { top: 30%; left: 35%; animation-delay: 2s, 2.5s; }
+.icon-3 { top: 15%; left: 60%; animation-delay: 3s, 3.5s; }
+.icon-4 { top: 55%; left: 80%; animation-delay: 4s, 4.5s; }
+.journey-icon::after { content: attr(data-label); position: absolute; bottom: -25px; font-size: 0.8rem; font-family: var(--font-hand); color: var(--text-secondary); white-space: nowrap; font-weight: bold; }
+
+.bio-text { flex: 1.2; min-width: 300px; }
+.bio-text h2 { font-family: var(--font-display); font-size: 3rem; color: var(--text-primary); margin-bottom: 5px; }
 .bio-subtitle { font-family: var(--font-hand); color: var(--accent-rust); font-size: 1.6rem; display: block; margin-bottom: 25px; }
-.bio-badges { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
-.badge { background: #fff; border: 1px dashed var(--text-secondary); padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: bold; }
-.bio-desc { font-size: 1.1rem; text-align: justify; }
-.highlight-text { background: linear-gradient(120deg, rgba(255, 183, 77, 0.4) 0%, rgba(255, 183, 77, 0.1) 100%); padding: 0 5px; }
-.mountain-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; pointer-events: none; z-index: 1; overflow: hidden; }
-.mountain-svg { width: 100%; height: 100%; position: absolute; bottom: -10px; }
-.mountain-path { fill: none; stroke: var(--text-primary); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 2000; stroke-dashoffset: 2000; opacity: 0.3; animation: drawInk 4s ease-out forwards 0.5s; }
+.bio-desc { font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); text-align: justify; position: relative; padding-left: 20px; border-left: 3px solid rgba(191, 54, 12, 0.2); }
+.highlight-text { background: linear-gradient(120deg, rgba(255, 183, 77, 0.4) 0%, rgba(255, 183, 77, 0.1) 100%); padding: 0 5px; border-radius: 4px; }
 
 .contact-postcard { background: #fff; padding: 40px; display: flex; flex-wrap: wrap; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 900px; margin: 0 auto 80px auto; background-image: repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(191, 54, 12, 0.05) 10px, rgba(191, 54, 12, 0.05) 20px); }
 .postcard-left { flex: 1; border-right: 2px solid #ddd; padding-right: 30px; }
