@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Sulat Kamay</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Background Animation -->
+    <div class="autumn-bg">
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Sulat Kamay</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="customize.html">Write</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="#" id="cart-btn">Cart (<span id="cart-count">0</span>)</a></li>
+        </ul>
+    </nav>
+
+    <!-- 1. JOSIE'S BIO SECTION (Journal Page Style) -->
+    <section class="bio-section">
+        
+        <!-- The Ink Doodle Animation (Positioned Absolute at Bottom) -->
+        <div class="mountain-container">
+            <svg class="mountain-svg" viewBox="0 0 1000 150" preserveAspectRatio="none">
+                <!-- A long, hand-drawn mountain range doodle -->
+                <path class="mountain-path" d="M0,150 
+                         C50,150 100,120 150,100 
+                         L200,50 L250,90 
+                         L300,30 L380,110 
+                         L450,60 L520,130 
+                         C600,130 650,90 700,70 
+                         L780,20 L850,100 
+                         L920,80 L1000,150" />
+            </svg>
+        </div>
+
+        <!-- Left: The Polaroid Photo -->
+        <div class="bio-image-wrapper">
+            <div class="bio-tape"></div> <!-- Washi Tape Decor -->
+            <!-- Replace 'assets/josie-profile.jpg' with the actual photo file -->
+            <img src="assets/josie-profile.jpg" alt="Josie Mae Nuena" class="bio-photo" onerror="this.src='https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">
+        </div>
+
+        <!-- Right: The Story -->
+        <div class="bio-text">
+            <h2>Josie Mae Nuena</h2>
+            <span class="bio-subtitle">Founder & Licensed Teacher</span>
+            
+            <div class="bio-badges">
+                <span class="badge">🎓 Cum Laude (XU)</span>
+                <span class="badge">🍎 SPED Educator</span>
+                <span class="badge">🏔️ Hiker</span>
+            </div>
+
+            <div class="bio-desc">
+                <p>
+                    Before Sulat Kamay, I dedicated myself to the classroom. Graduating <strong>Cum Laude</strong> with a degree in <span class="highlight-text">Special Needs Education</span> from Xavier University, I learned that every student has a unique language of love and learning.
+                </p>
+                <br>
+                <p>
+                    Outside the classroom, you’ll find me on the trails. <strong>Hiking is my sanctuary.</strong> The mountains taught me that the most breathtaking views require patience and persistence—much like creating a handmade gift.
+                </p>
+                <br>
+                <p>
+                    I started <strong>Sulat Kamay</strong> to blend these two worlds. Just like a difficult hike or a lesson plan, crafting a custom letter requires heart, patience, and a personal touch. I’m here to help you express what matters most.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. CONTACT POSTCARD -->
+    <section class="contact-postcard">
+        <div class="postcard-left">
+            <h3 style="font-family:'Dancing Script'; font-size:2rem; margin-bottom:20px; color:var(--accent-rust);">Let's Collaborate!</h3>
+            <p>Based in <strong>Cagayan de Oro City, PH</strong>.</p>
+            <br>
+            <p>For orders and custom requests, message us directly on our social media channels.</p>
+            <br>
+            <button class="add-btn" onclick="alert('Open Instagram/Facebook to DM!')">Message @SulatKamayPH</button>
+        </div>
+        <div class="postcard-right">
+            <!-- Stamp -->
+            <div class="stamp-box">
+                <span>🏔️</span>
+            </div>
+            <!-- Address Lines -->
+            <div style="width:100%; border-bottom:1px solid #ccc; margin:15px 0;"></div>
+            <div style="width:100%; border-bottom:1px solid #ccc; margin:15px 0;"></div>
+            <div style="width:100%; border-bottom:1px solid #ccc; margin:15px 0;"></div>
+            <p style="font-family:'Dancing Script'; color:#aaa; margin-top:10px; align-self:flex-end;">To: The Dreamers</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sulat Kamay. <br>Handmade with love in Cagayan de Oro.</p>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Your Keepsake Box</h2>
+            <ul id="cart-items"></ul>
+            <div class="cart-summary">
+                <p>Total: <strong>P<span id="cart-total">0.00</span></strong></p>
+                <button class="checkout-btn" onclick="alert('Please take a screenshot of your cart and send it to our FB/IG page!')">Checkout via DM</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
