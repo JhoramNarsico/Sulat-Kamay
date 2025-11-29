@@ -97,18 +97,13 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
-    
-    /* NEW: Clean White with slight transparency (Vellum effect) */
     background-color: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(8px); /* Blurs content behind it */
-    
-    /* NEW: Perforated "Stamp" Border */
+    backdrop-filter: blur(8px); 
     border-bottom: 2px dashed rgba(191, 54, 12, 0.25); 
-    
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); /* Very soft shadow */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     animation: slideDown 0.8s ease-out;
     transition: all 0.3s ease;
 }
@@ -123,7 +118,6 @@ nav {
 .nav-logo-img {
     width: 50px;
     height: auto;
-    /* Soft shadow to lift it off the white */
     filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1)); 
     transition: transform 0.3s ease;
 }
@@ -141,7 +135,7 @@ nav {
 .main-logo {
     font-family: var(--font-display);
     font-size: 1.8rem;
-    color: #3e2723; /* Dark Brown for contrast against white */
+    color: #3e2723;
     line-height: 1;
     letter-spacing: 0.5px;
 }
@@ -149,7 +143,7 @@ nav {
 .tagline {
     font-family: var(--font-hand);
     font-size: 1rem;
-    color: #bf360c; /* Rust Orange for a pop of color */
+    color: #bf360c;
     margin-top: 2px;
     margin-left: 2px;
 }
@@ -164,7 +158,7 @@ nav {
 
 .nav-links a {
     text-decoration: none;
-    color: #5d4037; /* Medium Brown */
+    color: #5d4037;
     font-weight: 600;
     font-size: 1rem;
     position: relative;
@@ -206,7 +200,7 @@ nav {
     animation: floatPen 2s ease-in-out infinite;
 }
 
-/* --- CART BUTTON (Clean Style) --- */
+/* --- CART BUTTON --- */
 .cart-link {
     border: 1px solid #a1887f;
     padding: 8px 20px !important;
@@ -241,31 +235,26 @@ nav {
 }
 
 /* =========================================
-   HERO SECTION (Window Seat + Stationery)
+   HERO SECTION
    ========================================= */
 .hero { min-height: 90vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 20px; opacity: 0; animation: fadeInUp 1s 0.2s forwards; }
 
-/* The Stationery Paper Look */
 .hero-paper {
     width: 100%; max-width: 650px; padding: 60px 50px;
     position: relative; z-index: 10; transform: rotate(-2deg);
-    /* Cream background + Guidelines */
     background-color: #fdfbf7;
     background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'), repeating-linear-gradient(transparent, transparent 39px, rgba(62, 39, 35, 0.1) 40px);
     background-size: auto, 100% 40px; background-attachment: local;
-    /* Depth */
     border: 1px solid rgba(0,0,0,0.05);
     box-shadow: 0 10px 30px rgba(62, 39, 35, 0.15), inset 0 0 40px rgba(255, 248, 225, 0.5), 0 1px 0 rgba(255,255,255,0.5) inset;
     border-radius: 2px;
 }
-/* Margin line */
 .hero-paper::before { content: ''; position: absolute; top: 0; left: 40px; width: 2px; height: 100%; background-color: rgba(255, 0, 0, 0.05); pointer-events: none; }
 
-/* The Handwritten Text */
 .handwriting-container {
     min-height: 160px; font-family: var(--font-hand); font-size: 2.4rem;
     line-height: 40px; /* Matches grid lines */
-    color: #3e2723; /* Ink Color */
+    color: #3e2723;
     margin-bottom: 30px; text-shadow: 1px 1px 0px rgba(0,0,0,0.05); padding-top: 5px;
 }
 .cursor { display: inline-block; width: 2px; height: 30px; background-color: var(--accent-rust); animation: blink 1s infinite; margin-bottom: -5px; }
@@ -437,13 +426,13 @@ h2::after { content: "🍂"; display: block; font-size: 1.5rem; margin-top: 10px
 .checkout-btn:hover { background: #a02c0a; }
 
 /* =========================================
-   ABOUT PAGE: JOSIE'S JOURNEY
+   HOW TO ORDER & ABOUT PAGE STYLES
    ========================================= */
 .bio-section { max-width: 1100px; margin: 0 auto; padding: 80px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 60px; position: relative; }
 .bio-visuals { flex: 1; min-width: 300px; height: 400px; position: relative; background: #fff; border-radius: 5px; box-shadow: 10px 10px 30px rgba(62, 39, 35, 0.1); border: 1px solid #e0e0e0; overflow: hidden; background-image: linear-gradient(#e0e0e0 1px, transparent 1px), linear-gradient(90deg, #e0e0e0 1px, transparent 1px); background-size: 40px 40px; transform: rotate(-2deg); }
 .bio-visuals::before { content: ''; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 120px; height: 35px; background-color: rgba(191, 54, 12, 0.7); clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%); z-index: 10; }
 .journey-svg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
-.journey-path { fill: none; stroke: var(--text-primary); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawPath 4s linear forwards 0.5s; }
+.journey-path { fill: none; stroke: var(--text-primary); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawInk 4s linear forwards 0.5s; }
 .journey-icon { position: absolute; font-size: 2.5rem; background: #fff; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 3px 3px 10px rgba(0,0,0,0.1); border: 2px dashed var(--accent-rust); opacity: 0; transform: scale(0); animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, floatIcon 3s ease-in-out infinite; }
 .icon-1 { top: 60%; left: 10%; animation-delay: 1s, 1.5s; }
 .icon-2 { top: 30%; left: 35%; animation-delay: 2s, 2.5s; }
@@ -459,6 +448,24 @@ h2::after { content: "🍂"; display: block; font-size: 1.5rem; margin-top: 10px
 .postcard-left { flex: 1; border-right: 2px solid #ddd; padding-right: 30px; }
 .postcard-right { flex: 1; padding-left: 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .stamp-box { width: 80px; height: 90px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 2rem; align-self: flex-end; color: #ccc; }
+
+/* NEW: Process List & Step Markers */
+.process-list { list-style: none; padding: 0; margin-top: 10px; }
+.process-list li { display: flex; gap: 20px; margin-bottom: 25px; opacity: 0; animation: fadeInUp 0.5s ease forwards; }
+.process-list li:nth-child(1) { animation-delay: 0.2s; }
+.process-list li:nth-child(2) { animation-delay: 0.4s; }
+.process-list li:nth-child(3) { animation-delay: 0.6s; }
+.process-list li:nth-child(4) { animation-delay: 0.8s; }
+.step-marker { background-color: var(--accent-rust); color: #fff; width: 30px; height: 30px; min-width: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: bold; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); position: relative; z-index: 2; }
+.process-list li:not(:last-child) .step-marker::after { content: ''; position: absolute; top: 30px; left: 50%; transform: translateX(-50%); width: 2px; height: 60px; background: #e0e0e0; z-index: 1; }
+.step-detail strong { display: block; font-family: var(--font-display); font-size: 1.1rem; color: var(--text-primary); margin-bottom: 5px; }
+.step-detail p { font-family: var(--font-serif); font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; }
+.step-detail a { color: var(--accent-rust); text-decoration: underline; }
+
+/* NEW: Info Grid for Payment */
+.info-grid { display: flex; gap: 30px; margin-top: 20px; }
+.info-item strong { display: block; color: var(--text-primary); margin-bottom: 8px; font-family: var(--font-display); border-bottom: 1px dashed var(--accent-gold); padding-bottom: 2px; display: inline-block; }
+.info-item p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
 
 /* =========================================
    ENHANCED KEEPSAKE BOX (MODAL)
@@ -484,7 +491,7 @@ h2::after { content: "🍂"; display: block; font-size: 1.5rem; margin-top: 10px
 .remove-btn { background: none; border: none; color: #999; cursor: pointer; font-size: 0.8rem; text-decoration: underline; margin-top: 5px; }
 .remove-btn:hover { color: #d32f2f; }
 .cart-summary { padding: 25px; background: #fff; border-top: 2px solid var(--accent-rust); text-align: center; }
-.total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-family: var(--font-display); font-size: 1.4rem; color: var(--text-primary); }
+.total-row, .cart-total-display { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-family: var(--font-display); font-size: 1.4rem; color: var(--text-primary); }
 .empty-cart-msg { text-align: center; padding: 50px 20px; color: var(--text-secondary); }
 .empty-icon { font-size: 3rem; display: block; margin-bottom: 15px; opacity: 0.5; }
 .shop-link { color: var(--accent-rust); font-weight: bold; cursor: pointer; text-decoration: underline; }
@@ -507,4 +514,7 @@ footer { background: var(--text-primary); color: #d7ccc8; padding: 40px; text-al
     .builder-summary { flex-direction: column; gap: 10px; padding: 15px; }
     .summary-action { width: 100%; justify-content: space-between; }
     .writing-desk { flex-direction: column; }
+    /* New Mobile Fixes */
+    .process-list li:not(:last-child) .step-marker::after { display: none; }
+    .info-grid { flex-direction: column; gap: 20px; }
 }

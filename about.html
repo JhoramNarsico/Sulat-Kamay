@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Sulat Kamay</title>
+    <title>How to Order | Sulat Kamay</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -12,6 +12,7 @@
     <div class="autumn-atmosphere">
         <div class="bg-item leaf l1">🍂</div>
         <div class="bg-item bird b1">🕊️</div>
+        <div class="bg-item floater f2">📦</div>
     </div>
 
     <nav>
@@ -26,76 +27,102 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="shop.html">Shop</a></li>
             <li><a href="customize.html">Write</a></li>
-            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="about.html" class="active">How to Order</a></li>
             <li><a href="#" id="cart-btn" class="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
         </ul>
     </nav>
 
-    <!-- JOSIE'S JOURNEY (Animated Ink Map) -->
-    <section class="bio-section">
+    <!-- THE ORDERING JOURNEY (Animated Ink Map) -->
+    <section class="bio-section guide-section">
         
         <!-- Visual Map -->
         <div class="bio-visuals">
             <!-- The Ink Line -->
             <svg class="journey-svg" viewBox="0 0 400 300">
-                <path class="journey-path" d="M20,250 Q60,250 80,200 T150,120 T250,80 T350,200" />
+                <!-- Path adapted to look like a process flow -->
+                <path class="journey-path" d="M30,250 Q60,250 80,200 T150,120 T250,80 T350,150" />
             </svg>
 
-            <!-- Pop-up Milestones -->
-            <div class="journey-icon icon-1" data-label="XU Cum Laude">🎓</div>
-            <div class="journey-icon icon-2" data-label="Licensed Teacher">🍎</div>
-            <div class="journey-icon icon-3" data-label="Hiker at Heart">🏔️</div>
-            <div class="journey-icon icon-4" data-label="Sulat Kamay">💌</div>
+            <!-- Pop-up Steps -->
+            <div class="journey-icon icon-1" data-label="1. Curate">🛒</div>
+            <div class="journey-icon icon-2" data-label="2. Compose">✍️</div>
+            <div class="journey-icon icon-3" data-label="3. Capture">📸</div>
+            <div class="journey-icon icon-4" data-label="4. Confirm">💳</div>
         </div>
 
-        <!-- Narrative -->
+        <!-- Instructions -->
         <div class="bio-text">
-            <h2>Josie Mae Nuena</h2>
-            <span class="bio-subtitle">The Heart Behind the Handwriting</span>
+            <h2>How to Order</h2>
+            <span class="bio-subtitle">From our hands to yours.</span>
             
             <div class="bio-desc">
-                <p>
-                    My journey wasn't a straight line; it was a climb. 
-                    It began in the halls of <strong>Xavier University</strong>, graduating <span class="highlight-text">Cum Laude</span> with a degree in Special Needs Education.
-                </p>
-                <br>
-                <p>
-                    As a <strong>Licensed Professional Teacher</strong>, I learned that every person processes love differently. But when the classroom walls felt too small, I looked up.
-                </p>
-                <br>
-                <p>
-                    <strong>Hiking became my escape.</strong> Scaling the mountains of Mindanao taught me that the best views come after the hardest climbs. It taught me patience, silence, and the beauty of slowing down.
-                </p>
-                <br>
-                <p>
-                    <strong>Sulat Kamay</strong> is the summit of these passions. I bring the patience of a teacher and the peace of a hiker into every box I pack.
-                </p>
+                <ul class="process-list">
+                    <li>
+                        <span class="step-marker">1</span>
+                        <div class="step-detail">
+                            <strong>Curate Your Box</strong>
+                            <p>Visit the <a href="shop.html">Shop</a> and choose a base package (Love, Cute, or Flowers). Add little extras like chocolates or dried flowers to make it unique.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-marker">2</span>
+                        <div class="step-detail">
+                            <strong>Write Your Letter</strong>
+                            <p>Go to the <a href="customize.html">Write</a> page. Type your message, and we will handwrite it on vintage paper, sealed with wax.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-marker">3</span>
+                        <div class="step-detail">
+                            <strong>Capture & DM</strong>
+                            <p>Open your Cart icon (top right). Take a <strong>screenshot</strong> of your summary and send it to our Instagram <strong>@SulatKamayPH</strong>.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-marker">4</span>
+                        <div class="step-detail">
+                            <strong>Payment & Fulfillment</strong>
+                            <p>We accept GCash or Bank Transfer. Once paid, we begin crafting your box. Lead time is 3-5 days.</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- Contact Postcard -->
+    <!-- Payment & Shipping Postcard -->
     <section class="contact-postcard">
         <div class="postcard-left">
-            <h3 style="font-family:'Dancing Script'; font-size:2rem; color:var(--accent-rust);">Let's Collaborate!</h3>
-            <p>Based in <strong>Cagayan de Oro City, PH</strong>.</p>
-            <button class="add-btn" onclick="alert('Open Instagram/Facebook to DM!')">Message @SulatKamayPH</button>
+            <h3 style="font-family:'Dancing Script'; font-size:2rem; color:var(--accent-rust);">Payment & Shipping</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Payment Options:</strong>
+                    <p>• GCash<br>• BPI / BDO Transfer<br>• Maya</p>
+                </div>
+                <div class="info-item">
+                    <strong>Shipping:</strong>
+                    <p>• J&T Express (Nationwide)<br>• Maxim/Grab (CDO City only)<br>• Meet-ups (XU / Divisoria)</p>
+                </div>
+            </div>
         </div>
         <div class="postcard-right">
-            <div class="stamp-box"><span>🏔️</span></div>
+            <div class="stamp-box"><span>✈️</span></div>
             <div style="width:100%; border-bottom:1px solid #ccc; margin:15px 0;"></div>
             <div style="width:100%; border-bottom:1px solid #ccc; margin:15px 0;"></div>
-            <p style="font-family:'Dancing Script'; color:#aaa; margin-top:10px;">To: The Dreamers</p>
+            <p style="font-family:'Dancing Script'; color:#aaa; margin-top:10px;">To: The Sender</p>
         </div>
     </section>
 
-    <!-- Cart Modal (Same as Index) -->
+    <!-- Cart Modal -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="modal-header"><h2>Your Keepsake Box</h2></div>
             <ul id="cart-items"></ul>
-            <div class="cart-summary"><button class="cta-button" style="width:100%">Checkout via DM</button></div>
+            <div class="cart-summary">
+                <p class="cart-total-display">Total: <strong>P<span id="cart-total">0.00</span></strong></p>
+                <button class="cta-button" style="width:100%" onclick="alert('Please take a screenshot of this list and DM it to @SulatKamayPH on Instagram to finalize your order!')">Checkout via DM</button>
+            </div>
         </div>
     </div>
 
