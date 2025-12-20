@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop | Sulat Kamay</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Link to Main CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Background -->
+    <!-- Background Leaves -->
     <div class="autumn-bg"><div class="leaf"></div><div class="leaf"></div></div>
 
     <!-- Navigation -->
     <nav>
         <div class="brand-container" onclick="window.location.href='index.html'">
-            <div class="wax-seal-logo">SK</div>
+            <img src="assets/sk-seal.png" class="nav-logo-img" alt="SK Logo">
             <div class="logo-text">
                 <h1 class="main-logo">Sulat Kamay</h1>
                 <span class="tagline">Handcrafted Memories</span>
@@ -29,108 +33,136 @@
         </ul>
     </nav>
 
+    <!-- Full Screen Intro (Title Card) -->
     <header class="shop-intro">
         <h2>The Collection</h2>
         <p>Find the perfect package for your story.</p>
+        
+        <!-- Scroll Down Arrow -->
+        <div class="scroll-indicator" onclick="document.querySelector('.showroom-love').scrollIntoView({behavior: 'smooth'})">
+            ↓
+        </div>
     </header>
 
     <!-- ==========================================
-         SHOWROOM 1: THE GRAND SUITE (LOVE)
+         SECTION 1: LOVE COLLECTION (Snapped)
          ========================================== -->
     <section class="showroom showroom-love">
-        <div class="showroom-content">
-            <div class="showroom-text">
-                <span class="tag-grand">★ The Grand Showroom</span>
-                <h2>Curated Box "Love"</h2>
-                <p class="description">
-                    The ultimate romantic gesture. This is our most luxurious package, designed to leave a lasting impression. 
-                    It holds the weight of your emotions in every detail.
-                </p>
-                <ul class="features">
-                    <li>✦ Personalized & Printed Letters</li>
-                    <li>✦ Premium Dried Flower Bouquet</li>
-                    <li>✦ 5 Polaroid Memories</li>
-                    <li>✦ Double Wax Seal Finish</li>
-                </ul>
-                <div class="price-block">
-                    <span class="price">P280.00</span>
-                    <button class="add-btn primary" onclick="addToCart(1)">Add to Box</button>
-                </div>
-            </div>
-            <div class="showroom-image">
-                <div class="frame-elegant">
-                    <img src="assets/giftbox-love.jpg" alt="Love Box" onerror="this.src='https://via.placeholder.com/500'">
-                </div>
+        
+        <!-- HEADER INFO -->
+        <div class="showroom-header">
+            <span class="tag-grand">★ The Grand Showroom</span>
+            <h2>Curated Box "Love"</h2>
+            <p class="description">
+                The ultimate romantic gesture. Designed to leave a lasting impression with premium details and double wax seals.
+            </p>
+            <ul class="features">
+                <li>✦ Printed Letters</li>
+                <li>✦ Premium Dried Bouquet</li>
+                <li>✦ 5 Polaroids</li>
+                <li>✦ Gold Accents</li>
+            </ul>
+            <div class="price-block">
+                <span class="price">P280.00</span>
+                <button class="add-btn primary" onclick="addToCart(1)">Add to Box</button>
             </div>
         </div>
+
+        <!-- SAMPLE GALLERY -->
+        <div class="sample-grid">
+            <div class="sample-item">
+                <img src="assets/giftbox-love.jpg" alt="Love Box Classic" onerror="this.src='https://via.placeholder.com/300'">
+                <p class="sample-caption">Classic Romance</p>
+            </div>
+            <div class="sample-item">
+                <img src="assets/giftbox-love.jpg" alt="Love Box Vintage" onerror="this.src='https://via.placeholder.com/300'">
+                <p class="sample-caption">Vintage Theme</p>
+            </div>
+             <div class="sample-item">
+                <img src="assets/giftbox-love.jpg" alt="Love Box Rustic" onerror="this.src='https://via.placeholder.com/300'">
+                <p class="sample-caption">Rustic Edition</p>
+            </div>
+        </div>
+
     </section>
 
     <!-- ==========================================
-         SHOWROOM 2: THE SWEET CORNER (CUTE)
+         SECTION 2: CUTE COLLECTION (Snapped)
          ========================================== -->
     <section class="showroom showroom-cute">
-        <div class="showroom-content reverse">
-            <div class="showroom-text">
-                <span class="tag-sweet">♥ The Sweetest Pick</span>
-                <h2>Curated Box "Cute"</h2>
-                <p class="description">
-                    Short, sweet, and straight to the heart. Perfect for monthsaries, apologies, or "just because." 
-                    Small in size, but massive in sentiment.
-                </p>
-                <ul class="features">
-                    <li>♥ Red Wax Seal Accent</li>
-                    <li>♥ 3 Selected Polaroids</li>
-                    <li>♥ Mini Bouquet</li>
-                    <li>♥ Budget-Friendly Sweetness</li>
-                </ul>
-                <div class="price-block">
-                    <span class="price">P190.00</span>
-                    <button class="add-btn secondary" onclick="addToCart(2)">Add to Box</button>
-                </div>
-            </div>
-            <div class="showroom-image">
-                <div class="frame-tape">
-                    <div class="washi-tape-top"></div>
-                    <img src="assets/giftbox-cute.jpg" alt="Cute Box" onerror="this.src='https://via.placeholder.com/500'">
-                </div>
+        
+        <!-- HEADER INFO -->
+        <div class="showroom-header">
+            <span class="tag-sweet">♥ The Sweetest Pick</span>
+            <h2>Curated Box "Cute"</h2>
+            <p class="description">
+                Short, sweet, and straight to the heart. Perfect for monthsaries, apologies, or "just because."
+            </p>
+            <ul class="features">
+                <li>♥ Red Wax Seal</li>
+                <li>♥ 3 Polaroids</li>
+                <li>♥ Mini Bouquet</li>
+                <li>♥ Budget-Friendly</li>
+            </ul>
+            <div class="price-block">
+                <span class="price">P190.00</span>
+                <button class="add-btn secondary" onclick="addToCart(2)">Add to Box</button>
             </div>
         </div>
+
+        <!-- SAMPLE GALLERY -->
+        <div class="sample-grid">
+            <div class="sample-item">
+                <img src="assets/giftbox-cute.jpg" alt="Cute Box Pink" onerror="this.src='https://via.placeholder.com/300'">
+                <p class="sample-caption">Pink Palette</p>
+            </div>
+            <div class="sample-item">
+                <img src="assets/giftbox-cute.jpg" alt="Cute Box Blue" onerror="this.src='https://via.placeholder.com/300'">
+                <p class="sample-caption">Blue Palette</p>
+            </div>
+        </div>
+
     </section>
 
     <!-- ==========================================
-         SHOWROOM 3: THE ADORABLE GARDEN (FLOWERS)
+         SECTION 3: FLOWERS COLLECTION (Snapped)
          ========================================== -->
     <section class="showroom showroom-flower">
-        <div class="showroom-content">
-            <div class="showroom-text">
-                <span class="tag-friendly">✿ The Friendly Choice</span>
-                <h2>Curated Box "Flowers"</h2>
-                <p class="description">
-                    The DIY Kit. Adorable, approachable, and open for your creativity. 
-                    Gift it to a friend, a sibling, or yourself.
-                </p>
-                <ul class="features">
-                    <li>✿ Complete DIY Stationery Set</li>
-                    <li>✿ 4 Stamped Sheets & Envelopes</li>
-                    <li>✿ Dried Flowers & Wax Seals</li>
-                    <li>✿ Most Accessible Price</li>
-                </ul>
-                <div class="price-block">
-                    <span class="price">P160.00</span>
-                    <button class="add-btn tertiary" onclick="addToCart(3)">Add to Box</button>
-                </div>
-            </div>
-            <div class="showroom-image">
-                <div class="frame-organic">
-                    <img src="assets/giftbox-flowers.jpg" alt="Flowers Box" onerror="this.src='https://via.placeholder.com/500'">
-                </div>
+        
+        <!-- HEADER INFO -->
+        <div class="showroom-header">
+            <span class="tag-friendly">✿ The Friendly Choice</span>
+            <h2>Curated Box "Flowers"</h2>
+            <p class="description">
+                The DIY Kit. Adorable, approachable, and open for your creativity. Gift it to a friend or yourself.
+            </p>
+            <ul class="features">
+                <li>✿ DIY Stationery Set</li>
+                <li>✿ 4 Stamped Sheets</li>
+                <li>✿ Dried Flowers</li>
+                <li>✿ Wax Seals</li>
+            </ul>
+            <div class="price-block">
+                <span class="price">P160.00</span>
+                <button class="add-btn tertiary" onclick="addToCart(3)">Add to Box</button>
             </div>
         </div>
+
+        <!-- SAMPLE GALLERY -->
+        <div class="sample-grid">
+            <div class="sample-item">
+                <img src="assets/giftbox-flowers.jpg" alt="Flowers Kit 1" onerror="this.src='https://via.placeholder.com/300'">
+                <p class="sample-caption">Standard Kit</p>
+            </div>
+            <div class="sample-item">
+                <img src="assets/giftbox-flowers.jpg" alt="Flowers Kit 2" onerror="this.src='https://via.placeholder.com/300'">
+                <p class="sample-caption">Advanced Kit</p>
+            </div>
+        </div>
+
     </section>
 
-    <!-- ==========================================
-         THE ACCESSORY SHOWCASE (ADD-ONS)
-         ========================================== -->
+    <!-- Accessories (Snapped) -->
     <section class="accessories-section">
         <div class="accessories-header">
             <h3>~ Little Showcases ~</h3>
@@ -140,23 +172,41 @@
         <div id="addons-container" class="product-container"></div>
     </section>
 
+    <!-- Footer (Vintage Leather Style) -->
     <footer>
-        <p>&copy; 2025 Sulat Kamay. Handmade in Cagayan de Oro.</p>
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <h3 class="footer-logo">Sulat Kamay</h3>
+                <p class="footer-tagline">Handcrafted Memories</p>
+                <p class="footer-desc">
+                    Capturing emotions in wax, ink, and paper. 
+                    Every box is a story waiting to be told.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sulat Kamay. Handmade with love.</p>
+        </div>
     </footer>
 
     <!-- Cart Modal -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Your Keepsake Box</h2>
+            <div class="modal-header">
+                <h2>Your Keepsake Box</h2>
+                <p>Memories collected so far...</p>
+            </div>
             <ul id="cart-items"></ul>
             <div class="cart-summary">
-                <p>Total: <strong>P<span id="cart-total">0.00</span></strong></p>
-                <button class="checkout-btn">Checkout via DM</button>
+                <div class="total-row"><span>Total:</span><strong>P<span id="cart-total">0.00</span></strong></div>
+                <button class="cta-button" style="width:100%" onclick="alert('Screenshot this list and DM it to us on Instagram!')">Checkout via DM</button>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

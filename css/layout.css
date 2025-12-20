@@ -1,0 +1,180 @@
+/* =========================================
+   NAVIGATION (Vintage Stationery Style)
+   ========================================= */
+nav {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 5%; 
+    background-color: #fdfbf7; 
+    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+    border-bottom: 3px solid #e0e0e0;
+    position: relative;
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    box-shadow: 0 4px 20px rgba(62, 39, 35, 0.08);
+    transition: all 0.3s ease;
+}
+
+nav::after {
+    content: '';
+    position: absolute;
+    bottom: 3px; 
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--accent-rust);
+    opacity: 0.3;
+}
+
+/* --- LOGO AREA --- */
+.brand-container { display: flex; align-items: center; gap: 15px; cursor: pointer; }
+.nav-logo-img { 
+    width: 55px; height: auto; 
+    filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.15)); 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+.brand-container:hover .nav-logo-img { transform: rotate(15deg) scale(1.1); }
+.logo-text { display: flex; flex-direction: column; justify-content: center; }
+.main-logo { 
+    font-family: var(--font-display); font-size: 2rem; color: #3e2723; 
+    line-height: 0.9; letter-spacing: -0.5px;
+}
+.tagline { 
+    font-family: var(--font-hand); font-size: 1.1rem; color: var(--accent-rust); 
+    margin-top: 5px; margin-left: 2px; opacity: 0.9;
+}
+
+/* --- NAV LINKS --- */
+.nav-links { list-style: none; display: flex; align-items: center; gap: 40px; }
+.nav-links a { 
+    text-decoration: none; color: var(--text-secondary); font-weight: 700; 
+    font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1.5px; 
+    position: relative; padding: 5px 0; transition: color 0.3s;
+    font-family: var(--font-display);
+}
+.nav-links a::before { 
+    content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 3px; 
+    background-color: var(--accent-rust); transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+    border-radius: 2px; opacity: 0.7;
+}
+.nav-links a:hover { color: var(--accent-rust); }
+.nav-links a:hover::before { width: 100%; }
+.nav-links a.active { color: #3e2723; }
+.nav-links a.active::after { 
+    content: ''; position: absolute; bottom: 2px; left: -5%; width: 110%; height: 8px;
+    background-color: rgba(255, 183, 77, 0.4); z-index: -1; transform: rotate(-1deg);
+    border-radius: 4px;
+}
+
+/* --- CART BUTTON --- */
+.cart-link { 
+    border: 2px solid #8d6e63 !important; padding: 8px 24px !important; 
+    border-radius: 4px !important; color: #5d4037 !important; transition: 0.3s; 
+    background: transparent; font-family: var(--font-display) !important;
+    text-transform: uppercase; font-size: 0.85rem !important; letter-spacing: 1px;
+}
+.cart-link:hover { 
+    background: #5d4037; border-color: #5d4037 !important; color: #fff !important; 
+    box-shadow: 0 4px 10px rgba(93, 64, 55, 0.3); transform: translateY(-2px);
+}
+.cart-link::after, .cart-link::before { display: none !important; }
+
+@media (max-width: 768px) {
+    nav { flex-direction: column; padding: 20px; gap: 20px; }
+    .nav-links { gap: 25px; font-size: 0.9rem; flex-wrap: wrap; justify-content: center; }
+}
+
+/* =========================================
+   FOOTER (Vintage Leather Journal Style)
+   ========================================= */
+footer {
+    background-color: #3e2723; 
+    background-image: url('https://www.transparenttextures.com/patterns/black-scales.png');
+    color: #efebe9;
+    padding: 60px 5% 30px;
+    margin-top: auto;
+    position: relative;
+    border-top: 4px solid var(--accent-rust);
+    box-shadow: inset 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Decorative "Stitch" line */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 6px; left: 0; width: 100%; height: 2px;
+    border-top: 2px dashed rgba(255,255,255,0.15);
+    pointer-events: none;
+}
+
+.footer-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; /* Centered content */
+    text-align: center;      /* Centered text */
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.brand-col .footer-logo {
+    font-family: var(--font-display);
+    font-size: 2.5rem; /* Larger since it's standalone */
+    color: #ffcc80; 
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.brand-col .footer-tagline {
+    font-family: var(--font-hand);
+    font-size: 1.4rem;
+    color: var(--accent-rust);
+    margin-bottom: 20px;
+}
+
+.brand-col .footer-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #bcaaa4;
+    max-width: 400px; /* Limits width for readability */
+    margin: 0 auto;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 0.85rem;
+    color: #8d6e63;
+    font-family: var(--font-serif);
+}
+
+/* =========================================
+   CART MODAL
+   ========================================= */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(62, 39, 35, 0.4); backdrop-filter: blur(3px); }
+.modal-content { background-color: #fdfbf7; background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png'); margin: 5% auto; padding: 0; width: 90%; max-width: 480px; position: relative; border-radius: 5px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); border: 1px solid #e0e0e0; animation: slideUpFade 0.4s ease-out; overflow: hidden; }
+.modal-header { background: rgba(253, 246, 227, 0.9); padding: 20px; text-align: center; border-bottom: 2px dashed rgba(191, 54, 12, 0.2); }
+.modal-header h2 { font-family: var(--font-display); font-size: 2rem; color: var(--accent-rust); margin: 0; }
+.modal-header p { font-family: var(--font-hand); color: var(--text-secondary); margin-top: 5px; font-size: 1.1rem; }
+.close { position: absolute; right: 20px; top: 15px; font-size: 28px; color: var(--text-secondary); cursor: pointer; transition: 0.3s; line-height: 1; }
+.close:hover { color: var(--accent-rust); transform: rotate(90deg); }
+#cart-items { list-style: none; padding: 0; margin: 0; max-height: 350px; overflow-y: auto; }
+#cart-items::-webkit-scrollbar { width: 6px; }
+#cart-items::-webkit-scrollbar-track { background: #f1f1f1; }
+#cart-items::-webkit-scrollbar-thumb { background: #d7ccc8; border-radius: 10px; }
+#cart-items li { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #eee; transition: 0.2s; }
+#cart-items li:hover { background-color: rgba(255,255,255,0.8); }
+.item-details { display: flex; flex-direction: column; }
+.item-name { font-family: var(--font-serif); font-weight: bold; color: var(--text-primary); font-size: 1rem; }
+.item-desc { font-size: 0.8rem; color: #888; max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item-price-action { text-align: right; }
+.item-price { font-family: var(--font-hand); font-size: 1.2rem; color: var(--accent-rust); display: block; }
+.remove-btn { background: none; border: none; color: #999; cursor: pointer; font-size: 0.8rem; text-decoration: underline; margin-top: 5px; }
+.remove-btn:hover { color: #d32f2f; }
+.cart-summary { padding: 25px; background: #fff; border-top: 2px solid var(--accent-rust); text-align: center; }
+.total-row, .cart-total-display { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-family: var(--font-display); font-size: 1.4rem; color: var(--text-primary); }
+.empty-cart-msg { text-align: center; padding: 50px 20px; color: var(--text-secondary); }
+.empty-icon { font-size: 3rem; display: block; margin-bottom: 15px; opacity: 0.5; }
+.shop-link { color: var(--accent-rust); font-weight: bold; cursor: pointer; text-decoration: underline; }

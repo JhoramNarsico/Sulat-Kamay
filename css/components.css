@@ -1,0 +1,21 @@
+/* Buttons */
+.cta-button { display: inline-flex; align-items: center; justify-content: center; padding: 15px 40px; background: radial-gradient(circle at 30% 30%, #d84315, #bf360c); color: #fff; text-decoration: none; border-radius: 50px; font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 1px; box-shadow: 0 5px 15px rgba(191, 54, 12, 0.4); transition: 0.3s ease; border: 2px solid #a52a2a; cursor: pointer; }
+.cta-button:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 25px rgba(191, 54, 12, 0.5); }
+.cta-button::after { content: "➝"; margin-left: 10px; font-size: 1.2rem; transition: margin-left 0.3s; }
+.cta-button:hover::after { margin-left: 15px; }
+
+.add-btn { background: var(--text-secondary); color: white; border: none; padding: 8px 20px; cursor: pointer; font-family: var(--font-serif); transition: 0.3s; }
+.add-btn.primary { background: #5d4037; color: #d4af37; border: 1px solid #5d4037; padding: 10px 25px; }
+.add-btn.primary:hover { background: #3e2723; }
+.add-btn.secondary { background: #e57373; color: white; border: none; border-radius: 20px; padding: 10px 25px; }
+.add-btn.secondary:hover { background: #ef5350; }
+.add-btn.tertiary { background: var(--accent-green); color: white; border: none; padding: 10px 25px; }
+.add-btn.tertiary:hover { background: #33691e; }
+.shop-now-btn { padding: 10px 20px; background-color: transparent; border: 2px solid var(--accent-rust); color: var(--accent-rust); font-family: var(--font-display); border-radius: 30px; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
+.shop-now-btn:hover { background-color: var(--accent-rust); color: white; }
+
+/* Product Cards (General) */
+.product-container { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
+.card { background: #fff; padding: 15px; border: 1px solid #eee; width: 280px; text-align: center; box-shadow: 5px 5px 20px rgba(121, 85, 72, 0.08); transition: 0.4s; }
+.card:hover { transform: translateY(-8px); }
+.card img { width: 100%; height: 200px; object-fit: cover; filter: sepia(0.2); margin-bottom: 10px; }

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build Your Box | Sulat Kamay</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- CHANGED: Link to main.css -->
+    <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -33,15 +34,12 @@
             <p>Follow the steps to curate the perfect gift.</p>
         </header>
 
-        <!-- STEP 1: CHOOSE BOX -->
-        <!-- FIX: Added 'active' class so this section is clickable immediately -->
         <section class="build-step active" id="step-1">
             <div class="step-title">
                 <span class="step-num">1</span>
                 <h3>Choose your Base Package</h3>
             </div>
             <div class="box-selection-grid">
-                <!-- Love Option -->
                 <div class="selection-card theme-love" onclick="selectBox(1, 280, 'Love')">
                     <div class="card-img">
                         <img src="assets/giftbox-love.jpg" alt="Love" onerror="this.src='https://via.placeholder.com/300'">
@@ -54,7 +52,6 @@
                     <div class="check-mark">✔</div>
                 </div>
 
-                <!-- Cute Option -->
                 <div class="selection-card theme-cute" onclick="selectBox(2, 190, 'Cute')">
                     <div class="card-img">
                         <img src="assets/giftbox-cute.jpg" alt="Cute" onerror="this.src='https://via.placeholder.com/300'">
@@ -67,7 +64,6 @@
                     <div class="check-mark">✔</div>
                 </div>
 
-                <!-- Flower Option -->
                 <div class="selection-card theme-flowers" onclick="selectBox(3, 160, 'Flowers')">
                     <div class="card-img">
                         <img src="assets/giftbox-flowers.jpg" alt="Flowers" onerror="this.src='https://via.placeholder.com/300'">
@@ -82,7 +78,6 @@
             </div>
         </section>
 
-        <!-- STEP 2: ADD-ONS -->
         <section class="build-step" id="step-2">
             <div class="step-title">
                 <span class="step-num">2</span>
@@ -108,24 +103,19 @@
             </div>
         </section>
 
-        <!-- STEP 3: WRITE LETTER -->
         <section class="build-step" id="step-3">
             <div class="step-title">
                 <span class="step-num">3</span>
                 <h3>Compose Your Letter</h3>
             </div>
-            
             <div class="writing-desk">
                 <div class="input-panel">
                     <label>Recipient Name</label>
                     <input type="text" id="recipient-name" placeholder="My Dearest...">
-                    
                     <label>Your Message</label>
                     <textarea id="letter-content" placeholder="Start typing here... The preview on the right will update automatically."></textarea>
-                    
                     <p class="note">*We will handwrite this exactly as typed.</p>
                 </div>
-
                 <div class="preview-panel">
                     <div id="letter-preview" class="paper default-paper">
                         <div class="decor-layer"></div>
@@ -139,7 +129,6 @@
         </section>
     </div>
 
-    <!-- STICKY FOOTER SUMMARY -->
     <div class="builder-summary">
         <div class="summary-text">
             <span id="selected-box-name">No Box Selected</span>
@@ -151,7 +140,6 @@
         </div>
     </div>
 
-    <!-- Cart Modal -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -164,6 +152,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- CHANGED: Script type module -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

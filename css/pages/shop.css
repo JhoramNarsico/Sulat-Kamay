@@ -1,0 +1,247 @@
+/* =========================================
+   1. SCROLL SNAP SETUP (The Lock Feature)
+   ========================================= */
+html {
+    scroll-snap-type: y mandatory; /* Forces snapping on Y axis */
+    scroll-behavior: smooth;
+    /* Prevents the sticky header from covering the content */
+    scroll-padding-top: 85px; 
+}
+
+/* Base Transition for Aura Effect */
+body {
+    background: radial-gradient(circle at center, var(--bg-center), var(--bg-edge));
+    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png'), 
+                      radial-gradient(circle at center, var(--bg-center), var(--bg-edge));
+    background-blend-mode: multiply, normal;
+    background-attachment: fixed;
+    transition: --bg-center 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                --bg-edge 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Register Custom Properties */
+@property --bg-center { syntax: '<color>'; inherits: true; initial-value: #fdf6e3; }
+@property --bg-edge { syntax: '<color>'; inherits: true; initial-value: #fdf6e3; }
+
+nav {
+    transition: background-color 1.2s ease, border-color 1.2s ease;
+}
+
+/* =========================================
+   2. COLOR THEMES
+   ========================================= */
+/* LOVE */
+body.theme-love { --bg-center: #fffdf5; --bg-edge: #fdf6e3; }
+body.theme-love nav { background-color: #fffdf5; border-bottom-color: #d4af37; }
+body.theme-love .nav-links a.active { color: #d4af37; }
+
+/* CUTE */
+body.theme-cute { --bg-center: #fff9fb; --bg-edge: #fce4ec; }
+body.theme-cute nav { background-color: #fff9fb; border-bottom-color: #e57373; }
+body.theme-cute .showroom-cute h2 { color: #e57373; }
+body.theme-cute .nav-links a.active { color: #e57373; }
+
+/* FLOWER */
+body.theme-flower { --bg-center: #fbfffa; --bg-edge: #f1f8e9; }
+body.theme-flower nav { background-color: #fbfffa; border-bottom-color: #556b2f; }
+body.theme-flower .showroom-flower h2 { color: #556b2f; }
+body.theme-flower .nav-links a.active { color: #556b2f; }
+
+
+/* =========================================
+   3. FULL SCREEN SECTIONS
+   ========================================= */
+
+/* Common logic for all main sections */
+section, header.shop-intro {
+    scroll-snap-align: start; /* The lock mechanism */
+    min-height: 100vh;        /* Takes up full screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* Centers content vertically */
+    padding: 40px 5%;         /* Reduced top padding since flex handles centering */
+    box-sizing: border-box;
+}
+
+/* --- THE INTRO COVER (Title Card) --- */
+.shop-intro { 
+    text-align: center; 
+    position: relative;
+    /* Offset height calculation to account for nav bar */
+    height: calc(100vh - 80px); 
+}
+
+.shop-intro h2 { 
+    font-family: var(--font-display); 
+    font-size: 5rem; /* Massive Title */
+    color: var(--accent-rust); 
+    margin-bottom: 20px;
+    opacity: 0; 
+    animation: fadeInUp 1s ease forwards 0.5s;
+}
+
+.shop-intro p {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    opacity: 0; 
+    animation: fadeInUp 1s ease forwards 0.8s;
+}
+
+/* Scroll Down Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: var(--accent-rust);
+    animation: bounce 2s infinite;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+    40% {transform: translateX(-50%) translateY(-10px);}
+    60% {transform: translateX(-50%) translateY(-5px);}
+}
+
+/* --- SHOWROOMS --- */
+.showroom { 
+    border-bottom: 1px dashed rgba(121, 85, 72, 0.1); 
+}
+
+.showroom-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+}
+
+.showroom h2 { 
+    font-size: 3.5rem; 
+    margin: 10px 0 20px; 
+    font-family: var(--font-display);
+}
+
+.description { 
+    font-size: 1.1rem; 
+    line-height: 1.8; 
+    margin-bottom: 25px; 
+    color: var(--text-secondary); 
+}
+
+.features { 
+    list-style: none; 
+    margin-bottom: 30px; 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 15px; 
+}
+
+.features li { 
+    font-family: var(--font-serif); 
+    font-size: 1rem; 
+    color: var(--text-primary); 
+    background: rgba(255,255,255,0.6); 
+    padding: 8px 20px; 
+    border-radius: 20px; 
+    border: 1px solid rgba(0,0,0,0.05); 
+}
+
+.price-block { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 20px; 
+    margin-top: 30px; 
+}
+
+.showroom .price { 
+    font-size: 2rem; 
+    font-family: var(--font-hand); 
+    color: var(--accent-rust); 
+}
+
+/* --- PRODUCT GALLERY GRID --- */
+.sample-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.sample-item {
+    background: #fff;
+    padding: 10px 10px 50px 10px; 
+    box-shadow: 5px 10px 20px rgba(0,0,0,0.1);
+    width: 280px;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    transform: rotate(0deg);
+}
+
+.sample-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    filter: sepia(0.2);
+    transition: 0.3s;
+}
+
+.sample-item:hover {
+    transform: translateY(-15px) scale(1.02) !important;
+    z-index: 10;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.sample-item:hover img { filter: sepia(0); }
+
+.sample-caption {
+    font-family: var(--font-hand);
+    color: #795548;
+    text-align: center;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    left: 0;
+    font-size: 1.4rem;
+}
+
+/* --- THEME SPECIFICS (Frames & Colors) --- */
+.showroom-love h2 { color: #5d4037; }
+.tag-grand { text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: #d4af37; font-weight: bold; border-bottom: 1px solid #d4af37; }
+.showroom-love .sample-item { border: 1px solid #d4af37; }
+.showroom-love .sample-item:nth-child(even) { transform: rotate(2deg); }
+.showroom-love .sample-item:nth-child(odd) { transform: rotate(-2deg); }
+
+.showroom-cute h2 { color: #e57373; }
+.tag-sweet { font-family: var(--font-hand); font-size: 1.4rem; color: #e57373; }
+.showroom-cute .sample-item::before {
+    content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 30px; background: rgba(229, 115, 115, 0.5); backdrop-filter: blur(2px);
+}
+
+.showroom-flower h2 { color: var(--accent-green); }
+.tag-friendly { font-family: var(--font-serif); font-style: italic; color: var(--accent-green); }
+.showroom-flower .sample-item { border-radius: 4px; box-shadow: 0 5px 15px rgba(85, 107, 47, 0.15); border: 1px solid var(--accent-green); }
+
+/* --- ACCESSORIES --- */
+.accessories-section { 
+    background: rgba(255,255,255,0.4); 
+    justify-content: flex-start; /* Don't center vertically */
+    padding-top: 80px; 
+}
+.accessories-header { text-align: center; margin-bottom: 50px; }
+.accessories-header h3 { font-family: var(--font-display); font-size: 2.2rem; color: var(--text-primary); }
+.accessories-header p { font-style: italic; color: var(--text-secondary); }
+
+@media (max-width: 768px) {
+    .shop-intro h2 { font-size: 3.5rem; }
+    .features { flex-direction: column; align-items: center; gap: 10px; }
+    .sample-item { width: 100%; max-width: 350px; transform: none !important; margin-bottom: 30px; }
+    /* Disable snap on mobile if content is too tall */
+    .showroom { min-height: auto; padding: 60px 20px; } 
+}

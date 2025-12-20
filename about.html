@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Order | Sulat Kamay</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- CHANGED: Link to main.css -->
+    <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Atmospheric Background -->
     <div class="autumn-atmosphere">
         <div class="bg-item leaf l1">🍂</div>
         <div class="bg-item bird b1">🕊️</div>
@@ -32,29 +32,20 @@
         </ul>
     </nav>
 
-    <!-- THE ORDERING JOURNEY (Animated Ink Map) -->
     <section class="bio-section guide-section">
-        
-        <!-- Visual Map -->
         <div class="bio-visuals">
-            <!-- The Ink Line -->
             <svg class="journey-svg" viewBox="0 0 400 300">
-                <!-- Path adapted to look like a process flow -->
                 <path class="journey-path" d="M30,250 Q60,250 80,200 T150,120 T250,80 T350,150" />
             </svg>
-
-            <!-- Pop-up Steps -->
             <div class="journey-icon icon-1" data-label="1. Curate">🛒</div>
             <div class="journey-icon icon-2" data-label="2. Compose">✍️</div>
             <div class="journey-icon icon-3" data-label="3. Capture">📸</div>
             <div class="journey-icon icon-4" data-label="4. Confirm">💳</div>
         </div>
 
-        <!-- Instructions -->
         <div class="bio-text">
             <h2>How to Order</h2>
             <span class="bio-subtitle">From our hands to yours.</span>
-            
             <div class="bio-desc">
                 <ul class="process-list">
                     <li>
@@ -90,7 +81,6 @@
         </div>
     </section>
 
-    <!-- Payment & Shipping Postcard -->
     <section class="contact-postcard">
         <div class="postcard-left">
             <h3 style="font-family:'Dancing Script'; font-size:2rem; color:var(--accent-rust);">Payment & Shipping</h3>
@@ -113,7 +103,6 @@
         </div>
     </section>
 
-    <!-- Cart Modal -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -126,6 +115,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- CHANGED: Script type module -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

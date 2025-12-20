@@ -1,0 +1,24 @@
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+@keyframes floatPen { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-3px) rotate(5deg); } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes drawInk { to { stroke-dashoffset: 0; } }
+@keyframes slideUpFade { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* Intro Keys */
+@keyframes openFlap { 0% { transform: rotateX(0deg); z-index: 4; } 100% { transform: rotateX(180deg); z-index: 1; } }
+@keyframes breakSeal { 0% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes slideOutEnvelope { to { transform: translateY(50px); opacity: 0; visibility: hidden; } }
+@keyframes stampThud { 0% { opacity: 0; transform: scale(3) rotate(-10deg); } 70% { opacity: 1; transform: scale(0.9) rotate(0deg); } 100% { opacity: 1; transform: scale(1) rotate(-3deg); } }
+
+/* Hero Background Keys */
+@keyframes fallSwirl { 0% { transform: translateY(0) rotate(0deg) translateX(0); } 50% { transform: translateY(50vh) rotate(180deg) translateX(20px); } 100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); } }
+@keyframes flyAcross { 0% { transform: translateX(0) translateY(0) scaleX(1); left: -10%; } 25% { transform: translateX(25vw) translateY(-10px); } 50% { transform: translateX(50vw) translateY(0); } 75% { transform: translateX(75vw) translateY(10px); } 100% { transform: translateX(110vw) translateY(0); left: 100%; } }
+@keyframes floatDrift { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(-5px, -15px) rotate(-5deg); } }
+@keyframes sunPass { 0% { transform: translateX(-20%) translateY(-20%); } 100% { transform: translateX(20%) translateY(20%); } }
+@keyframes swayShadows { 0% { transform: rotate(0deg) translateX(0); } 100% { transform: rotate(2deg) translateX(20px); } }
+@keyframes floatQuill { 0%, 100% { transform: rotate(15deg) translateY(0); } 50% { transform: rotate(10deg) translateY(-15px); } }
+
+/* About Page Keys */
+@keyframes popIn { to { opacity: 1; transform: scale(1); } }
+@keyframes floatIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }

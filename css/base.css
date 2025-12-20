@@ -1,0 +1,29 @@
+:root {
+    /* Autumn / Golden Hour Palette */
+    --bg-paper: #fdf6e3;        /* Warm Cream */
+    --bg-texture: #f4e4bc;      /* Kraft Paper Base */
+    --text-primary: #4e342e;    /* Deep Coffee Brown */
+    --text-secondary: #795548;  /* Lighter Brown */
+    --accent-rust: #bf360c;     /* Deep Autumn Red/Rust */
+    --accent-gold: #ffb74d;     /* Soft Sunlight Gold */
+    --accent-green: #556b2f;    /* Dried Olive Green */
+    
+    /* Fonts */
+    --font-hand: 'Dancing Script', cursive;
+    --font-serif: 'Lora', serif;
+    --font-display: 'Playfair Display', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-serif);
+    background-color: var(--bg-paper);
+    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Common helper classes */
+.autumn-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
