@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Order | Sulat Kamay</title>
-    <!-- CHANGED: Link to main.css -->
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/main.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="autumn-atmosphere">
-        <div class="bg-item leaf l1">🍂</div>
-        <div class="bg-item bird b1">🕊️</div>
-        <div class="bg-item floater f2">📦</div>
-    </div>
+<body class="about-page">
+    
+    <!-- Background Atmosphere -->
+    <div class="autumn-bg"><div class="leaf"></div><div class="leaf"></div></div>
 
+    <!-- Navigation -->
     <nav>
         <div class="brand-container" onclick="window.location.href='index.html'">
             <img src="assets/sk-seal.png" class="nav-logo-img" alt="SK Logo">
@@ -32,77 +34,139 @@
         </ul>
     </nav>
 
-    <section class="bio-section guide-section">
-        <div class="bio-visuals">
-            <svg class="journey-svg" viewBox="0 0 400 300">
-                <path class="journey-path" d="M30,250 Q60,250 80,200 T150,120 T250,80 T350,150" />
-            </svg>
-            <div class="journey-icon icon-1" data-label="1. Curate">🛒</div>
-            <div class="journey-icon icon-2" data-label="2. Compose">✍️</div>
-            <div class="journey-icon icon-3" data-label="3. Capture">📸</div>
-            <div class="journey-icon icon-4" data-label="4. Confirm">💳</div>
+    <!-- Hero Section -->
+    <header class="about-hero">
+        <div class="hero-content">
+            <h2>From Our Hands to Yours</h2>
+            <div class="decorative-line"></div>
+            <p>A simple guide to capturing your memories.</p>
+        </div>
+    </header>
+
+    <div class="guide-wrapper">
+        
+        <!-- 1. STEP-BY-STEP PROCESS -->
+        <section class="process-grid">
+            <!-- Step 1 -->
+            <div class="process-card stagger-1">
+                <div class="step-badge">01</div>
+                <div class="icon-visual">🛒</div>
+                <h3>Curate</h3>
+                <p>Visit the <a href="shop.html">Shop</a> or <a href="customize.html">Write</a> page. Choose a vessel for your feelings—be it a "Love" box or a custom bundle.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="process-card stagger-2">
+                <div class="step-badge">02</div>
+                <div class="icon-visual">✍️</div>
+                <h3>Compose</h3>
+                <p>Type your message in our new <strong>Letter Builder</strong>. We will handwrite it on vintage paper, sealed with wax.</p>
+            </div>
+
+            <!-- Step 3 (Highlight) -->
+            <div class="process-card highlight stagger-3">
+                <div class="step-badge">03</div>
+                <div class="icon-visual">📸</div>
+                <h3>Capture</h3>
+                <p>Open your Cart (top right). Take a <strong>Screenshot</strong> of your summary. This is your order ticket.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="process-card stagger-4">
+                <div class="step-badge">04</div>
+                <div class="icon-visual">💌</div>
+                <h3>Connect</h3>
+                <p>Send the screenshot to our Instagram <strong>@SulatKamayPH</strong> to finalize details and payment.</p>
+            </div>
+        </section>
+
+        <!-- 2. LOGISTICS SECTION -->
+        <section class="logistics-section stagger-5">
+            <div class="logistics-container">
+                
+                <!-- Payment Options -->
+                <div class="logistics-col">
+                    <h4><span class="icon">💳</span> Payment Options</h4>
+                    <p class="logistics-desc">We accept secure payments via:</p>
+                    <div class="logo-grid">
+                        <!-- GCash -->
+                        <div class="logo-card gcash">
+                            <img src="assets/logo-gcash.png" alt="GCash">
+                            <span class="sub-text">Mobile Wallet</span>
+                        </div>
+                        <!-- Maya -->
+                        <div class="logo-card maya">
+                            <img src="assets/logo-maya.png" alt="Maya">
+                            <span class="sub-text">Maya / PayMaya</span>
+                        </div>
+                        <!-- Bank Transfer -->
+                        <div class="logo-card bank">
+                            <div class="bank-logos-group">
+                                <img src="assets/logo-bpi.png" alt="BPI" title="BPI">
+                                <span class="divider">/</span>
+                                <img src="assets/logo-bdo.png" alt="BDO" title="BDO">
+                            </div>
+                            <span class="sub-text">Direct Transfer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vertical Divider Line -->
+                <div class="divider-vertical"></div>
+
+                <!-- Shipping Options -->
+                <div class="logistics-col">
+                    <h4><span class="icon">🚚</span> Shipping & Delivery</h4>
+                    <p class="logistics-desc">Delivering memories nationwide:</p>
+                    <div class="logo-grid">
+                        <!-- J&T -->
+                        <div class="logo-card jnt">
+                            <img src="assets/logo-jnt.png" alt="J&T Express">
+                            <span class="sub-text">Nationwide</span>
+                        </div>
+                        <!-- Local Delivery -->
+                        <div class="logo-card delivery-apps">
+                            <div class="app-logos-group">
+                                <img src="assets/logo-maxim.png" alt="Maxim" class="maxim-icon">
+                                <span class="divider">/</span>
+                                <img src="assets/logo-grab.png" alt="Grab" class="grab-icon">
+                            </div>
+                            <span class="sub-text">CDO City Only</span>
+                        </div>
+                        <!-- Meetups -->
+                        <div class="logo-card meetup">
+                            <span class="emoji-icon">📍</span>
+                            <span class="logo-text">Meet-ups</span>
+                            <span class="sub-text">XU / Divisoria</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <div class="cta-container stagger-6">
+            <button class="cta-button" onclick="window.location.href='shop.html'">Start Your Order</button>
         </div>
 
-        <div class="bio-text">
-            <h2>How to Order</h2>
-            <span class="bio-subtitle">From our hands to yours.</span>
-            <div class="bio-desc">
-                <ul class="process-list">
-                    <li>
-                        <span class="step-marker">1</span>
-                        <div class="step-detail">
-                            <strong>Curate Your Box</strong>
-                            <p>Visit the <a href="shop.html">Shop</a> and choose a base package (Love, Cute, or Flowers). Add little extras like chocolates or dried flowers to make it unique.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="step-marker">2</span>
-                        <div class="step-detail">
-                            <strong>Write Your Letter</strong>
-                            <p>Go to the <a href="customize.html">Write</a> page. Type your message, and we will handwrite it on vintage paper, sealed with wax.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="step-marker">3</span>
-                        <div class="step-detail">
-                            <strong>Capture & DM</strong>
-                            <p>Open your Cart icon (top right). Take a <strong>screenshot</strong> of your summary and send it to our Instagram <strong>@SulatKamayPH</strong>.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="step-marker">4</span>
-                        <div class="step-detail">
-                            <strong>Payment & Fulfillment</strong>
-                            <p>We accept GCash or Bank Transfer. Once paid, we begin crafting your box. Lead time is 3-5 days.</p>
-                        </div>
-                    </li>
-                </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <h3 class="footer-logo">Sulat Kamay</h3>
+                <p class="footer-tagline">Handcrafted Memories</p>
+                <p class="footer-desc">Capturing emotions in wax, ink, and paper.</p>
             </div>
         </div>
-    </section>
-
-    <section class="contact-postcard">
-        <div class="postcard-left">
-            <h3 style="font-family:'Dancing Script'; font-size:2rem; color:var(--accent-rust);">Payment & Shipping</h3>
-            <div class="info-grid">
-                <div class="info-item">
-                    <strong>Payment Options:</strong>
-                    <p>• GCash<br>• BPI / BDO Transfer<br>• Maya</p>
-                </div>
-                <div class="info-item">
-                    <strong>Shipping:</strong>
-                    <p>• J&T Express (Nationwide)<br>• Maxim/Grab (CDO City only)<br>• Meet-ups (XU / Divisoria)</p>
-                </div>
-            </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sulat Kamay. Handmade with love.</p>
         </div>
-        <div class="postcard-right">
-            <div class="stamp-box"><span>✈️</span></div>
-            <div style="width:100%; border-bottom:1px solid #ccc; margin:15px 0;"></div>
-            <div style="width:100%; border-bottom:1px solid #ccc; margin:15px 0;"></div>
-            <p style="font-family:'Dancing Script'; color:#aaa; margin-top:10px;">To: The Sender</p>
-        </div>
-    </section>
+    </footer>
 
+    <!-- Cart Modal -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -115,7 +179,7 @@
         </div>
     </div>
 
-    <!-- CHANGED: Script type module -->
+    <!-- Main Script -->
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
