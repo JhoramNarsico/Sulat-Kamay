@@ -2,7 +2,6 @@ import { products } from './data.js';
 import { addToCart, removeFromCart, updateCartUI } from './cart.js';
 import { selectBox, toggleAddon, addBundleToCart, initLetterBuilder } from './builder.js';
 import { runIntroSequence, initScrollAnimations } from './home-animations.js';
-// IMPORT THE SHOP ANIMATION
 import { initShopScrollSpy } from './shop-animations.js';
 
 // EXPOSE FUNCTIONS GLOBALLY
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addonsContainer = document.getElementById('addons-container');
     if (addonsContainer) {
         renderShop(addonsContainer);
-        initShopScrollSpy(); // <--- Activate the Aura effect
+        initShopScrollSpy();
     }
     
     // --- Builder Page Logic ---
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupModal();
 });
 
-// Render Add-ons in Shop
+// Render Add-ons in Shop (Updated Structure)
 function renderShop(container) {
     container.innerHTML = ''; 
     const addOns = products.filter(p => p.category === 'addon');
@@ -47,12 +46,19 @@ function renderShop(container) {
         card.className = 'card';
         const fallback = `https://via.placeholder.com/300x250?text=${encodeURIComponent(product.name)}`;
         
+        // NEW: Nested structure to match CSS for proper alignment
         card.innerHTML = `
-            <img src="${product.img}" alt="${product.name}" onerror="this.src='${fallback}'">
-            <h3>${product.name}</h3>
-            <p style="font-size: 0.9rem; color: #795548; margin-bottom: 10px;">${product.desc}</p>
-            <div class="price">P${product.price.toFixed(2)}</div>
-            <button class="add-btn" onclick="addToCart(${product.id})">Add to Box</button>
+            <div class="img-container">
+                <img src="${product.img}" alt="${product.name}" onerror="this.src='${fallback}'">
+            </div>
+            <div class="card-content">
+                <h3>${product.name}</h3>
+                <p>${product.desc}</p>
+                <div class="price-action-row">
+                    <span class="price">P${product.price.toFixed(2)}</span>
+                    <button class="add-btn" onclick="addToCart(${product.id})">Add</button>
+                </div>
+            </div>
         `;
         container.appendChild(card);
     });

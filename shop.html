@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Background Leaves -->
     <div class="autumn-bg"><div class="leaf"></div><div class="leaf"></div></div>
 
     <nav>
@@ -47,12 +48,15 @@
             <h2>Curated Box "Love"</h2>
             <p class="description">This isn't just a gift box; it’s a time capsule. The <strong>"Love"</strong> box is our most luxurious offering, designed to hold the weight of your deepest emotions. Inside, you’ll find a handcrafted bouquet of premium dried flowers—Statice or Gypsophila—that will never fade, just like your affection.<br><br>We include five of your most cherished memories printed on high-quality polaroid stock, and a personalized letter sealed with our signature <strong>double-wax stamp</strong> in gold and burgundy. It’s the closest thing to mailing a warm hug.</p>
             <ul class="features"><li>✦ 3 Printed Letters</li><li>✦ Premium Dried Bouquet</li><li>✦ 5 Polaroids</li><li>✦ Gold Accents</li></ul>
-            <div class="price-block"><span class="price">P280.00</span><button class="add-btn primary" onclick="addToCart(1)">Add to Box</button></div>
         </div>
         <div class="gallery-container">
             <div class="nav-arrow prev" onclick="slideGallery('love', -1)">←</div>
             <div class="gallery-main"><img src="assets/giftbox-love.jpg" id="img-love" alt="Love Box"><p class="sample-caption" id="caption-love">Classic Romance Edition</p></div>
             <div class="nav-arrow next" onclick="slideGallery('love', 1)">→</div>
+        </div>
+        <div class="price-block">
+            <span class="price">P280.00</span>
+            <button class="add-btn primary" onclick="addToCart(1)">Add to Box</button>
         </div>
     </section>
 
@@ -60,16 +64,19 @@
     <section class="showroom showroom-cute">
         <div class="pink-atmosphere"></div>
         <div class="showroom-header">
-            <span class="tag-sweet">♥ The Sweetest Pick</span>
+            <span class="tag-sweet">The Sweetest Pick</span>
             <h2>Curated Box "Cute"</h2>
             <p class="description">Sometimes, less is more. The <strong>"Cute"</strong> box is designed for those spontaneous moments of affection. Whether it's a monthsary, a peace offering after a small fight, or a random Tuesday surprise, this box delivers pure joy.<br><br>Wrapped with our signature <strong>washi tape aesthetics</strong> and soft pastel tones, it features a mini dried bouquet and three selected photos. It’s a whisper of love rather than a shout—short, sweet, and straight to the heart.</p>
             <ul class="features"><li>♥ Red Wax Seal</li><li>♥ 3 Polaroids</li><li>♥ Mini Bouquet</li><li>♥ Budget-Friendly</li></ul>
-            <div class="price-block"><span class="price">P190.00</span><button class="add-btn secondary" onclick="addToCart(2)">Add to Box</button></div>
         </div>
         <div class="gallery-container">
             <div class="nav-arrow prev" onclick="slideGallery('cute', -1)">←</div>
             <div class="gallery-main"><img src="assets/giftbox-cute.jpg" id="img-cute" alt="Cute Box"><p class="sample-caption" id="caption-cute">The "Tickled Pink" Palette</p></div>
             <div class="nav-arrow next" onclick="slideGallery('cute', 1)">→</div>
+        </div>
+        <div class="price-block">
+            <span class="price">P190.00</span>
+            <button class="add-btn secondary" onclick="addToCart(2)">Add to Box</button>
         </div>
     </section>
 
@@ -77,26 +84,37 @@
     <section class="showroom showroom-flower">
         <div class="green-atmosphere"></div>
         <div class="showroom-header">
-            <span class="tag-friendly">✿ The Friendly Choice</span>
+            <span class="tag-friendly">The Friendly Choice</span>
             <h2>Curated Box "Flowers"</h2>
             <p class="description">For the souls who love to create. The <strong>"Flowers"</strong> box is an interactive <strong>DIY Kit</strong> curated for the artist in you. We provide the canvas—hand-stamped vintage papers, envelopes, assorted dried flora, and loose wax seals—and you provide the masterpiece.<br><br>Perfect for journaling, scrapbooking, or writing that one handwritten letter you’ve been meaning to send to a best friend or sibling. It’s organic, earthy, and full of potential.</p>
             <ul class="features"><li>✿ DIY Stationery Set</li><li>✿ 4 Stamped Sheets</li><li>✿ Dried Flowers</li><li>✿ Wax Seals</li></ul>
-            <div class="price-block"><span class="price">P160.00</span><button class="add-btn tertiary" onclick="addToCart(3)">Add to Box</button></div>
         </div>
         <div class="gallery-container">
             <div class="nav-arrow prev" onclick="slideGallery('flower', -1)">←</div>
             <div class="gallery-main"><img src="assets/giftbox-flowers.jpg" id="img-flower" alt="Flowers Kit"><p class="sample-caption" id="caption-flower">Standard DIY Kit</p></div>
             <div class="nav-arrow next" onclick="slideGallery('flower', 1)">→</div>
         </div>
+        <div class="price-block">
+            <span class="price">P160.00</span>
+            <button class="add-btn tertiary" onclick="addToCart(3)">Add to Box</button>
+        </div>
     </section>
 
-    <!-- ACCESSORIES (Vintage Dirty White Theme) -->
+    <!-- ACCESSORIES -->
     <section class="accessories-section">
         <div class="accessories-header">
             <h3>~ Little Showcases ~</h3>
             <p>Enhance the performance of your gift with these handcrafted extras.</p>
         </div>
-        <div id="addons-container" class="product-container"></div>
+        <div class="carousel-wrapper">
+            <button class="carousel-btn prev" onclick="slideAddons(-1)">&#10094;</button>
+            <div class="carousel-track-mask">
+                <div class="carousel-viewport" id="carousel-viewport">
+                    <div id="addons-container" class="product-container"></div>
+                </div>
+            </div>
+            <button class="carousel-btn next" onclick="slideAddons(1)">&#10095;</button>
+        </div>
     </section>
 
     <footer>
@@ -118,6 +136,7 @@
 
     <script type="module" src="js/main.js"></script>
     
+    <!-- Inline Scripts for Gallery/Carousel specific interactions -->
     <script>
         const galleryData = {
             love: [ { src: 'assets/giftbox-love.jpg', caption: 'Classic Romance Edition', filter: 'none' }, { src: 'assets/giftbox-love.jpg', caption: 'Vintage Parchment Theme', filter: 'sepia(0.6)' }, { src: 'assets/giftbox-love.jpg', caption: 'Rustic Midnight Theme', filter: 'brightness(0.8) contrast(1.2)' } ],
@@ -125,6 +144,7 @@
             flower: [ { src: 'assets/giftbox-flowers.jpg', caption: 'Standard DIY Kit', filter: 'none' }, { src: 'assets/giftbox-flowers.jpg', caption: 'Garden Edition (Greenery)', filter: 'hue-rotate(90deg)' }, { src: 'assets/giftbox-flowers.jpg', caption: 'Autumn Edition (Dried)', filter: 'sepia(0.5) contrast(1.2)' } ]
         };
         let indices = { love: 0, cute: 0, flower: 0 };
+        
         window.slideGallery = function(boxType, direction) {
             const items = galleryData[boxType];
             let newIndex = indices[boxType] + direction;
@@ -133,6 +153,8 @@
             indices[boxType] = newIndex;
             const img = document.getElementById('img-' + boxType);
             const caption = document.getElementById('caption-' + boxType);
+            
+            // Subtle fade animation
             img.style.opacity = '0';
             setTimeout(() => {
                 const item = items[newIndex];
@@ -142,6 +164,57 @@
                 img.style.opacity = '1';
             }, 300);
         }
+
+        // --- OPTIMIZED CAROUSEL LOGIC ---
+        const viewport = document.getElementById('carousel-viewport');
+
+        function updateCarouselButtons() {
+            const prevBtn = document.querySelector('.carousel-btn.prev');
+            const nextBtn = document.querySelector('.carousel-btn.next');
+            if (!prevBtn || !nextBtn) return;
+
+            // Math.ceil handles zooming/subpixel rendering issues
+            const scrollLeft = Math.ceil(viewport.scrollLeft);
+            const scrollWidth = viewport.scrollWidth;
+            const clientWidth = viewport.clientWidth;
+            const maxScroll = scrollWidth - clientWidth;
+
+            // Use a 2px buffer for robustness
+            const atStart = scrollLeft <= 2;
+            const atEnd = scrollLeft >= maxScroll - 2;
+
+            // Toggle Disabled States
+            prevBtn.classList.toggle('disabled', atStart);
+            nextBtn.classList.toggle('disabled', atEnd);
+        }
+
+        window.slideAddons = function(direction) {
+            const card = viewport.querySelector('.card');
+            if (!card) return;
+            const cardStyle = window.getComputedStyle(card);
+            const cardMargin = parseFloat(cardStyle.marginRight) || 25;
+            // Scroll by 1 card unit for precise control
+            const scrollAmount = (card.offsetWidth + cardMargin); 
+
+            viewport.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+        }
+
+        // Listeners
+        viewport.addEventListener('scroll', updateCarouselButtons);
+        
+        // Init observer to setup buttons once content loads
+        const observer = new MutationObserver((mutationsList, observer) => {
+            for(const mutation of mutationsList) {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    // Small delay to allow layout to settle
+                    setTimeout(updateCarouselButtons, 100); 
+                    observer.disconnect(); 
+                }
+            }
+        });
+        observer.observe(document.getElementById('addons-container'), { childList: true });
+        
+        window.addEventListener('resize', updateCarouselButtons);
     </script>
 </body>
 </html>
