@@ -1,20 +1,17 @@
 // Configuration
-const textContent = "My dearest, \n\nI just wanted to remind you that memories with the right people will always remain priceless. \n\nLet's keep this moment forever.";
+const textContent = "My dearest, \n\nI just wanted to remind you that memories with the right people will always remain priceless. \nLet's keep this moment \nforever.";
 
-// ADJUSTMENTS
 const fontSize = 34;       
 const strokeWidth = 2;     
 const strokeColor = "#4e342e"; 
 const speedPerChar = 70;  
+const lineDelay = 800;    
 
 export function runIntroSequence() {
     const introOverlay = document.getElementById('intro-overlay');
     
     if (introOverlay) {
-        // 1. Open the envelope
         setTimeout(() => { document.querySelector('.envelope-container').classList.add('open'); }, 800);
-        
-        // 2. Hide overlay and start writing
         setTimeout(() => {
             introOverlay.style.opacity = '0';
             setTimeout(() => { 
@@ -32,16 +29,29 @@ function initHandwriting() {
 
     const lines = textContent.split('\n');
     
+    // --- OPTIMIZED: Calculate total animation time for final sequence ---
+    let totalDuration = 0;
+    lines.forEach(line => {
+        const cleanLine = line.trim() === "" ? " " : line;
+        const duration = cleanLine.length > 1 ? cleanLine.length * speedPerChar : 100;
+        totalDuration += (lineDelay + duration);
+    });
+
+    // Schedule final sequence after writing is complete
+    setTimeout(finishAnimationSequence, totalDuration + 500); // 500ms buffer
+
+    // --- VARA CONFIGURATION (No changes needed here) ---
     const varaText = lines.map(line => {
         const cleanLine = line.trim() === "" ? " " : line;
         const duration = cleanLine.length > 1 ? cleanLine.length * speedPerChar : 100;
 
         return { 
             text: cleanLine, 
-            delay: 600, 
+            delay: lineDelay, 
             duration: duration, 
-            x: 5, 
-            fromCurrentPosition: { y: false } 
+            x: 0, 
+            y: 5, 
+            fromCurrentPosition: { y: true } 
         };
     });
 
@@ -57,19 +67,12 @@ function initHandwriting() {
             autoAnimation: true
         }
     );
-
-    const totalChars = textContent.length;
-    const estimatedTime = (totalChars * speedPerChar) + (lines.length * 600) + 1000;
-
-    setTimeout(() => {
-        finishAnimationSequence();
-    }, estimatedTime);
 }
 
 function finishAnimationSequence() {
     const staticSection = document.querySelector('.static-hero-text');
     const stampContainer = document.getElementById('final-stamp-container');
-    
+
     if(stampContainer && stampContainer.innerHTML === '') {
         const stampImg = document.createElement('img');
         stampImg.src = 'assets/sk-seal.png';
@@ -81,31 +84,22 @@ function finishAnimationSequence() {
     if(staticSection) {
         staticSection.classList.add('visible');
     }
-    
-    const cursor = document.querySelector('.cursor');
-    if(cursor) cursor.style.display = 'none';
 }
 
-// SCROLL ANIMATION OBSERVER
 export function initScrollAnimations() {
-    // 1. Setup the observer
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                // Add a slight delay between cards for a "staggered" effect
                 setTimeout(() => {
                     entry.target.classList.add('visible');
                 }, index * 200); 
-
-                // Stop watching once it's visible
                 observer.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.2 // Trigger when 20% of the card is visible
+        threshold: 0.2
     });
 
-    // 2. Target the cards
     const cards = document.querySelectorAll('.highlight-card');
     cards.forEach(card => observer.observe(card));
 }
