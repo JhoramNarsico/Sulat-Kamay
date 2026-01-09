@@ -40,7 +40,7 @@
         <div class="scroll-indicator" onclick="document.querySelector('.showroom-love').scrollIntoView({behavior: 'smooth'})">↓</div>
     </header>
 
-    <!-- LOVE -->
+    <!-- LOVE (4 Pictures) -->
     <section class="showroom showroom-love">
         <div class="gold-dust"></div>
         <div class="showroom-header">
@@ -51,7 +51,10 @@
         </div>
         <div class="gallery-container">
             <div class="nav-arrow prev" onclick="slideGallery('love', -1)">←</div>
-            <div class="gallery-main"><img src="assets/giftbox-love.jpg" id="img-love" alt="Love Box"><p class="sample-caption" id="caption-love">Classic Romance Edition</p></div>
+            <!-- Default image is #1 -->
+            <div class="gallery-main">
+                <img src="assets/giftbox-love-1.jpeg" id="img-love" alt="Love Box" onerror="this.src='https://via.placeholder.com/500?text=Love+Box+1'">
+            </div>
             <div class="nav-arrow next" onclick="slideGallery('love', 1)">→</div>
         </div>
         <div class="price-block">
@@ -60,7 +63,7 @@
         </div>
     </section>
 
-    <!-- CUTE -->
+    <!-- CUTE (5 Pictures) -->
     <section class="showroom showroom-cute">
         <div class="pink-atmosphere"></div>
         <div class="showroom-header">
@@ -71,7 +74,10 @@
         </div>
         <div class="gallery-container">
             <div class="nav-arrow prev" onclick="slideGallery('cute', -1)">←</div>
-            <div class="gallery-main"><img src="assets/giftbox-cute.jpg" id="img-cute" alt="Cute Box"><p class="sample-caption" id="caption-cute">The "Tickled Pink" Palette</p></div>
+            <!-- Default image is #1 -->
+            <div class="gallery-main">
+                <img src="assets/giftbox-cute-1.jpeg" id="img-cute" alt="Cute Box" onerror="this.src='https://via.placeholder.com/500?text=Cute+Box+1'">
+            </div>
             <div class="nav-arrow next" onclick="slideGallery('cute', 1)">→</div>
         </div>
         <div class="price-block">
@@ -80,7 +86,7 @@
         </div>
     </section>
 
-    <!-- FLOWERS -->
+    <!-- FLOWERS (1 Picture only - No Arrows) -->
     <section class="showroom showroom-flower">
         <div class="green-atmosphere"></div>
         <div class="showroom-header">
@@ -90,9 +96,9 @@
             <ul class="features"><li>✿ DIY Stationery Set</li><li>✿ 4 Stamped Sheets</li><li>✿ Dried Flowers</li><li>✿ Wax Seals</li></ul>
         </div>
         <div class="gallery-container">
-            <div class="nav-arrow prev" onclick="slideGallery('flower', -1)">←</div>
-            <div class="gallery-main"><img src="assets/giftbox-flowers.jpg" id="img-flower" alt="Flowers Kit"><p class="sample-caption" id="caption-flower">Standard DIY Kit</p></div>
-            <div class="nav-arrow next" onclick="slideGallery('flower', 1)">→</div>
+            <div class="gallery-main">
+                <img src="assets/giftbox-flowers.jpg" id="img-flower" alt="Flowers Kit" onerror="this.src='https://via.placeholder.com/500?text=Flowers+Box'">
+            </div>
         </div>
         <div class="price-block">
             <span class="price">P160.00</span>
@@ -139,33 +145,62 @@
     <!-- Inline Scripts for Gallery/Carousel specific interactions -->
     <script>
         const galleryData = {
-            love: [ { src: 'assets/giftbox-love.jpg', caption: 'Classic Romance Edition', filter: 'none' }, { src: 'assets/giftbox-love.jpg', caption: 'Vintage Parchment Theme', filter: 'sepia(0.6)' }, { src: 'assets/giftbox-love.jpg', caption: 'Rustic Midnight Theme', filter: 'brightness(0.8) contrast(1.2)' } ],
-            cute: [ { src: 'assets/giftbox-cute.jpg', caption: 'The "Tickled Pink" Palette', filter: 'none' }, { src: 'assets/giftbox-cute.jpg', caption: 'The "Sky Blue" Palette', filter: 'hue-rotate(180deg)' }, { src: 'assets/giftbox-cute.jpg', caption: 'The "Coffee Date" Palette', filter: 'sepia(1)' } ],
-            flower: [ { src: 'assets/giftbox-flowers.jpg', caption: 'Standard DIY Kit', filter: 'none' }, { src: 'assets/giftbox-flowers.jpg', caption: 'Garden Edition (Greenery)', filter: 'hue-rotate(90deg)' }, { src: 'assets/giftbox-flowers.jpg', caption: 'Autumn Edition (Dried)', filter: 'sepia(0.5) contrast(1.2)' } ]
+            // LOVE: 4 Images
+            love: [ 
+                { src: 'assets/giftbox-love-1.jpeg' }, 
+                { src: 'assets/giftbox-love-2.jpeg' }, 
+                { src: 'assets/giftbox-love-3.jpeg' },
+                { src: 'assets/giftbox-love-4.jpeg' } 
+            ],
+            // CUTE: 5 Images
+            cute: [ 
+                { src: 'assets/giftbox-cute-1.jpeg' }, 
+                { src: 'assets/giftbox-cute-2.jpeg' }, 
+                { src: 'assets/giftbox-cute-3.jpeg' },
+                { src: 'assets/giftbox-cute-4.jpeg' },
+                { src: 'assets/giftbox-cute-5.jpeg' }
+            ],
+            // FLOWER: 1 Image (Data placeholder only, arrows removed in HTML)
+            flower: [ 
+                { src: 'assets/giftbox-flowers.jpg' } 
+            ]
         };
+
         let indices = { love: 0, cute: 0, flower: 0 };
         
         window.slideGallery = function(boxType, direction) {
             const items = galleryData[boxType];
+            
+            // Safety: if 1 or 0 items, don't slide
+            if (!items || items.length <= 1) return;
+
             let newIndex = indices[boxType] + direction;
+            
+            // Loop functionality
             if (newIndex < 0) newIndex = items.length - 1;
             if (newIndex >= items.length) newIndex = 0;
-            indices[boxType] = newIndex;
-            const img = document.getElementById('img-' + boxType);
-            const caption = document.getElementById('caption-' + boxType);
             
-            // Subtle fade animation
+            indices[boxType] = newIndex;
+            
+            const img = document.getElementById('img-' + boxType);
+            
+            // Fade Animation
             img.style.opacity = '0';
+
             setTimeout(() => {
                 const item = items[newIndex];
                 img.src = item.src;
-                caption.innerText = item.caption;
-                img.style.filter = item.filter;
+                
+                // If the file doesn't exist yet, this fallback makes it visible so you can see logic works
+                img.onerror = function() {
+                    this.src = `https://via.placeholder.com/500?text=${boxType}+${newIndex+1}`;
+                };
+
                 img.style.opacity = '1';
             }, 300);
         }
 
-        // --- OPTIMIZED CAROUSEL LOGIC ---
+        // --- CAROUSEL LOGIC ---
         const viewport = document.getElementById('carousel-viewport');
 
         function updateCarouselButtons() {
@@ -173,17 +208,14 @@
             const nextBtn = document.querySelector('.carousel-btn.next');
             if (!prevBtn || !nextBtn) return;
 
-            // Math.ceil handles zooming/subpixel rendering issues
             const scrollLeft = Math.ceil(viewport.scrollLeft);
             const scrollWidth = viewport.scrollWidth;
             const clientWidth = viewport.clientWidth;
             const maxScroll = scrollWidth - clientWidth;
 
-            // Use a 2px buffer for robustness
             const atStart = scrollLeft <= 2;
             const atEnd = scrollLeft >= maxScroll - 2;
 
-            // Toggle Disabled States
             prevBtn.classList.toggle('disabled', atStart);
             nextBtn.classList.toggle('disabled', atEnd);
         }
@@ -193,7 +225,6 @@
             if (!card) return;
             const cardStyle = window.getComputedStyle(card);
             const cardMargin = parseFloat(cardStyle.marginRight) || 25;
-            // Scroll by 1 card unit for precise control
             const scrollAmount = (card.offsetWidth + cardMargin); 
 
             viewport.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
@@ -202,11 +233,9 @@
         // Listeners
         viewport.addEventListener('scroll', updateCarouselButtons);
         
-        // Init observer to setup buttons once content loads
         const observer = new MutationObserver((mutationsList, observer) => {
             for(const mutation of mutationsList) {
                 if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                    // Small delay to allow layout to settle
                     setTimeout(updateCarouselButtons, 100); 
                     observer.disconnect(); 
                 }
