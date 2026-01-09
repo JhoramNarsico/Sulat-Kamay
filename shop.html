@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop | Sulat Kamay</title>
-    <!-- HTML2Canvas Library (Required for Receipt Generation) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/main.css">
     <!-- Google Fonts -->
@@ -13,10 +11,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
+    <!-- HTML2Canvas (Required for global receipt logic if imported) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <!-- Internal Style for Smooth Transitions -->
     <style>
         .gallery-main {
-            background-color: #fdfbf7; /* Matches paper color to hide loading */
+            background-color: #fdfbf7;
             transition: background-color 0.3s;
         }
         .gallery-main img {
@@ -78,14 +79,14 @@
         <div class="gallery-container">
             <div class="nav-arrow prev" onclick="slideGallery('love', -1)">←</div>
             <div class="gallery-main">
-                <!-- Initial Image -->
                 <img src="assets/giftbox-love-1.jpeg" id="img-love" alt="Love Box" onerror="this.src='https://via.placeholder.com/500?text=Love+Box+1'">
             </div>
             <div class="nav-arrow next" onclick="slideGallery('love', 1)">→</div>
         </div>
         <div class="price-block">
             <span class="price">P280.00</span>
-            <button class="add-btn primary" onclick="addToCart(1)">Add to Box</button>
+            <!-- CHANGED: Redirects to Builder -->
+            <button class="add-btn primary" onclick="window.location.href='customize.html?box=1'">Personalize This Box</button>
         </div>
     </section>
 
@@ -101,14 +102,14 @@
         <div class="gallery-container">
             <div class="nav-arrow prev" onclick="slideGallery('cute', -1)">←</div>
             <div class="gallery-main">
-                <!-- Initial Image -->
                 <img src="assets/giftbox-cute-1.jpeg" id="img-cute" alt="Cute Box" onerror="this.src='https://via.placeholder.com/500?text=Cute+Box+1'">
             </div>
             <div class="nav-arrow next" onclick="slideGallery('cute', 1)">→</div>
         </div>
         <div class="price-block">
             <span class="price">P190.00</span>
-            <button class="add-btn secondary" onclick="addToCart(2)">Add to Box</button>
+            <!-- CHANGED: Redirects to Builder -->
+            <button class="add-btn secondary" onclick="window.location.href='customize.html?box=2'">Personalize This Box</button>
         </div>
     </section>
 
@@ -122,15 +123,14 @@
             <ul class="features"><li>✿ DIY Stationery Set</li><li>✿ 4 Stamped Sheets</li><li>✿ Dried Flowers</li><li>✿ Wax Seals</li></ul>
         </div>
         <div class="gallery-container">
-            <!-- Arrows removed intentionally -->
             <div class="gallery-main">
-                <!-- Initial Image -->
                 <img src="assets/giftbox-flowers.jpg" id="img-flower" alt="Flowers Kit" onerror="this.src='https://via.placeholder.com/500?text=Flowers+Box'">
             </div>
         </div>
         <div class="price-block">
             <span class="price">P160.00</span>
-            <button class="add-btn tertiary" onclick="addToCart(3)">Add to Box</button>
+            <!-- CHANGED: Redirects to Builder -->
+            <button class="add-btn tertiary" onclick="window.location.href='customize.html?box=3'">Personalize This Box</button>
         </div>
     </section>
 
@@ -176,233 +176,107 @@
             <ul id="cart-items"></ul>
             <div class="cart-summary">
                 <div class="total-row"><span>Total:</span><strong>P<span id="cart-total">0.00</span></strong></div>
-                <button class="cta-button" style="width:100%" onclick="alert('Screenshot this list and DM it to us on Instagram!')">Checkout via DM</button>
+                <button class="cta-button" style="width:100%">Checkout via DM</button>
             </div>
         </div>
     </div>
 
     <!-- TOAST NOTIFICATION CONTAINER -->
-<div id="toast-box"></div>
+    <div id="toast-box"></div>
 
-<!-- DUAL-FILE RECEIPT MODAL -->
-<div id="receipt-modal" class="receipt-modal">
-    <div class="receipt-content">
-        
-        <!-- HEADER -->
-        <div class="modal-top-bar">
-            <h2>Your Order Files</h2>
-            <p>Please save the files below and send them to us.</p>
-        </div>
-
-        <!-- === SOURCE HTML (Hidden during view, visible during capture) === -->
-        <div id="source-html-container">
-            
-            <!-- PAPER 1: ORDER SLIP (Financial) -->
-            <div id="receipt-preview" class="paper-source">
-                <div class="receipt-header">
-                    <img src="assets/sk-seal.png" class="receipt-logo" alt="SK">
-                    <div class="receipt-title">Order Slip</div>
-                    <div class="receipt-meta-grid">
-                        <div class="meta-row"><span>Ref:</span> <span id="r-ref">--</span></div>
-                        <div class="meta-row"><span>Date:</span> <span id="r-date">--</span></div>
-                        <div class="meta-row"><span>Time:</span> <span id="r-time">--</span></div>
-                        <div class="meta-row nickname-row"><span>Customer:</span> <span id="r-nickname">--</span></div>
-                    </div>
-                </div>
-                <table class="receipt-items">
-                    <thead><tr><th>Item</th><th>Price</th></tr></thead>
-                    <tbody id="r-items-body"></tbody>
-                </table>
-                <div class="receipt-total">
-                    <span>TOTAL</span>
-                    <span>P<span id="r-total">0.00</span></span>
-                </div>
-                <div class="receipt-footer">
-                    <p>Thank you for writing with us.</p>
-                </div>
-            </div>
-
-            <!-- PAPER 2: LETTER SLIP (Content) -->
-            <div id="letter-slip" class="paper-source letter-theme">
-                <div class="letter-header">
-                    <span class="clip-icon">📎</span>
-                    <h3>Transcription Request</h3>
-                    <div class="mini-meta">Ref: <span id="l-ref">--</span> | <span id="l-nickname">--</span></div>
-                </div>
-                <div id="letter-content-body">
-                    <!-- Letters injected here -->
-                </div>
-                <div class="letter-footer">
-                    * Please handwrite on vintage paper *
-                </div>
-            </div>
-        </div>
-        <!-- === END SOURCE HTML === -->
-
-
-        <!-- === GENERATED PREVIEWS (What the user sees) === -->
-        <div id="generated-files-area">
-            
-            <!-- FILE 1 PREVIEW -->
-            <div class="file-block">
-                <div class="file-label">📄 File 1: Order Slip</div>
-                <img id="img-preview-order" class="final-img" alt="Order Slip">
-                <a id="btn-dl-order" class="action-btn btn-download small-btn">📥 Save Order Slip</a>
-            </div>
-
-            <!-- FILE 2 PREVIEW (Hidden if no letters) -->
-            <div class="file-block" id="block-letter" style="display:none;">
-                <div class="file-label">💌 File 2: Letter Content</div>
-                <img id="img-preview-letter" class="final-img" alt="Letter Slip">
-                <a id="btn-dl-letter" class="action-btn btn-download small-btn">📥 Save Letter Content</a>
-            </div>
-
-        </div>
-
-        <!-- FINAL ACTIONS -->
-        <div class="receipt-actions">
-            <a href="https://www.instagram.com/sulatkamay_ph/" target="_blank" class="action-btn btn-instagram">
-                📸 Send Files to Instagram
-            </a>
-            <button class="action-btn btn-close-receipt" onclick="closeReceipt()">Close</button>
-        </div>
-
+    <!-- RECEIPT MODAL (Included for consistency) -->
+    <div id="receipt-modal" class="receipt-modal">
+        <!-- Receipt content usually handled dynamically by JS -->
     </div>
-</div>
+
     <!-- Main Logic Script -->
     <script type="module" src="js/main.js"></script>
     
     <!-- OPTIMIZED GALLERY SCRIPT -->
     <script>
-        // --- 1. GALLERY CONFIGURATION ---
         const galleryData = {
-            // Love Box: 4 Images
             love: [ 
                 { src: 'assets/giftbox-love-1.jpeg' }, 
                 { src: 'assets/giftbox-love-2.jpeg' }, 
-                { src: 'assets/giftbox-love-3.jpeg' },
+                { src: 'assets/giftbox-love-3.jpeg' }, 
                 { src: 'assets/giftbox-love-4.jpeg' } 
             ],
-            // Cute Box: 5 Images
             cute: [ 
                 { src: 'assets/giftbox-cute-1.jpeg' }, 
                 { src: 'assets/giftbox-cute-2.jpeg' }, 
-                { src: 'assets/giftbox-cute-3.jpeg' },
-                { src: 'assets/giftbox-cute-4.jpeg' },
-                { src: 'assets/giftbox-cute-5.jpeg' }
+                { src: 'assets/giftbox-cute-3.jpeg' }, 
+                { src: 'assets/giftbox-cute-4.jpeg' }, 
+                { src: 'assets/giftbox-cute-5.jpeg' } 
             ],
-            // Flower Box: 1 Image
-            flower: [ 
-                { src: 'assets/giftbox-flowers.jpg' } 
-            ]
+            flower: [ { src: 'assets/giftbox-flowers.jpg' } ]
         };
 
         let indices = { love: 0, cute: 0, flower: 0 };
         let transitionTimeouts = {}; 
 
-        // --- 2. PRELOADER (Eliminates White Flash) ---
         function preloadAllImages() {
-            console.log("Preloading gallery images...");
             for (const category in galleryData) {
                 galleryData[category].forEach(item => {
                     const img = new Image();
-                    img.src = item.src; // Forces browser to cache
+                    img.src = item.src; 
                 });
             }
         }
 
-        // --- 3. SLIDER LOGIC ---
         window.slideGallery = function(boxType, direction) {
             const items = galleryData[boxType];
-            
-            // Safety: if 1 or 0 items, do not slide
             if (!items || items.length <= 1) return;
 
             let newIndex = indices[boxType] + direction;
-            
-            // Loop navigation
             if (newIndex < 0) newIndex = items.length - 1;
             if (newIndex >= items.length) newIndex = 0;
-            
             indices[boxType] = newIndex;
             
             const imgElement = document.getElementById('img-' + boxType);
-            
-            // Clear existing animation if user clicks quickly
             if (transitionTimeouts[boxType]) clearTimeout(transitionTimeouts[boxType]);
 
-            // Step A: Fade Out slightly
             imgElement.style.opacity = '0.4'; 
 
-            // Step B: Swap Source & Fade In
             transitionTimeouts[boxType] = setTimeout(() => {
-                // Swap Source
                 imgElement.src = items[newIndex].src;
-                
-                // When loaded (or if cached), fade back in
                 const fadeIn = () => { imgElement.style.opacity = '1'; };
-                
-                if (imgElement.complete) {
-                    fadeIn();
-                } else {
-                    imgElement.onload = fadeIn;
-                }
-            }, 250); // 250ms matches the fade transition
+                if (imgElement.complete) fadeIn(); else imgElement.onload = fadeIn;
+            }, 250);
         }
 
-        // --- 4. INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
-            // A. Start Preloading
             preloadAllImages();
-
-            // B. Ensure first images match JS data
             ['love', 'cute', 'flower'].forEach(box => {
                 const img = document.getElementById('img-' + box);
                 if (galleryData[box] && galleryData[box].length > 0 && img) {
-                    // Set src in case HTML is outdated
                     img.src = galleryData[box][0].src;
                 }
             });
-            
-            // C. Setup Carousel
             updateCarouselButtons();
         });
 
-        // --- 5. ACCESSORIES CAROUSEL LOGIC ---
+        // Carousel Logic
         const viewport = document.getElementById('carousel-viewport');
-
         function updateCarouselButtons() {
             const prevBtn = document.querySelector('.carousel-btn.prev');
             const nextBtn = document.querySelector('.carousel-btn.next');
             if (!prevBtn || !nextBtn || !viewport) return;
-
             const scrollLeft = Math.ceil(viewport.scrollLeft);
             const scrollWidth = viewport.scrollWidth;
             const clientWidth = viewport.clientWidth;
             const maxScroll = scrollWidth - clientWidth;
-
-            // Add buffer for float calculation errors
-            const atStart = scrollLeft <= 5;
-            const atEnd = scrollLeft >= maxScroll - 5;
-
-            prevBtn.classList.toggle('disabled', atStart);
-            nextBtn.classList.toggle('disabled', atEnd);
+            prevBtn.classList.toggle('disabled', scrollLeft <= 5);
+            nextBtn.classList.toggle('disabled', scrollLeft >= maxScroll - 5);
         }
 
         window.slideAddons = function(direction) {
             const card = viewport.querySelector('.card');
             if (!card) return;
-            const cardStyle = window.getComputedStyle(card);
-            // Calculate width of one item + gap
-            const cardMargin = parseFloat(cardStyle.marginRight) || 25;
-            const scrollAmount = (card.offsetWidth + cardMargin); 
-
+            const scrollAmount = (card.offsetWidth + 25); 
             viewport.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
         }
 
         if(viewport) viewport.addEventListener('scroll', updateCarouselButtons);
-        
-        // Watch for dynamic content loading in carousel
         const observer = new MutationObserver((mutationsList, observer) => {
             for(const mutation of mutationsList) {
                 if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
@@ -411,10 +285,8 @@
                 }
             }
         });
-        
         const addonContainer = document.getElementById('addons-container');
         if(addonContainer) observer.observe(addonContainer, { childList: true });
-        
         window.addEventListener('resize', updateCarouselButtons);
     </script>
 </body>

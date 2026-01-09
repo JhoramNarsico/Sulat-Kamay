@@ -1,6 +1,6 @@
 import { products } from './data.js';
-import { addToCart, removeFromCart, updateCartUI } from './cart.js';
-import { selectBox, toggleAddon, addBundleToCart, initLetterBuilder } from './builder.js';
+import { addToCart, removeFromCart, updateCartUI, closeReceipt } from './cart.js';
+import { selectBox, toggleAddon, addBundleToCart, initLetterBuilder, checkUrlForBoxSelection } from './builder.js';
 import { runIntroSequence, initScrollAnimations } from './home-animations.js';
 import { initShopScrollSpy } from './shop-animations.js';
 
@@ -10,6 +10,7 @@ window.removeFromCart = removeFromCart;
 window.selectBox = selectBox;
 window.toggleAddon = toggleAddon;
 window.addBundleToCart = addBundleToCart;
+window.closeReceipt = closeReceipt; // This is now safely imported
 
 document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
@@ -18,12 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const addonsContainer = document.getElementById('addons-container');
     if (addonsContainer) {
         renderShop(addonsContainer);
-        initShopScrollSpy();
+        // Check if function exists before calling to prevent errors on other pages
+        if (typeof initShopScrollSpy === 'function') initShopScrollSpy();
     }
     
     // --- Builder Page Logic ---
     if (document.getElementById('letter-preview')) {
         initLetterBuilder();
+        checkUrlForBoxSelection();
     }
 
     // --- Home Page Logic ---
@@ -36,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupModal();
 });
 
-// Render Add-ons in Shop (Updated Structure)
+// Render Add-ons in Shop
 function renderShop(container) {
     container.innerHTML = ''; 
     const addOns = products.filter(p => p.category === 'addon');
@@ -46,7 +49,6 @@ function renderShop(container) {
         card.className = 'card';
         const fallback = `https://via.placeholder.com/300x250?text=${encodeURIComponent(product.name)}`;
         
-        // NEW: Nested structure to match CSS for proper alignment
         card.innerHTML = `
             <div class="img-container">
                 <img src="${product.img}" alt="${product.name}" onerror="this.src='${fallback}'">
@@ -72,11 +74,11 @@ function setupModal() {
 
     if(btn) btn.onclick = (e) => { 
         e.preventDefault(); 
-        modal.style.display = "block"; 
+        if(modal) modal.style.display = "block"; 
     };
     
     if(close) close.onclick = () => {
-        modal.style.display = "none";
+        if(modal) modal.style.display = "none";
     };
     
     window.onclick = (e) => { 

@@ -494,22 +494,49 @@
 }
 .addon-tag { font-size: 0.9rem; color: #bf360c; }
 
-.summary-actions { display: flex; align-items: center; gap: 30px; }
-.total-display { text-align: right; }
-.total-display span { display: block; font-size: 0.8rem; color: #999; }
+.summary-actions { display: flex; align-items: center; gap: 20px; }
+
+/* TOTAL DISPLAY STYLING */
+.total-display { 
+    text-align: right; 
+    display: flex; 
+    flex-direction: column; /* Stack "Total" label on top of price */
+    justify-content: center;
+}
+
+/* 1. The Label "Total:" */
+.total-display > span:first-child { 
+    display: block; 
+    font-size: 0.85rem; 
+    color: #888; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 2. The Price Amount "P 0.00" */
 .total-display .amount { 
     font-family: var(--font-display, serif); 
-    font-size: 1.8rem; 
+    font-size: 2.8rem; /* INCREASED SIZE HERE */
     color: #bf360c; 
     font-weight: bold; 
     line-height: 1;
+    margin-top: 5px;
+    display: block;
 }
 
+/* 3. Fix: Ensure inner span stays inline */
+.total-display .amount span { 
+    display: inline !important; 
+    font-size: inherit; 
+    color: inherit; 
+}
+
+/* BUTTON */
 .add-bundle-btn {
     background: #3e2723;
     color: #fff;
     border: none;
-    padding: 14px 35px;
+    padding: 15px 40px; /* Slightly larger button */
     border-radius: 50px;
     font-family: var(--font-display, serif);
     font-size: 1.1rem;

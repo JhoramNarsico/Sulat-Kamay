@@ -11,16 +11,19 @@ export function initLetterBuilder() {
     }
     
     // Live Typing Listeners
-    document.getElementById('recipient-name').addEventListener('input', (e) => {
-        document.getElementById('preview-name').innerText = e.target.value || "My Dearest...";
-    });
+    const recipientInput = document.getElementById('recipient-name');
+    if(recipientInput) {
+        recipientInput.addEventListener('input', (e) => {
+            document.getElementById('preview-name').innerText = e.target.value || "My Dearest...";
+        });
+    }
     
     const bodyInput = document.getElementById('letter-content');
-    bodyInput.addEventListener('input', (e) => {
-        // Convert newlines to breaks for HTML preview
-        // Note: innerText usually handles \n but CSS white-space: pre-wrap is safer
-        document.getElementById('preview-body').innerText = e.target.value || "Your words will appear here...";
-    });
+    if(bodyInput) {
+        bodyInput.addEventListener('input', (e) => {
+            document.getElementById('preview-body').innerText = e.target.value || "Your words will appear here...";
+        });
+    }
 }
 
 export function selectBox(id, price, theme) {
@@ -29,7 +32,7 @@ export function selectBox(id, price, theme) {
     // UI Updates
     document.querySelectorAll('.selection-card').forEach(card => card.classList.remove('selected'));
     
-    // Find the clicked card based on theme class (simplification)
+    // Find the clicked card based on theme class
     const card = document.querySelector(`.theme-${theme.toLowerCase()}`);
     if(card) card.classList.add('selected');
     
@@ -41,9 +44,7 @@ export function selectBox(id, price, theme) {
     
     // Update Paper Style
     const preview = document.getElementById('letter-preview');
-    // Remove old style classes
     preview.classList.remove('style-Love', 'style-Cute', 'style-Flowers');
-    // Add new
     preview.classList.add(`style-${theme}`);
     
     // Scroll to next step gently
@@ -95,6 +96,12 @@ export function addBundleToCart() {
         if(!confirm("You haven't written a letter yet. Add blank paper?")) return;
     }
 
+    // Build Description string with Add-ons
+    let addonString = 'None';
+    if(builderState.addons.length > 0) {
+        addonString = builderState.addons.map(a => a.name).join(', ');
+    }
+
     // Create a composite Item
     const bundleItem = {
         id: 'bundle-' + Date.now(),
@@ -102,12 +109,36 @@ export function addBundleToCart() {
         price: parseFloat(document.getElementById('builder-total').innerText),
         desc: `
             <b>To:</b> ${recipient || 'Blank'}<br>
-            <b>Add-ons:</b> ${builderState.addons.map(a=>a.name).join(', ') || 'None'}<br>
-            <i>Note: Letter content saved securely.</i>
+            <b>Add-ons:</b> ${addonString}
         `,
-        // In a real app, you'd save the full message content here or sends it to backend
+        // Save the raw text for the receipt generator
         fullMessage: message 
     };
     
     addToCart(null, bundleItem);
+}
+
+// --- NEW FUNCTION: Check URL for Auto-Selection ---
+export function checkUrlForBoxSelection() {
+    const params = new URLSearchParams(window.location.search);
+    const boxId = params.get('box');
+
+    if (boxId) {
+        // Map IDs to their Data
+        const boxMap = {
+            '1': { price: 280, theme: 'Love' },
+            '2': { price: 190, theme: 'Cute' },
+            '3': { price: 160, theme: 'Flowers' }
+        };
+
+        const box = boxMap[boxId];
+        
+        if (box) {
+            // Trigger selection
+            selectBox(parseInt(boxId), box.price, box.theme);
+            
+            // Clean URL so refresh doesn't jump again
+            window.history.replaceState({}, document.title, "customize.html");
+        }
+    }
 }

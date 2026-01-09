@@ -143,20 +143,49 @@ function generateFiles(nickname) {
     cart.forEach(item => {
         total += item.price;
         
-        // 1. Add to Order Slip
         let details = '';
-        if(item.desc && item.desc.includes('To:')) {
-             const match = item.desc.match(/To:\s*([^<]*)/);
-             if(match) details = `<br><small style="color:#5d4037; font-style:italic;">For: ${match[1]}</small>`;
-        }
-        tbody.innerHTML += `<tr><td class="r-name">${item.name}${details}</td><td class="r-price">P${item.price.toFixed(2)}</td></tr>`;
+        let recipientName = ''; // Store recipient for the letter slip
+        
+        // 1. Check for Custom Bundle Descriptions
+        if(item.desc) {
+            // A. Extract Recipient Name (Regex ignores HTML tags)
+            if(item.desc.includes('To:')) {
+                const matchTo = item.desc.match(/To:(?:<[^>]+>)?\s*([^<]*)/i);
+                if(matchTo && matchTo[1].trim()) {
+                    recipientName = matchTo[1].trim();
+                }
+            }
 
-        // 2. Add to Letter Slip (if message exists)
+            // B. Extract Add-ons (Regex ignores HTML tags)
+            if(item.desc.includes('Add-ons:')) {
+                const matchAddons = item.desc.match(/Add-ons:(?:<[^>]+>)?\s*([^<]*)/i);
+                if(matchAddons && matchAddons[1] && matchAddons[1].trim() !== 'None') {
+                     details += `<br><small style="color:#5d4037; font-size:0.85rem;">+ ${matchAddons[1].trim()}</small>`;
+                }
+            }
+        }
+
+        // 2. Add to Order Slip (Financial)
+        tbody.innerHTML += `
+            <tr>
+                <td class="r-name">${item.name}${details}</td>
+                <td class="r-price">P${item.price.toFixed(2)}</td>
+            </tr>
+        `;
+
+        // 3. Add to Letter Slip (Content)
         if (item.fullMessage) {
             hasLetters = true;
+            
+            // Generate Header HTML if recipient exists
+            let headerHtml = '';
+            if (recipientName) {
+                headerHtml = `<div class="task-header"><strong>To:</strong> ${recipientName}</div>`;
+            }
+
             letterBody.innerHTML += `
                 <div class="transcription-task">
-                    <div class="task-header"><strong>Subject:</strong> ${item.name}</div>
+                    ${headerHtml}
                     <div class="task-message">"${item.fullMessage}"</div>
                 </div><hr class="task-divider">
             `;
@@ -167,44 +196,50 @@ function generateFiles(nickname) {
 
     // C. Screenshot Generation (Order Slip)
     const sourceOrder = document.getElementById('receipt-preview');
-    // We clear src to show loading state if needed
-    document.getElementById('img-preview-order').src = '';
+    const previewImg = document.getElementById('img-preview-order');
+    if (previewImg) previewImg.src = '';
     
     setTimeout(() => {
         html2canvas(sourceOrder, { scale: 2 }).then(canvas => {
             const imgData = canvas.toDataURL("image/png");
-            document.getElementById('img-preview-order').src = imgData;
+            if (previewImg) previewImg.src = imgData;
             
             const btn = document.getElementById('btn-dl-order');
-            btn.href = imgData;
-            btn.download = `OrderSlip_${ref}.png`;
+            if (btn) {
+                btn.href = imgData;
+                btn.download = `OrderSlip_${ref}.png`;
+            }
         });
     }, 100);
 
-    // D. Screenshot Generation (Letter Slip) - Only if letters exist
+    // D. Screenshot Generation (Letter Slip)
     const blockLetter = document.getElementById('block-letter');
     const sourceLetter = document.getElementById('letter-slip');
+    const letterPreviewImg = document.getElementById('img-preview-letter');
     
     if (hasLetters) {
-        blockLetter.style.display = 'block';
-        document.getElementById('img-preview-letter').src = '';
+        if (blockLetter) blockLetter.style.display = 'block';
+        if (letterPreviewImg) letterPreviewImg.src = '';
         
         setTimeout(() => {
             html2canvas(sourceLetter, { scale: 2 }).then(canvas => {
                 const imgData = canvas.toDataURL("image/png");
-                document.getElementById('img-preview-letter').src = imgData;
+                if (letterPreviewImg) letterPreviewImg.src = imgData;
                 
                 const btn = document.getElementById('btn-dl-letter');
-                btn.href = imgData;
-                btn.download = `LetterContent_${ref}.png`;
+                if (btn) {
+                    btn.href = imgData;
+                    btn.download = `LetterContent_${ref}.png`;
+                }
             });
-        }, 300); // Slight delay after first one to prevent lag
+        }, 300); 
     } else {
-        blockLetter.style.display = 'none';
+        if (blockLetter) blockLetter.style.display = 'none';
     }
 }
 
-// Global Close Function
-window.closeReceipt = function() {
-    document.getElementById('receipt-modal').style.display = 'none';
+// 4. EXPORTED CLOSE FUNCTION (Fixes the syntax error)
+export function closeReceipt() {
+    const modal = document.getElementById('receipt-modal');
+    if (modal) modal.style.display = 'none';
 }
