@@ -4,17 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop | Sulat Kamay</title>
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/main.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Internal Style for Smooth Transitions -->
+    <style>
+        .gallery-main {
+            background-color: #fdfbf7; /* Matches paper color to hide loading */
+            transition: background-color 0.3s;
+        }
+        .gallery-main img {
+            transition: opacity 0.25s ease-in-out;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
-    <!-- Background Leaves -->
+    <!-- Background Atmosphere -->
     <div class="autumn-bg"><div class="leaf"></div><div class="leaf"></div></div>
 
+    <!-- Navigation -->
     <nav>
         <div class="brand-container" onclick="window.location.href='index.html'">
             <img src="assets/sk-seal.png" class="nav-logo-img" alt="SK Logo">
-            <div class="logo-text"><h1 class="main-logo">Sulat Kamay</h1><span class="tagline">Handcrafted Memories</span></div>
+            <div class="logo-text">
+                <h1 class="main-logo">Sulat Kamay</h1>
+                <span class="tagline">Handcrafted Memories</span>
+            </div>
         </div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
@@ -25,6 +48,7 @@
         </ul>
     </nav>
 
+    <!-- Header / Intro -->
     <header class="shop-intro">
         <div class="intro-wrapper">
             <h2>The Collection</h2>
@@ -40,19 +64,19 @@
         <div class="scroll-indicator" onclick="document.querySelector('.showroom-love').scrollIntoView({behavior: 'smooth'})">↓</div>
     </header>
 
-    <!-- LOVE (4 Pictures) -->
+    <!-- SECTION 1: LOVE (4 Pictures) -->
     <section class="showroom showroom-love">
         <div class="gold-dust"></div>
         <div class="showroom-header">
             <span class="tag-grand">The Grand Showroom</span>
             <h2>Curated Box "Love"</h2>
-            <p class="description">This isn't just a gift box; it’s a time capsule. The <strong>"Love"</strong> box is our most luxurious offering, designed to hold the weight of your deepest emotions. Inside, you’ll find a handcrafted bouquet of premium dried flowers—Statice or Gypsophila—that will never fade, just like your affection.<br><br>We include five of your most cherished memories printed on high-quality polaroid stock, and a personalized letter sealed with our signature <strong>double-wax stamp</strong> in gold and burgundy. It’s the closest thing to mailing a warm hug.</p>
+            <p class="description">This isn't just a gift box; it’s a time capsule. The <strong>"Love"</strong> box is our most luxurious offering, designed to hold the weight of your deepest emotions. Inside, you’ll find a handcrafted bouquet of premium dried flowers—Statice or Gypsophila—that will never fade, just like your affection.<br><br>We include five of your most cherished memories printed on high-quality polaroid stock, and a personalized letter sealed with our signature <strong>double-wax stamp</strong> in gold and burgundy.</p>
             <ul class="features"><li>✦ 3 Printed Letters</li><li>✦ Premium Dried Bouquet</li><li>✦ 5 Polaroids</li><li>✦ Gold Accents</li></ul>
         </div>
         <div class="gallery-container">
             <div class="nav-arrow prev" onclick="slideGallery('love', -1)">←</div>
-            <!-- Default image is #1 -->
             <div class="gallery-main">
+                <!-- Initial Image -->
                 <img src="assets/giftbox-love-1.jpeg" id="img-love" alt="Love Box" onerror="this.src='https://via.placeholder.com/500?text=Love+Box+1'">
             </div>
             <div class="nav-arrow next" onclick="slideGallery('love', 1)">→</div>
@@ -63,7 +87,7 @@
         </div>
     </section>
 
-    <!-- CUTE (5 Pictures) -->
+    <!-- SECTION 2: CUTE (5 Pictures) -->
     <section class="showroom showroom-cute">
         <div class="pink-atmosphere"></div>
         <div class="showroom-header">
@@ -74,8 +98,8 @@
         </div>
         <div class="gallery-container">
             <div class="nav-arrow prev" onclick="slideGallery('cute', -1)">←</div>
-            <!-- Default image is #1 -->
             <div class="gallery-main">
+                <!-- Initial Image -->
                 <img src="assets/giftbox-cute-1.jpeg" id="img-cute" alt="Cute Box" onerror="this.src='https://via.placeholder.com/500?text=Cute+Box+1'">
             </div>
             <div class="nav-arrow next" onclick="slideGallery('cute', 1)">→</div>
@@ -86,17 +110,19 @@
         </div>
     </section>
 
-    <!-- FLOWERS (1 Picture only - No Arrows) -->
+    <!-- SECTION 3: FLOWERS (1 Picture - No Arrows) -->
     <section class="showroom showroom-flower">
         <div class="green-atmosphere"></div>
         <div class="showroom-header">
             <span class="tag-friendly">The Friendly Choice</span>
             <h2>Curated Box "Flowers"</h2>
-            <p class="description">For the souls who love to create. The <strong>"Flowers"</strong> box is an interactive <strong>DIY Kit</strong> curated for the artist in you. We provide the canvas—hand-stamped vintage papers, envelopes, assorted dried flora, and loose wax seals—and you provide the masterpiece.<br><br>Perfect for journaling, scrapbooking, or writing that one handwritten letter you’ve been meaning to send to a best friend or sibling. It’s organic, earthy, and full of potential.</p>
+            <p class="description">For the souls who love to create. The <strong>"Flowers"</strong> box is an interactive <strong>DIY Kit</strong> curated for the artist in you. We provide the canvas—hand-stamped vintage papers, envelopes, assorted dried flora, and loose wax seals—and you provide the masterpiece.<br><br>Perfect for journaling, scrapbooking, or writing that one handwritten letter you’ve been meaning to send to a best friend or sibling.</p>
             <ul class="features"><li>✿ DIY Stationery Set</li><li>✿ 4 Stamped Sheets</li><li>✿ Dried Flowers</li><li>✿ Wax Seals</li></ul>
         </div>
         <div class="gallery-container">
+            <!-- Arrows removed intentionally -->
             <div class="gallery-main">
+                <!-- Initial Image -->
                 <img src="assets/giftbox-flowers.jpg" id="img-flower" alt="Flowers Kit" onerror="this.src='https://via.placeholder.com/500?text=Flowers+Box'">
             </div>
         </div>
@@ -106,7 +132,7 @@
         </div>
     </section>
 
-    <!-- ACCESSORIES -->
+    <!-- ACCESSORIES CAROUSEL -->
     <section class="accessories-section">
         <div class="accessories-header">
             <h3>~ Little Showcases ~</h3>
@@ -123,36 +149,51 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="footer-container">
-            <div class="footer-col brand-col"><h3 class="footer-logo">Sulat Kamay</h3><p class="footer-tagline">Handcrafted Memories</p><p class="footer-desc">Capturing emotions in wax, ink, and paper.</p></div>
+            <div class="footer-col brand-col">
+                <h3 class="footer-logo">Sulat Kamay</h3>
+                <p class="footer-tagline">Handcrafted Memories</p>
+                <p class="footer-desc">Capturing emotions in wax, ink, and paper.</p>
+            </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2025 Sulat Kamay. Handmade with love.</p></div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sulat Kamay. Handmade with love.</p>
+        </div>
     </footer>
 
-    <!-- Modal & Scripts -->
+    <!-- Cart Modal -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div class="modal-header"><h2>Your Keepsake Box</h2><p>Memories collected so far...</p></div>
+            <div class="modal-header">
+                <h2>Your Keepsake Box</h2>
+                <p>Memories collected so far...</p>
+            </div>
             <ul id="cart-items"></ul>
-            <div class="cart-summary"><div class="total-row"><span>Total:</span><strong>P<span id="cart-total">0.00</span></strong></div><button class="cta-button" style="width:100%" onclick="alert('Screenshot this list and DM it to us on Instagram!')">Checkout via DM</button></div>
+            <div class="cart-summary">
+                <div class="total-row"><span>Total:</span><strong>P<span id="cart-total">0.00</span></strong></div>
+                <button class="cta-button" style="width:100%" onclick="alert('Screenshot this list and DM it to us on Instagram!')">Checkout via DM</button>
+            </div>
         </div>
     </div>
 
+    <!-- Main Logic Script -->
     <script type="module" src="js/main.js"></script>
     
-    <!-- Inline Scripts for Gallery/Carousel specific interactions -->
+    <!-- OPTIMIZED GALLERY SCRIPT -->
     <script>
+        // --- 1. GALLERY CONFIGURATION ---
         const galleryData = {
-            // LOVE: 4 Images
+            // Love Box: 4 Images
             love: [ 
                 { src: 'assets/giftbox-love-1.jpeg' }, 
                 { src: 'assets/giftbox-love-2.jpeg' }, 
                 { src: 'assets/giftbox-love-3.jpeg' },
                 { src: 'assets/giftbox-love-4.jpeg' } 
             ],
-            // CUTE: 5 Images
+            // Cute Box: 5 Images
             cute: [ 
                 { src: 'assets/giftbox-cute-1.jpeg' }, 
                 { src: 'assets/giftbox-cute-2.jpeg' }, 
@@ -160,61 +201,99 @@
                 { src: 'assets/giftbox-cute-4.jpeg' },
                 { src: 'assets/giftbox-cute-5.jpeg' }
             ],
-            // FLOWER: 1 Image (Data placeholder only, arrows removed in HTML)
+            // Flower Box: 1 Image
             flower: [ 
                 { src: 'assets/giftbox-flowers.jpg' } 
             ]
         };
 
         let indices = { love: 0, cute: 0, flower: 0 };
-        
+        let transitionTimeouts = {}; 
+
+        // --- 2. PRELOADER (Eliminates White Flash) ---
+        function preloadAllImages() {
+            console.log("Preloading gallery images...");
+            for (const category in galleryData) {
+                galleryData[category].forEach(item => {
+                    const img = new Image();
+                    img.src = item.src; // Forces browser to cache
+                });
+            }
+        }
+
+        // --- 3. SLIDER LOGIC ---
         window.slideGallery = function(boxType, direction) {
             const items = galleryData[boxType];
             
-            // Safety: if 1 or 0 items, don't slide
+            // Safety: if 1 or 0 items, do not slide
             if (!items || items.length <= 1) return;
 
             let newIndex = indices[boxType] + direction;
             
-            // Loop functionality
+            // Loop navigation
             if (newIndex < 0) newIndex = items.length - 1;
             if (newIndex >= items.length) newIndex = 0;
             
             indices[boxType] = newIndex;
             
-            const img = document.getElementById('img-' + boxType);
+            const imgElement = document.getElementById('img-' + boxType);
             
-            // Fade Animation
-            img.style.opacity = '0';
+            // Clear existing animation if user clicks quickly
+            if (transitionTimeouts[boxType]) clearTimeout(transitionTimeouts[boxType]);
 
-            setTimeout(() => {
-                const item = items[newIndex];
-                img.src = item.src;
+            // Step A: Fade Out slightly
+            imgElement.style.opacity = '0.4'; 
+
+            // Step B: Swap Source & Fade In
+            transitionTimeouts[boxType] = setTimeout(() => {
+                // Swap Source
+                imgElement.src = items[newIndex].src;
                 
-                // If the file doesn't exist yet, this fallback makes it visible so you can see logic works
-                img.onerror = function() {
-                    this.src = `https://via.placeholder.com/500?text=${boxType}+${newIndex+1}`;
-                };
-
-                img.style.opacity = '1';
-            }, 300);
+                // When loaded (or if cached), fade back in
+                const fadeIn = () => { imgElement.style.opacity = '1'; };
+                
+                if (imgElement.complete) {
+                    fadeIn();
+                } else {
+                    imgElement.onload = fadeIn;
+                }
+            }, 250); // 250ms matches the fade transition
         }
 
-        // --- CAROUSEL LOGIC ---
+        // --- 4. INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // A. Start Preloading
+            preloadAllImages();
+
+            // B. Ensure first images match JS data
+            ['love', 'cute', 'flower'].forEach(box => {
+                const img = document.getElementById('img-' + box);
+                if (galleryData[box] && galleryData[box].length > 0 && img) {
+                    // Set src in case HTML is outdated
+                    img.src = galleryData[box][0].src;
+                }
+            });
+            
+            // C. Setup Carousel
+            updateCarouselButtons();
+        });
+
+        // --- 5. ACCESSORIES CAROUSEL LOGIC ---
         const viewport = document.getElementById('carousel-viewport');
 
         function updateCarouselButtons() {
             const prevBtn = document.querySelector('.carousel-btn.prev');
             const nextBtn = document.querySelector('.carousel-btn.next');
-            if (!prevBtn || !nextBtn) return;
+            if (!prevBtn || !nextBtn || !viewport) return;
 
             const scrollLeft = Math.ceil(viewport.scrollLeft);
             const scrollWidth = viewport.scrollWidth;
             const clientWidth = viewport.clientWidth;
             const maxScroll = scrollWidth - clientWidth;
 
-            const atStart = scrollLeft <= 2;
-            const atEnd = scrollLeft >= maxScroll - 2;
+            // Add buffer for float calculation errors
+            const atStart = scrollLeft <= 5;
+            const atEnd = scrollLeft >= maxScroll - 5;
 
             prevBtn.classList.toggle('disabled', atStart);
             nextBtn.classList.toggle('disabled', atEnd);
@@ -224,15 +303,16 @@
             const card = viewport.querySelector('.card');
             if (!card) return;
             const cardStyle = window.getComputedStyle(card);
+            // Calculate width of one item + gap
             const cardMargin = parseFloat(cardStyle.marginRight) || 25;
             const scrollAmount = (card.offsetWidth + cardMargin); 
 
             viewport.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
         }
 
-        // Listeners
-        viewport.addEventListener('scroll', updateCarouselButtons);
+        if(viewport) viewport.addEventListener('scroll', updateCarouselButtons);
         
+        // Watch for dynamic content loading in carousel
         const observer = new MutationObserver((mutationsList, observer) => {
             for(const mutation of mutationsList) {
                 if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
@@ -241,7 +321,9 @@
                 }
             }
         });
-        observer.observe(document.getElementById('addons-container'), { childList: true });
+        
+        const addonContainer = document.getElementById('addons-container');
+        if(addonContainer) observer.observe(addonContainer, { childList: true });
         
         window.addEventListener('resize', updateCarouselButtons);
     </script>
