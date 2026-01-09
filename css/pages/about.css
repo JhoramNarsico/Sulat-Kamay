@@ -63,7 +63,6 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     text-align: center;
-    /* Color Hierarchy: Default Border */
     border-bottom: 4px solid #e0e0e0;
 }
 
@@ -73,15 +72,12 @@
     border-bottom-color: #4e342e;
 }
 
-/* Hierarchy: Highlight the "Capture" step (Step 3) */
 .process-card.highlight {
     background-color: #fffdf5;
-    border-color: #bf360c; /* Rust Border */
+    border-color: #bf360c;
     border-bottom-width: 4px;
 }
-.process-card.highlight:hover {
-    border-bottom-color: #a02c0a; /* Darker Rust */
-}
+.process-card.highlight:hover { border-bottom-color: #a02c0a; }
 
 .step-badge {
     position: absolute;
@@ -95,13 +91,11 @@
     width: 40px; height: 40px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    border: 4px solid #faf9f6; /* Blend with bg */
+    border: 4px solid #faf9f6;
     box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
-.process-card.highlight .step-badge {
-    background: #bf360c;
-}
+.process-card.highlight .step-badge { background: #bf360c; }
 
 .icon-visual {
     font-size: 3rem;
@@ -113,13 +107,13 @@
 .process-card h3 {
     font-family: var(--font-display, serif);
     font-size: 1.6rem;
-    color: #3e2723; /* Dark Coffee */
+    color: #3e2723;
     margin-bottom: 10px;
 }
 
 .process-card p {
     font-size: 0.95rem;
-    color: #795548; /* Muted Brown */
+    color: #795548;
     line-height: 1.6;
 }
 
@@ -132,7 +126,104 @@
 }
 .process-card a:hover { border-bottom-style: solid; }
 
-/* --- LOGISTICS SECTION (Payment & Shipping) --- */
+/* --- DM GUIDE SECTION --- */
+.dm-guide-section {
+    background-color: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 40px;
+    margin-bottom: 60px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+}
+
+.dm-guide-content { display: flex; align-items: center; gap: 50px; }
+.dm-text { flex: 1.5; }
+
+.dm-text h4 {
+    font-family: var(--font-display, serif);
+    font-size: 1.8rem;
+    color: #3e2723;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dm-steps {
+    margin: 20px 0 30px 20px;
+    font-family: var(--font-serif, sans-serif);
+    color: #5d4037;
+    line-height: 1.8;
+}
+
+.dm-steps li { margin-bottom: 10px; padding-left: 10px; }
+.dm-steps strong { color: #bf360c; }
+
+.instagram-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: transform 0.2s;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(220, 39, 67, 0.3);
+}
+
+.instagram-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(220, 39, 67, 0.4); }
+
+.dm-visual { flex: 1; display: flex; justify-content: center; }
+
+.phone-mockup {
+    background-color: #f5f5f5;
+    border: 8px solid #333;
+    border-radius: 20px;
+    width: 240px;
+    height: 320px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.chat-bubble {
+    background-color: #3e2723;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 15px 15px 0 15px;
+    font-size: 0.75rem;
+    align-self: flex-end;
+    max-width: 80%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    animation: popIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+.chat-bubble:nth-child(1) { animation-delay: 0.5s; }
+.chat-bubble:nth-child(2) { animation-delay: 1.0s; }
+
+.chat-reply {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 15px 15px 15px 0;
+    font-size: 0.75rem;
+    align-self: flex-start;
+    max-width: 80%;
+    animation: popIn 0.5s ease-out forwards 1.8s;
+    opacity: 0;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- LOGISTICS SECTION --- */
 .logistics-section {
     background: #fff;
     border: 1px dashed #a1887f;
@@ -143,14 +234,8 @@
     background-image: repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(161, 136, 127, 0.03) 10px, rgba(161, 136, 127, 0.03) 20px);
 }
 
-.logistics-container {
-    display: flex;
-    gap: 60px;
-}
-
-.logistics-col {
-    flex: 1;
-}
+.logistics-container { display: flex; gap: 60px; }
+.logistics-col { flex: 1; }
 
 .divider-vertical {
     width: 1px;
@@ -188,7 +273,6 @@
     display: block;
 }
 
-/* Logos Grid */
 .logo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -210,64 +294,33 @@
 }
 
 .logo-card img {
-    height: 30px; /* Fixed height for consistency */
+    height: 30px;
     width: auto;
     object-fit: contain;
     margin-bottom: 8px;
-    filter: grayscale(0.2); /* Vintage feel */
+    filter: grayscale(0.2);
     transition: 0.3s;
 }
 
-.logo-card:hover img {
-    filter: grayscale(0);
-    transform: scale(1.1);
-}
+.logo-card:hover img { filter: grayscale(0); transform: scale(1.1); }
+.logo-card:hover { border-color: #bf360c; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
 
-.logo-card:hover {
-    border-color: #bf360c;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-}
-
-/* Brand Colors on Hover (Subtle) */
+/* Brand Colors */
 .logo-card.gcash:hover { border-color: #007dfe; background: rgba(0,125,254,0.05); }
-
-/* Updated GoTyme Hover */
 .logo-card.gotyme:hover { border-color: #00aeef; background: rgba(0, 174, 239, 0.05); }
-
 .logo-card.bank:hover { border-color: #d32f2f; background: rgba(211,47,47,0.05); }
 .logo-card.jnt:hover { border-color: #e60012; background: rgba(230,0,18,0.05); }
 
-.bank-icons { font-size: 1.1rem; margin-bottom: 5px; }
-.emoji-icon { font-size: 1.8rem; margin-bottom: 5px; }
-
-.logo-text {
-    font-weight: bold;
-    color: #5d4037;
-    font-size: 0.95rem;
-    font-family: var(--font-serif, sans-serif);
-}
-
-.sub-text {
-    font-size: 0.7rem;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: auto;
-}
+.logo-text { font-weight: bold; color: #5d4037; font-size: 0.95rem; font-family: var(--font-serif, sans-serif); }
+.sub-text { font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: auto; }
 
 /* --- ANIMATIONS --- */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
+@keyframes scaleWidth { from { width: 0; } to { width: 60px; } }
 
-@keyframes scaleWidth {
-    from { width: 0; }
-    to { width: 60px; }
-}
-
-/* Staggered Delays */
 .stagger-1 { animation: fadeInUp 0.8s ease-out 0.2s backwards; }
 .stagger-2 { animation: fadeInUp 0.8s ease-out 0.4s backwards; }
 .stagger-3 { animation: fadeInUp 0.8s ease-out 0.6s backwards; }
@@ -275,16 +328,13 @@
 .stagger-5 { animation: fadeInUp 0.8s ease-out 1.0s backwards; }
 .stagger-6 { animation: fadeInUp 0.8s ease-out 1.2s backwards; }
 
-/* --- CTA --- */
-.cta-container {
-    text-align: center;
-    margin-top: 60px;
-}
+.cta-container { text-align: center; margin-top: 60px; }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .logistics-container { flex-direction: column; gap: 40px; }
+    .logistics-container, .dm-guide-content { flex-direction: column; gap: 40px; }
     .divider-vertical { width: 100%; height: 1px; }
     .process-grid { grid-template-columns: 1fr; }
     .logistics-section { padding: 30px 20px; }
+    .phone-mockup { width: 100%; max-width: 280px; }
 }

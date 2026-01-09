@@ -50,38 +50,67 @@
             <!-- Step 1 -->
             <div class="process-card stagger-1">
                 <div class="step-badge">01</div>
-                <div class="icon-visual">🛒</div>
-                <h3>Curate</h3>
-                <p>Visit the <a href="shop.html">Shop</a> or <a href="customize.html">Write</a> page. Choose a vessel for your feelings—be it a "Love" box or a custom bundle.</p>
+                <div class="icon-visual">🎁</div>
+                <h3>Select & Personalize</h3>
+                <p>Visit the <a href="shop.html">Shop</a>. Choose a curated box (Love, Cute, or Flowers) and add optional items like chocolates or polaroids.</p>
             </div>
 
             <!-- Step 2 -->
             <div class="process-card stagger-2">
                 <div class="step-badge">02</div>
                 <div class="icon-visual">✍️</div>
-                <h3>Compose</h3>
-                <p>Type your message in our new <strong>Letter Builder</strong>. We will handwrite it on vintage paper, sealed with wax.</p>
+                <h3>Write Your Message</h3>
+                <p>Use our <strong>Letter Builder</strong> to type your message. We will handwrite this exact text on vintage paper, sealed with wax.</p>
             </div>
 
-            <!-- Step 3 (Highlight) -->
+            <!-- Step 3 -->
             <div class="process-card highlight stagger-3">
                 <div class="step-badge">03</div>
-                <div class="icon-visual">📸</div>
-                <h3>Capture</h3>
-                <p>Open your Cart (top right). Take a <strong>Screenshot</strong> of your summary. This is your order ticket.</p>
+                <div class="icon-visual">🧾</div>
+                <h3>Get Your Slip</h3>
+                <p>Go to <strong>Cart > Checkout</strong>. Enter your nickname. Our system will generate an <strong>Order Slip</strong> (and Letter Slip) image. <strong>Save/Download these images.</strong></p>
             </div>
 
             <!-- Step 4 -->
             <div class="process-card stagger-4">
                 <div class="step-badge">04</div>
-                <div class="icon-visual">💌</div>
-                <h3>Connect</h3>
-                <p>Send the screenshot to our Instagram <strong>@SulatKamayPH</strong> to finalize details and payment.</p>
+                <div class="icon-visual">📨</div>
+                <h3>Submit Order</h3>
+                <p>Send the saved images to our Instagram <strong>@sulatkamay_ph</strong>. We will reply with payment details to confirm.</p>
             </div>
         </section>
 
-        <!-- 2. LOGISTICS SECTION -->
-        <section class="logistics-section stagger-5">
+        <!-- 2. DETAILED DM INSTRUCTIONS -->
+        <section class="dm-guide-section stagger-5">
+            <div class="dm-guide-content">
+                <div class="dm-text">
+                    <h4><span class="icon">📸</span> How to send the Order via Instagram</h4>
+                    <p>Once you have downloaded your <strong>Order Slip</strong> (and Letter Content) from the Cart:</p>
+                    <ol class="dm-steps">
+                        <li>Open Instagram and search for <strong>@sulatkamay_ph</strong>.</li>
+                        <li>Tap the <strong>Message</strong> button to open our chat.</li>
+                        <li>Tap the <strong>Image Icon</strong> (🖼️) at the bottom left of the chat.</li>
+                        <li>Select the <strong>Order Slip image</strong> you just downloaded.</li>
+                        <li><em>(If you wrote a letter)</em> Select the <strong>Letter Content image</strong> as well.</li>
+                        <li>Hit <strong>Send</strong>! We will review it and send you the payment details (GCash/GoTyme/Bank).</li>
+                    </ol>
+                    <div class="dm-btn-container">
+                        <a href="https://www.instagram.com/sulatkamay_ph/" target="_blank" class="instagram-btn">Go to our Instagram ➝</a>
+                    </div>
+                </div>
+                <div class="dm-visual">
+                    <!-- Simple visual representation using CSS shapes -->
+                    <div class="phone-mockup">
+                        <div class="chat-bubble">Here is my Order Slip! 📄</div>
+                        <div class="chat-bubble">And my Letter text 💌</div>
+                        <div class="chat-reply">Received! Total is P600. Here are payment details...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. LOGISTICS SECTION -->
+        <section class="logistics-section stagger-6">
             <div class="logistics-container">
                 
                 <!-- Payment Options -->
@@ -89,17 +118,15 @@
                     <h4><span class="icon">💳</span> Payment Options</h4>
                     <p class="logistics-desc">We accept secure payments via:</p>
                     <div class="logo-grid">
-                        <!-- GCash -->
                         <div class="logo-card gcash">
                             <img src="assets/logo-gcash.png" alt="GCash">
                             <span class="sub-text">Mobile Wallet</span>
                         </div>
+                        <!-- Updated to GoTyme -->
                         <div class="logo-card gotyme">
-                         <!-- Ensure you add 'logo-gotyme.png' to your assets folder -->
-                         <img src="assets/logo-gotyme.png" alt="GoTyme Bank">
-                         <span class="sub-text">GoTyme Bank</span>
+                            <img src="assets/logo-gotyme.png" alt="GoTyme">
+                            <span class="sub-text">GoTyme Bank</span>
                         </div>
-                        <!-- Bank Transfer -->
                         <div class="logo-card bank">
                             <div class="bank-logos-group">
                                 <img src="assets/logo-bpi.png" alt="BPI" title="BPI">
@@ -119,12 +146,10 @@
                     <h4><span class="icon">🚚</span> Shipping & Delivery</h4>
                     <p class="logistics-desc">Delivering memories nationwide:</p>
                     <div class="logo-grid">
-                        <!-- J&T -->
                         <div class="logo-card jnt">
                             <img src="assets/logo-jnt.png" alt="J&T Express">
                             <span class="sub-text">Nationwide</span>
                         </div>
-                        <!-- Local Delivery -->
                         <div class="logo-card delivery-apps">
                             <div class="app-logos-group">
                                 <img src="assets/logo-maxim.png" alt="Maxim" class="maxim-icon">
@@ -133,7 +158,6 @@
                             </div>
                             <span class="sub-text">CDO City Only</span>
                         </div>
-                        <!-- Meetups -->
                         <div class="logo-card meetup">
                             <span class="emoji-icon">📍</span>
                             <span class="logo-text">Meet-ups</span>
@@ -174,100 +198,13 @@
             <ul id="cart-items"></ul>
             <div class="cart-summary">
                 <p class="cart-total-display">Total: <strong>P<span id="cart-total">0.00</span></strong></p>
-                <button class="cta-button" style="width:100%" onclick="alert('Please take a screenshot of this list and DM it to @SulatKamayPH on Instagram to finalize your order!')">Checkout via DM</button>
+                <button class="cta-button" style="width:100%">Checkout via DM</button>
             </div>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
-<div id="toast-box"></div>
-
-<!-- RECEIPT MODAL SYSTEM -->
-<!-- DUAL-FILE RECEIPT MODAL -->
-<div id="receipt-modal" class="receipt-modal">
-    <div class="receipt-content">
-        
-        <!-- HEADER -->
-        <div class="modal-top-bar">
-            <h2>Your Order Files</h2>
-            <p>Please save the files below and send them to us.</p>
-        </div>
-
-        <!-- === SOURCE HTML (Hidden during view, visible during capture) === -->
-        <div id="source-html-container">
-            
-            <!-- PAPER 1: ORDER SLIP (Financial) -->
-            <div id="receipt-preview" class="paper-source">
-                <div class="receipt-header">
-                    <img src="assets/sk-seal.png" class="receipt-logo" alt="SK">
-                    <div class="receipt-title">Order Slip</div>
-                    <div class="receipt-meta-grid">
-                        <div class="meta-row"><span>Ref:</span> <span id="r-ref">--</span></div>
-                        <div class="meta-row"><span>Date:</span> <span id="r-date">--</span></div>
-                        <div class="meta-row"><span>Time:</span> <span id="r-time">--</span></div>
-                        <div class="meta-row nickname-row"><span>Customer:</span> <span id="r-nickname">--</span></div>
-                    </div>
-                </div>
-                <table class="receipt-items">
-                    <thead><tr><th>Item</th><th>Price</th></tr></thead>
-                    <tbody id="r-items-body"></tbody>
-                </table>
-                <div class="receipt-total">
-                    <span>TOTAL</span>
-                    <span>P<span id="r-total">0.00</span></span>
-                </div>
-                <div class="receipt-footer">
-                    <p>Thank you for writing with us.</p>
-                </div>
-            </div>
-
-            <!-- PAPER 2: LETTER SLIP (Content) -->
-            <div id="letter-slip" class="paper-source letter-theme">
-                <div class="letter-header">
-                    <span class="clip-icon">📎</span>
-                    <h3>Transcription Request</h3>
-                    <div class="mini-meta">Ref: <span id="l-ref">--</span> | <span id="l-nickname">--</span></div>
-                </div>
-                <div id="letter-content-body">
-                    <!-- Letters injected here -->
-                </div>
-                <div class="letter-footer">
-                    * Please handwrite on vintage paper *
-                </div>
-            </div>
-        </div>
-        <!-- === END SOURCE HTML === -->
-
-
-        <!-- === GENERATED PREVIEWS (What the user sees) === -->
-        <div id="generated-files-area">
-            
-            <!-- FILE 1 PREVIEW -->
-            <div class="file-block">
-                <div class="file-label">📄 File 1: Order Slip</div>
-                <img id="img-preview-order" class="final-img" alt="Order Slip">
-                <a id="btn-dl-order" class="action-btn btn-download small-btn">📥 Save Order Slip</a>
-            </div>
-
-            <!-- FILE 2 PREVIEW (Hidden if no letters) -->
-            <div class="file-block" id="block-letter" style="display:none;">
-                <div class="file-label">💌 File 2: Letter Content</div>
-                <img id="img-preview-letter" class="final-img" alt="Letter Slip">
-                <a id="btn-dl-letter" class="action-btn btn-download small-btn">📥 Save Letter Content</a>
-            </div>
-
-        </div>
-
-        <!-- FINAL ACTIONS -->
-        <div class="receipt-actions">
-            <a href="https://www.instagram.com/sulatkamay_ph/" target="_blank" class="action-btn btn-instagram">
-                📸 Send Files to Instagram
-            </a>
-            <button class="action-btn btn-close-receipt" onclick="closeReceipt()">Close</button>
-        </div>
-
-    </div>
-</div>
+    <!-- Receipt Modal (Included for compatibility) -->
+    <div id="receipt-modal" class="receipt-modal"></div>
 
     <!-- Main Script -->
     <script type="module" src="js/main.js"></script>
