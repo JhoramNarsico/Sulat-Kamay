@@ -2,7 +2,7 @@
    SULAT KAMAY - MAIN STYLESHEET
    ========================================= */
 
-/* 1. Core Imports (Order is important) */
+/* 1. Core Imports */
 @import 'base.css';
 @import 'animations.css';
 @import 'layout.css';
@@ -50,176 +50,156 @@
 }
 
 /* =========================================
-   4. RECEIPT MODAL SYSTEM (POS)
+   4. DUAL-FILE RECEIPT MODAL (POS)
    ========================================= */
+
 .receipt-modal {
     display: none;
     position: fixed;
     z-index: 3000;
     left: 0; top: 0;
     width: 100%; height: 100%;
-    background-color: rgba(30, 20, 15, 0.9); /* Dark overlay */
+    background-color: rgba(20, 10, 5, 0.95); /* Deep dark overlay */
     backdrop-filter: blur(5px);
     overflow-y: auto;
     padding: 20px 0;
 }
 
 .receipt-content {
-    margin: 20px auto;
+    margin: 10px auto;
     width: 90%;
-    max-width: 420px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    animation: fadeInUp 0.4s ease-out;
+    gap: 15px;
+    padding-bottom: 50px;
 }
 
-/* --- THE VINTAGE PAPER RECEIPT --- */
-#receipt-preview {
-    /* 1. SOLID PAPER BACKGROUND (Critical for Image Gen) */
+.modal-top-bar { text-align: center; color: #fff; margin-bottom: 10px; }
+.modal-top-bar h2 { font-family: 'Playfair Display', serif; color: #d4af37; margin-bottom: 5px; }
+.modal-top-bar p { font-size: 0.9rem; opacity: 0.8; }
+
+/* --- SOURCE HTML CONTAINER --- 
+   This contains the raw HTML receipts. 
+   We hide it off-screen so the user doesn't see it, 
+   but html2canvas can still "see" and render it. 
+*/
+#source-html-container {
+    position: absolute;
+    left: -9999px; /* Move off-screen */
+    top: 0;
+    pointer-events: none;
+}
+
+/* Shared Paper Style for Source */
+.paper-source {
+    width: 450px; /* Fixed width for consistent high-res screenshots */
+    padding: 40px 30px;
     background-color: #fffdf5; 
     background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
-    
-    /* 2. DIMENSIONS */
-    width: 100%;
-    padding: 40px 30px;
+    margin-bottom: 50px;
     position: relative;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-    
-    /* 3. TYPOGRAPHY (High Contrast) */
+    box-shadow: none; /* No shadow on source to avoid artifacts */
+}
+
+/* ----------------------------------
+   PAPER 1: FINANCIAL ORDER SLIP
+   ---------------------------------- */
+#receipt-preview {
+    border-top: 5px solid #bf360c;
+    border-bottom: 5px solid #bf360c;
     font-family: 'Courier New', Courier, monospace;
-    color: #2c241b; /* Deep Coffee / Ink Color */
-    font-weight: 600;
-    
-    /* 4. ZIGZAG EDGES (Receipt Effect) */
+    color: #2c241b;
+    /* Zigzag Bottom Edge */
     clip-path: polygon(
-        0% 0%, 5% 2%, 10% 0%, 15% 2%, 20% 0%, 25% 2%, 30% 0%, 35% 2%, 40% 0%, 45% 2%, 50% 0%, 55% 2%, 60% 0%, 65% 2%, 70% 0%, 75% 2%, 80% 0%, 85% 2%, 90% 0%, 95% 2%, 100% 0%, 
-        100% 100%, 95% 98%, 90% 100%, 85% 98%, 80% 100%, 75% 98%, 70% 100%, 65% 98%, 60% 100%, 55% 98%, 50% 100%, 45% 98%, 40% 100%, 35% 98%, 30% 100%, 25% 98%, 20% 100%, 15% 98%, 10% 100%, 5% 98%, 0% 100%
+        0% 0%, 100% 0%, 100% 98%, 95% 100%, 90% 98%, 85% 100%, 80% 98%, 75% 100%, 70% 98%, 65% 100%, 60% 98%, 55% 100%, 50% 98%, 45% 100%, 40% 98%, 35% 100%, 30% 98%, 25% 100%, 20% 98%, 15% 100%, 10% 98%, 5% 100%, 0% 98%
     );
 }
 
-/* Header Styling */
-.receipt-header {
-    text-align: center;
-    border-bottom: 2px dashed #4e342e;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+.receipt-header, .receipt-items, .receipt-total, .receipt-footer { text-align: center; }
+.receipt-logo { width: 60px; margin-bottom: 10px; }
+.receipt-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: bold; color: #bf360c; text-transform: uppercase; }
+
+.receipt-meta-grid { text-align: left; font-size: 0.9rem; color: #5d4037; width: 90%; margin: 0 auto; }
+.meta-row { display: flex; justify-content: space-between; margin-bottom: 2px; }
+.nickname-row { border-top: 1px dotted #aaa; padding-top: 5px; margin-top: 5px; font-weight: bold; }
+
+.receipt-items { width: 100%; border-collapse: collapse; margin: 20px 0; }
+.receipt-items td { border-bottom: 1px dashed #ccc; padding: 10px 0; font-size: 1rem; vertical-align: top; }
+.receipt-items .r-price { text-align: right; font-weight: bold; }
+.receipt-items .r-name { text-align: left; width: 70%; }
+
+.receipt-total { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.6rem; color: #bf360c; border-top: 3px double #333; padding-top: 10px; margin-top: 10px; }
+.receipt-footer { margin-top: 20px; font-size: 0.8rem; font-style: italic; color: #888; }
+
+
+/* ----------------------------------
+   PAPER 2: LETTER CONTENT SLIP
+   ---------------------------------- */
+.letter-theme {
+    background-color: #ffffff; /* Cleaner white for readability */
+    border: 1px solid #d7ccc8;
+    font-family: 'Courier New', monospace;
 }
 
-.receipt-logo {
-    width: 60px;
-    filter: none; /* Keep original logo colors */
-    margin-bottom: 10px;
-}
-
-.receipt-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    color: #bf360c; /* Rust color */
+.letter-header {
+    text-align: center; 
+    border-bottom: 2px solid #333; 
+    padding-bottom: 10px; 
     margin-bottom: 15px;
-    text-transform: uppercase;
 }
+.letter-header h3 { font-family: 'Playfair Display', serif; text-transform: uppercase; letter-spacing: 1px; color: #333; }
+.mini-meta { font-size: 0.8rem; color: #888; font-family: sans-serif; }
+.clip-icon { font-size: 2rem; display: block; margin-bottom: 5px; }
 
-/* Meta Data Grid */
-.receipt-meta-grid {
+.transcription-task {
+    background: #f4f4f4;
+    padding: 15px;
+    border-left: 4px solid #bf360c;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.task-message { font-style: italic; white-space: pre-wrap; line-height: 1.5; margin-top: 5px; font-size: 1rem; }
+.letter-footer { text-align: center; border-top: 1px solid #eee; padding-top: 10px; font-size: 0.8rem; color: #aaa; text-transform: uppercase; }
+
+
+/* --- VISIBLE PREVIEW AREA (User UI) --- */
+#generated-files-area {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    text-align: left;
-    font-size: 0.9rem;
-    color: #5d4037;
-    margin: 0 auto;
-    width: 85%;
+    gap: 25px;
 }
 
-.meta-row {
-    display: flex;
-    justify-content: space-between;
-}
-
-.nickname-row {
-    margin-top: 5px;
-    padding-top: 5px;
-    border-top: 1px dotted #aaa;
-    font-weight: bold;
-    color: #3e2723;
-}
-
-/* Table Styling */
-.receipt-items {
-    width: 100%;
-    margin-bottom: 20px;
-    border-collapse: collapse;
-}
-
-.receipt-items th {
-    text-align: left;
-    border-bottom: 2px solid #2c241b;
-    padding: 8px 0;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    color: #2c241b;
-}
-
-.receipt-items td {
-    padding: 10px 0;
-    font-size: 1rem;
-    border-bottom: 1px dashed #ccc;
-    color: #3e2723;
-    vertical-align: top;
-}
-
-.receipt-items .r-price {
-    text-align: right;
-    font-weight: bold;
-}
-
-.receipt-items .r-name {
-    width: 70%;
-    line-height: 1.4;
-}
-
-/* Total Section */
-.receipt-total {
-    margin-top: 20px;
-    border-top: 3px double #2c241b;
-    border-bottom: 3px double #2c241b;
-    padding: 15px 0;
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #bf360c; /* Rust Red */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.receipt-footer {
-    margin-top: 30px;
+.file-block {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
-    color: #5d4037;
-    font-size: 0.85rem;
-    font-style: italic;
 }
 
-/* --- GENERATED IMAGE PREVIEW --- */
-#receipt-canvas-img {
+.file-label {
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
+}
+
+.final-img {
     width: 100%;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    border: 4px solid #fff;
-    border-radius: 2px;
-    display: none; /* Hidden until generated */
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    margin-bottom: 15px;
+    border: 2px solid #eee;
 }
 
 /* --- ACTION BUTTONS --- */
-.receipt-actions {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+.receipt-actions { width: 100%; display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
 
 .action-btn {
     width: 100%;
@@ -240,33 +220,15 @@
     letter-spacing: 1px;
 }
 
-.btn-download { 
-    background: #fff; 
-    color: #3e2723; 
-}
-.btn-download:hover { 
-    background: #eee; 
-    transform: translateY(-2px); 
-}
+.btn-download { background: #fff; color: #3e2723; }
+.btn-download:hover { background: #eee; transform: translateY(-2px); }
 
 .btn-instagram { 
     background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
     color: white; 
     box-shadow: 0 4px 15px rgba(220, 39, 67, 0.4);
 }
-.btn-instagram:hover { 
-    transform: translateY(-2px); 
-    box-shadow: 0 6px 20px rgba(220, 39, 67, 0.6); 
-}
+.btn-instagram:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(220, 39, 67, 0.6); }
 
-.btn-close-receipt { 
-    background: transparent; 
-    color: #ccc; 
-    border: 1px solid #666; 
-    margin-top: 10px; 
-}
-.btn-close-receipt:hover { 
-    background: rgba(255,255,255,0.1); 
-    color: #fff; 
-    border-color: #fff; 
-}
+.btn-close-receipt { background: transparent; color: #ccc; border: 1px solid #666; margin-top: 10px; }
+.btn-close-receipt:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: #fff; }

@@ -1,10 +1,9 @@
 import { products } from './data.js';
 
-// Load cart from LocalStorage or start empty
 let cart = JSON.parse(localStorage.getItem('sulatKamayCart')) || [];
 
 // =========================================
-// 1. TOAST NOTIFICATION SYSTEM
+// 1. TOAST NOTIFICATIONS
 // =========================================
 function showToast(message) {
     const box = document.getElementById('toast-box');
@@ -15,10 +14,10 @@ function showToast(message) {
     toast.innerHTML = `<span>🍂</span> ${message}`;
     box.appendChild(toast);
 
-    // Animation: Slide In
+    // Animation In
     setTimeout(() => toast.classList.add('show'), 100);
 
-    // Auto Remove after 3 seconds
+    // Auto Remove
     setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 400);
@@ -28,17 +27,13 @@ function showToast(message) {
 // =========================================
 // 2. CORE CART LOGIC
 // =========================================
-
 export function addToCart(id, customItem = null) {
     if (customItem) {
-        // Add custom bundle from Builder
         cart.push(customItem);
     } else {
-        // Add standard item from Shop
         const product = products.find(p => p.id === id);
         if(product) cart.push(product);
     }
-    
     saveCart();
     updateCartUI();
     showToast("Added to your Keepsake Box");
@@ -60,55 +55,34 @@ export function updateCartUI() {
     const totalSpan = document.getElementById('cart-total');
     const list = document.getElementById('cart-items');
     
-    // Update Counter
+    // Update Counts/Totals
     if(count) count.innerText = cart.length;
-    
-    // Update Total
     const totalAmount = cart.reduce((acc, item) => acc + item.price, 0);
     if(totalSpan) totalSpan.innerText = totalAmount.toFixed(2);
     
-    // Hook the "Checkout" button to the new Receipt Modal
+    // Setup Checkout Button
     const checkoutBtn = document.querySelector('.cart-summary .cta-button');
     if(checkoutBtn) {
-        checkoutBtn.onclick = openReceiptModal; // Connects to the receipt system
+        checkoutBtn.onclick = openReceiptModal;
         checkoutBtn.innerText = "Proceed to Checkout";
     }
 
-    // Render List
+    // Render List Items
     if(list) {
         list.innerHTML = ''; 
         if(cart.length === 0) {
-            // Empty State
-            list.innerHTML = `
-                <li class="empty-cart-msg">
-                    <span class="empty-icon">🍂</span>
-                    <p>Your box is currently empty.</p>
-                </li>
-            `;
+            list.innerHTML = `<li class="empty-cart-msg"><span class="empty-icon">🍂</span><p>Your box is currently empty.</p></li>`;
             if(checkoutBtn) checkoutBtn.style.display = 'none';
         } else {
-            // Populate Items
             if(checkoutBtn) checkoutBtn.style.display = 'block';
-            
             cart.forEach((item, index) => {
-                let shortDesc = item.desc ? item.desc : "Handcrafted item";
-                // Strip HTML tags for clean list view
-                let cleanDesc = shortDesc.replace(/<[^>]*>?/gm, ''); 
-                if(cleanDesc.length > 30) cleanDesc = cleanDesc.substring(0, 30) + '...';
-
-                // Expose remove function to window for inline onclick
+                let clean = (item.desc || "").replace(/<[^>]*>?/gm, ''); 
+                if(clean.length > 30) clean = clean.substring(0, 30) + '...';
                 window.removeFromCart = removeFromCart; 
-
                 list.innerHTML += `
                     <li>
-                        <div class="item-details">
-                            <span class="item-name">${item.name}</span>
-                            <span class="item-desc">${cleanDesc}</span>
-                        </div>
-                        <div class="item-price-action">
-                            <span class="item-price">P${item.price.toFixed(2)}</span>
-                            <button onclick="window.removeFromCart(${index})" class="remove-btn">Remove</button>
-                        </div>
+                        <div class="item-details"><span class="item-name">${item.name}</span><span class="item-desc">${clean}</span></div>
+                        <div class="item-price-action"><span class="item-price">P${item.price.toFixed(2)}</span><button onclick="window.removeFromCart(${index})" class="remove-btn">Remove</button></div>
                     </li>
                 `;
             });
@@ -117,111 +91,120 @@ export function updateCartUI() {
 }
 
 // =========================================
-// 3. RECEIPT & POS SYSTEM
+// 3. DUAL-FILE GENERATION SYSTEM
 // =========================================
 
 function openReceiptModal() {
-    if(cart.length === 0) return showToast("Your cart is empty!");
-
-    // 1. Ask for Nickname (Optional)
-    let nickname = prompt("Enter your Nickname for the receipt (Optional):");
+    if(cart.length === 0) return showToast("Cart is empty");
     
-    // Handle Cancel button
-    if (nickname === null) return; 
-    
-    // Default if empty
-    if (nickname.trim() === "") nickname = "Guest";
+    // 1. Prompt
+    let nickname = prompt("Enter Nickname for Receipt (Optional):");
+    if(nickname === null) return; // Cancelled
+    if(!nickname.trim()) nickname = "Guest";
 
-    // 2. Switch Modals (Hide Cart -> Show Receipt)
+    // 2. UI Switch
     const cartModal = document.getElementById('cart-modal');
     if(cartModal) cartModal.style.display = 'none';
-    
+
     const receiptModal = document.getElementById('receipt-modal');
     if(receiptModal) receiptModal.style.display = 'block';
-
-    // 3. Generate Data
-    generateReceiptData(nickname);
+    
+    // 3. Generate
+    generateFiles(nickname);
 }
 
-function generateReceiptData(nickname) {
-    // A. Generate Metadata (Ref, Date, Time)
+function generateFiles(nickname) {
+    // A. Generate Metadata
     const ref = 'SK-' + Math.floor(1000 + Math.random() * 9000); 
     const now = new Date();
-    
     const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
-    // Populate HTML Elements
+    // Fill HTML Source for Order Slip
     document.getElementById('r-ref').innerText = ref;
     document.getElementById('r-date').innerText = dateStr;
-    const timeEl = document.getElementById('r-time');
-    if(timeEl) timeEl.innerText = timeStr;
-    
-    const nickEl = document.getElementById('r-nickname');
-    if(nickEl) nickEl.innerText = nickname;
+    document.getElementById('r-time').innerText = timeStr;
+    document.getElementById('r-nickname').innerText = nickname;
 
-    // B. Build Receipt Items Table
+    // Fill HTML Source for Letter Slip
+    document.getElementById('l-ref').innerText = ref;
+    document.getElementById('l-nickname').innerText = nickname;
+
     const tbody = document.getElementById('r-items-body');
+    const letterBody = document.getElementById('letter-content-body');
+    
     tbody.innerHTML = '';
+    letterBody.innerHTML = '';
     
     let total = 0;
+    let hasLetters = false;
 
+    // B. Loop items and populate sources
     cart.forEach(item => {
         total += item.price;
         
-        // Add "For: [Name]" detail if it's a Bundle
+        // 1. Add to Order Slip
         let details = '';
         if(item.desc && item.desc.includes('To:')) {
              const match = item.desc.match(/To:\s*([^<]*)/);
-             if(match) {
-                 details = `<br><small style="color:#5d4037; font-style:italic;">For: ${match[1]}</small>`;
-             }
+             if(match) details = `<br><small style="color:#5d4037; font-style:italic;">For: ${match[1]}</small>`;
         }
+        tbody.innerHTML += `<tr><td class="r-name">${item.name}${details}</td><td class="r-price">P${item.price.toFixed(2)}</td></tr>`;
 
-        tbody.innerHTML += `
-            <tr>
-                <td class="r-name">${item.name}${details}</td>
-                <td class="r-price">P${item.price.toFixed(2)}</td>
-            </tr>
-        `;
+        // 2. Add to Letter Slip (if message exists)
+        if (item.fullMessage) {
+            hasLetters = true;
+            letterBody.innerHTML += `
+                <div class="transcription-task">
+                    <div class="task-header"><strong>Subject:</strong> ${item.name}</div>
+                    <div class="task-message">"${item.fullMessage}"</div>
+                </div><hr class="task-divider">
+            `;
+        }
     });
 
     document.getElementById('r-total').innerText = total.toFixed(2);
 
-    // C. Convert HTML Receipt to Image (Canvas)
-    const receiptEl = document.getElementById('receipt-preview');
-    const imgPreview = document.getElementById('receipt-canvas-img');
-    const downloadLink = document.getElementById('download-link');
-
-    // 1. Ensure HTML is visible for capture
-    receiptEl.style.display = 'block';
-    imgPreview.style.display = 'none';
-
-    // 2. Wait 300ms for DOM to render styles before snapping
+    // C. Screenshot Generation (Order Slip)
+    const sourceOrder = document.getElementById('receipt-preview');
+    // We clear src to show loading state if needed
+    document.getElementById('img-preview-order').src = '';
+    
     setTimeout(() => {
-        // Use solid background color to ensure text is readable
-        html2canvas(receiptEl, { scale: 2, backgroundColor: '#fffdf5' }).then(canvas => {
-            
-            // 3. Hide HTML, Show Image
-            receiptEl.style.display = 'none'; 
-            imgPreview.style.display = 'block';
-            
-            // 4. Set Image Source
+        html2canvas(sourceOrder, { scale: 2 }).then(canvas => {
             const imgData = canvas.toDataURL("image/png");
-            imgPreview.src = imgData;
+            document.getElementById('img-preview-order').src = imgData;
             
-            // 5. Update Download Link
-            downloadLink.href = imgData;
-            downloadLink.download = `SulatKamay_Order_${ref}.png`;
+            const btn = document.getElementById('btn-dl-order');
+            btn.href = imgData;
+            btn.download = `OrderSlip_${ref}.png`;
         });
-    }, 300);
+    }, 100);
+
+    // D. Screenshot Generation (Letter Slip) - Only if letters exist
+    const blockLetter = document.getElementById('block-letter');
+    const sourceLetter = document.getElementById('letter-slip');
+    
+    if (hasLetters) {
+        blockLetter.style.display = 'block';
+        document.getElementById('img-preview-letter').src = '';
+        
+        setTimeout(() => {
+            html2canvas(sourceLetter, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                document.getElementById('img-preview-letter').src = imgData;
+                
+                const btn = document.getElementById('btn-dl-letter');
+                btn.href = imgData;
+                btn.download = `LetterContent_${ref}.png`;
+            });
+        }, 300); // Slight delay after first one to prevent lag
+    } else {
+        blockLetter.style.display = 'none';
+    }
 }
 
-// Global Function to Close Receipt
+// Global Close Function
 window.closeReceipt = function() {
     document.getElementById('receipt-modal').style.display = 'none';
-    
-    // Reset view state for next time
-    document.getElementById('receipt-preview').style.display = 'block'; 
-    document.getElementById('receipt-canvas-img').style.display = 'none';
 }
