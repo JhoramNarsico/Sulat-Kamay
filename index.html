@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sulat Kamay | Handcrafted Memories</title>
+    <!-- HTML2Canvas Library (Required for Receipt Generation) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>  
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -143,6 +145,76 @@
             </div>
         </div>
     </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+<div id="toast-box"></div>
+
+<!-- RECEIPT MODAL SYSTEM -->
+<div id="receipt-modal" class="receipt-modal">
+    <div class="receipt-content">
+        
+        <!-- 1. The HTML Receipt (Hidden after generation) -->
+        <div id="receipt-preview">
+            <div class="receipt-header">
+    <img src="assets/sk-seal.png" class="receipt-logo" alt="SK">
+    <div class="receipt-title">Order Slip</div>
+    
+    <div class="receipt-meta-grid">
+        <!-- New Layout for Meta Data -->
+        <div class="meta-row">
+            <span>Ref:</span> <span id="r-ref">SK-0000</span>
+        </div>
+        <div class="meta-row">
+            <span>Date:</span> <span id="r-date">Jan 01, 2026</span>
+        </div>
+        <div class="meta-row">
+            <span>Time:</span> <span id="r-time">12:00 PM</span>
+        </div>
+        <div class="meta-row nickname-row">
+            <span>Customer:</span> <span id="r-nickname">Guest</span>
+        </div>
+    </div>
+</div>
+            <table class="receipt-items">
+                <thead><tr><th>Item</th><th>Price</th></tr></thead>
+                <tbody id="r-items-body">
+                    <!-- Items injected via JS -->
+                </tbody>
+            </table>
+            <div class="receipt-total">
+                <span>TOTAL</span>
+                <span>P<span id="r-total">0.00</span></span>
+            </div>
+            <div class="receipt-footer">
+                <p>Thank you for writing with us.</p>
+                <p>@sulatkamay_ph</p>
+            </div>
+        </div>
+
+        <!-- 2. The Generated Image (Shown to user) -->
+        <img id="receipt-canvas-img" alt="Order Receipt Image">
+
+        <!-- 3. Action Buttons -->
+        <div class="receipt-actions">
+            <p style="color:#eee; text-align:center; font-size:0.9rem; margin:0;">
+                1. Save this image<br>2. Send it to us on Instagram
+            </p>
+            
+            <a id="download-link" class="action-btn btn-download">
+                📥 Save Receipt
+            </a>
+            
+            <!-- UPDATED INSTAGRAM LINK -->
+            <a href="https://www.instagram.com/sulatkamay_ph/" target="_blank" class="action-btn btn-instagram">
+                📸 Send to Instagram
+            </a>
+            
+            <button class="action-btn btn-close-receipt" onclick="closeReceipt()">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/vara@1.4.0/src/vara.min.js"></script>
     <script type="module" src="js/main.js"></script>

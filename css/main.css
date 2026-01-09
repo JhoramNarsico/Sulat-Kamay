@@ -1,11 +1,272 @@
-/* Import order is critical */
+/* =========================================
+   SULAT KAMAY - MAIN STYLESHEET
+   ========================================= */
+
+/* 1. Core Imports (Order is important) */
 @import 'base.css';
 @import 'animations.css';
 @import 'layout.css';
 @import 'components.css';
 
-/* Page Specifics */
+/* 2. Page Specific Imports */
 @import 'pages/home.css';
 @import 'pages/shop.css';
 @import 'pages/builder.css';
 @import 'pages/about.css';
+
+/* =========================================
+   3. TOAST NOTIFICATION (Popups)
+   ========================================= */
+#toast-box {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+    pointer-events: none; /* Allows clicking through empty area */
+}
+
+.toast {
+    pointer-events: auto;
+    background: #3e2723;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transform: translateX(150%); /* Start hidden off-screen */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: 'Playfair Display', serif;
+    border-left: 4px solid #d4af37;
+    min-width: 250px;
+}
+
+.toast.show { 
+    transform: translateX(0); 
+}
+
+/* =========================================
+   4. RECEIPT MODAL SYSTEM (POS)
+   ========================================= */
+.receipt-modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(30, 20, 15, 0.9); /* Dark overlay */
+    backdrop-filter: blur(5px);
+    overflow-y: auto;
+    padding: 20px 0;
+}
+
+.receipt-content {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* --- THE VINTAGE PAPER RECEIPT --- */
+#receipt-preview {
+    /* 1. SOLID PAPER BACKGROUND (Critical for Image Gen) */
+    background-color: #fffdf5; 
+    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+    
+    /* 2. DIMENSIONS */
+    width: 100%;
+    padding: 40px 30px;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    
+    /* 3. TYPOGRAPHY (High Contrast) */
+    font-family: 'Courier New', Courier, monospace;
+    color: #2c241b; /* Deep Coffee / Ink Color */
+    font-weight: 600;
+    
+    /* 4. ZIGZAG EDGES (Receipt Effect) */
+    clip-path: polygon(
+        0% 0%, 5% 2%, 10% 0%, 15% 2%, 20% 0%, 25% 2%, 30% 0%, 35% 2%, 40% 0%, 45% 2%, 50% 0%, 55% 2%, 60% 0%, 65% 2%, 70% 0%, 75% 2%, 80% 0%, 85% 2%, 90% 0%, 95% 2%, 100% 0%, 
+        100% 100%, 95% 98%, 90% 100%, 85% 98%, 80% 100%, 75% 98%, 70% 100%, 65% 98%, 60% 100%, 55% 98%, 50% 100%, 45% 98%, 40% 100%, 35% 98%, 30% 100%, 25% 98%, 20% 100%, 15% 98%, 10% 100%, 5% 98%, 0% 100%
+    );
+}
+
+/* Header Styling */
+.receipt-header {
+    text-align: center;
+    border-bottom: 2px dashed #4e342e;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.receipt-logo {
+    width: 60px;
+    filter: none; /* Keep original logo colors */
+    margin-bottom: 10px;
+}
+
+.receipt-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #bf360c; /* Rust color */
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Meta Data Grid */
+.receipt-meta-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #5d4037;
+    margin: 0 auto;
+    width: 85%;
+}
+
+.meta-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nickname-row {
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px dotted #aaa;
+    font-weight: bold;
+    color: #3e2723;
+}
+
+/* Table Styling */
+.receipt-items {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+.receipt-items th {
+    text-align: left;
+    border-bottom: 2px solid #2c241b;
+    padding: 8px 0;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #2c241b;
+}
+
+.receipt-items td {
+    padding: 10px 0;
+    font-size: 1rem;
+    border-bottom: 1px dashed #ccc;
+    color: #3e2723;
+    vertical-align: top;
+}
+
+.receipt-items .r-price {
+    text-align: right;
+    font-weight: bold;
+}
+
+.receipt-items .r-name {
+    width: 70%;
+    line-height: 1.4;
+}
+
+/* Total Section */
+.receipt-total {
+    margin-top: 20px;
+    border-top: 3px double #2c241b;
+    border-bottom: 3px double #2c241b;
+    padding: 15px 0;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #bf360c; /* Rust Red */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.receipt-footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #5d4037;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* --- GENERATED IMAGE PREVIEW --- */
+#receipt-canvas-img {
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    border: 4px solid #fff;
+    border-radius: 2px;
+    display: none; /* Hidden until generated */
+}
+
+/* --- ACTION BUTTONS --- */
+.receipt-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.btn-download { 
+    background: #fff; 
+    color: #3e2723; 
+}
+.btn-download:hover { 
+    background: #eee; 
+    transform: translateY(-2px); 
+}
+
+.btn-instagram { 
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+    color: white; 
+    box-shadow: 0 4px 15px rgba(220, 39, 67, 0.4);
+}
+.btn-instagram:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 20px rgba(220, 39, 67, 0.6); 
+}
+
+.btn-close-receipt { 
+    background: transparent; 
+    color: #ccc; 
+    border: 1px solid #666; 
+    margin-top: 10px; 
+}
+.btn-close-receipt:hover { 
+    background: rgba(255,255,255,0.1); 
+    color: #fff; 
+    border-color: #fff; 
+}

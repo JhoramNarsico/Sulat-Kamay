@@ -231,7 +231,10 @@
 
 /* Brand Colors on Hover (Subtle) */
 .logo-card.gcash:hover { border-color: #007dfe; background: rgba(0,125,254,0.05); }
-.logo-card.maya:hover { border-color: #000; background: rgba(0,0,0,0.05); }
+
+/* Updated GoTyme Hover */
+.logo-card.gotyme:hover { border-color: #00aeef; background: rgba(0, 174, 239, 0.05); }
+
 .logo-card.bank:hover { border-color: #d32f2f; background: rgba(211,47,47,0.05); }
 .logo-card.jnt:hover { border-color: #e60012; background: rgba(230,0,18,0.05); }
 
