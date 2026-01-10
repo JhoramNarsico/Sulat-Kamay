@@ -96,7 +96,7 @@ export function updateCartUI() {
     const checkoutBtn = document.querySelector('.cart-summary .cta-button');
     if(checkoutBtn) {
         checkoutBtn.onclick = openReceiptModal;
-        checkoutBtn.innerText = "Proceed to Checkout →";
+        checkoutBtn.innerText = "Proceed to Checkout";
     }
 
     if(list) {
