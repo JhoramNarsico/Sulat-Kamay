@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Order | Sulat Kamay</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/sk-seal.png">
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/main.css">
-    <!-- HTML2Canvas (Required for global receipt logic) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- HTML2Canvas Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body class="about-page">
     
@@ -101,6 +106,7 @@
                     </div>
                 </div>
                 <div class="dm-visual">
+                    <!-- Simple visual representation using CSS shapes -->
                     <div class="phone-mockup">
                         <div class="chat-bubble">Here is my Order Slip! 📄</div>
                         <div class="chat-bubble">And my Letter text 💌</div>
@@ -123,6 +129,7 @@
                             <img src="assets/logo-gcash.png" alt="GCash">
                             <span class="sub-text">Mobile Wallet</span>
                         </div>
+                        <!-- Updated to GoTyme -->
                         <div class="logo-card gotyme">
                             <img src="assets/logo-gotyme.png" alt="GoTyme">
                             <span class="sub-text">GoTyme Bank</span>
@@ -194,35 +201,20 @@
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div class="modal-header">
-                <h2>Your Keepsake Box</h2>
-                <p>Memories collected so far...</p>
-            </div>
+            <div class="modal-header"><h2>Your Keepsake Box</h2></div>
             <ul id="cart-items"></ul>
             <div class="cart-summary">
-                <div class="total-row"><span>Total:</span><strong>P<span id="cart-total">0.00</span></strong></div>
+                <p class="cart-total-display">Total: <strong>P<span id="cart-total">0.00</span></strong></p>
                 <button class="cta-button" style="width:100%">Proceed to Checkout →</button>
             </div>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
-    <div id="toast-box"></div>
-
-    <!-- RECEIPT MODAL SYSTEM -->
+    <!-- RECEIPT MODAL (Hidden) -->
     <div id="receipt-modal" class="receipt-modal">
         <div class="receipt-content">
-            
-            <!-- HEADER -->
-            <div class="modal-top-bar">
-                <h2>Your Order Files</h2>
-                <p>Please save the files below and send them to us.</p>
-            </div>
-
-            <!-- === SOURCE HTML (Hidden during view, visible during capture) === -->
+            <div class="modal-top-bar"><h2>Your Order Files</h2><p>Please save the files below and send them to us.</p></div>
             <div id="source-html-container">
-                
-                <!-- PAPER 1: ORDER SLIP (Financial) -->
                 <div id="receipt-preview" class="paper-source">
                     <div class="receipt-header">
                         <img src="assets/sk-seal.png" class="receipt-logo" alt="SK">
@@ -234,64 +226,21 @@
                             <div class="meta-row nickname-row"><span>Customer:</span> <span id="r-nickname">--</span></div>
                         </div>
                     </div>
-                    <table class="receipt-items">
-                        <thead><tr><th>Item</th><th>Price</th></tr></thead>
-                        <tbody id="r-items-body"></tbody>
-                    </table>
-                    <div class="receipt-total">
-                        <span>TOTAL</span>
-                        <span>P<span id="r-total">0.00</span></span>
-                    </div>
-                    <div class="receipt-footer">
-                        <p>Thank you for writing with us.</p>
-                    </div>
+                    <table class="receipt-items"><thead><tr><th>Item</th><th>Price</th></tr></thead><tbody id="r-items-body"></tbody></table>
+                    <div class="receipt-total"><span>TOTAL</span><span>P<span id="r-total">0.00</span></span></div>
+                    <div class="receipt-footer"><p>Thank you for writing with us.</p></div>
                 </div>
-
-                <!-- PAPER 2: LETTER SLIP (Content) -->
                 <div id="letter-slip" class="paper-source letter-theme">
-                    <div class="letter-header">
-                        <span class="clip-icon">📎</span>
-                        <h3>Transcription Request</h3>
-                        <div class="mini-meta">Ref: <span id="l-ref">--</span> | <span id="l-nickname">--</span></div>
-                    </div>
-                    <div id="letter-content-body">
-                        <!-- Letters injected here -->
-                    </div>
-                    <div class="letter-footer">
-                        * Please handwrite on vintage paper *
-                    </div>
+                    <div class="letter-header"><span class="clip-icon">📎</span><h3>Transcription Request</h3><div class="mini-meta">Ref: <span id="l-ref">--</span> | <span id="l-nickname">--</span></div></div>
+                    <div id="letter-content-body"></div>
+                    <div class="letter-footer">* Please handwrite on vintage paper *</div>
                 </div>
             </div>
-            <!-- === END SOURCE HTML === -->
-
-
-            <!-- === GENERATED PREVIEWS (What the user sees) === -->
             <div id="generated-files-area">
-                
-                <!-- FILE 1 PREVIEW -->
-                <div class="file-block">
-                    <div class="file-label">📄 File 1: Order Slip</div>
-                    <img id="img-preview-order" class="final-img" alt="Order Slip">
-                    <a id="btn-dl-order" class="action-btn btn-download small-btn">📥 Save Order Slip</a>
-                </div>
-
-                <!-- FILE 2 PREVIEW (Hidden if no letters) -->
-                <div class="file-block" id="block-letter" style="display:none;">
-                    <div class="file-label">💌 File 2: Letter Content</div>
-                    <img id="img-preview-letter" class="final-img" alt="Letter Slip">
-                    <a id="btn-dl-letter" class="action-btn btn-download small-btn">📥 Save Letter Content</a>
-                </div>
-
+                <div class="file-block"><div class="file-label">📄 File 1: Order Slip</div><img id="img-preview-order" class="final-img" alt="Order Slip"><a id="btn-dl-order" class="action-btn btn-download small-btn">📥 Save Order Slip</a></div>
+                <div class="file-block" id="block-letter" style="display:none;"><div class="file-label">💌 File 2: Letter Content</div><img id="img-preview-letter" class="final-img" alt="Letter Slip"><a id="btn-dl-letter" class="action-btn btn-download small-btn">📥 Save Letter Content</a></div>
             </div>
-
-            <!-- FINAL ACTIONS -->
-            <div class="receipt-actions">
-                <a href="https://www.instagram.com/sulatkamay_ph/" target="_blank" class="action-btn btn-instagram">
-                    📸 Send Files to Instagram
-                </a>
-                <button class="action-btn btn-close-receipt" onclick="closeReceipt()">Close</button>
-            </div>
-
+            <div class="receipt-actions"><a href="https://www.instagram.com/sulatkamay_ph/" target="_blank" class="action-btn btn-instagram">📸 Send Files to Instagram</a><button class="action-btn btn-close-receipt" onclick="closeReceipt()">Close</button></div>
         </div>
     </div>
 

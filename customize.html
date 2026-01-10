@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Write | Sulat Kamay</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/sk-seal.png">
     
     <!-- HTML2Canvas Library (Required for Receipt Generation) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -109,7 +112,7 @@
             </div>
             <div class="addon-grid">
                 <!-- 1. Bouquet -->
-                <div class="addon-card" onclick="toggleAddon(this, 'Bouquet', 150)">
+                <div class="addon-card" onclick="toggleAddon(this, 'Mini Bouquet', 150)">
                     <img src="assets/addon-bouquet.jpg" onerror="this.src='https://via.placeholder.com/100?text=Flower'">
                     <div class="addon-details">
                         <h5>Mini Bouquet</h5>
@@ -127,7 +130,7 @@
                     <div class="checkbox"></div>
                 </div>
                 <!-- 3. Polaroid -->
-                <div class="addon-card" onclick="toggleAddon(this, 'Polaroid', 5)">
+                <div class="addon-card" onclick="toggleAddon(this, 'Extra Polaroid', 5)">
                     <img src="assets/polaroids.jpg" onerror="this.src='https://via.placeholder.com/100?text=Photo'">
                     <div class="addon-details">
                         <h5>Extra Polaroid</h5>
@@ -136,7 +139,7 @@
                     <div class="checkbox"></div>
                 </div>
                 <!-- 4. Stickers -->
-                <div class="addon-card" onclick="toggleAddon(this, 'Stickers', 20)">
+                <div class="addon-card" onclick="toggleAddon(this, 'Sticker Pack', 20)">
                     <img src="assets/addon-stickers.jpg" onerror="this.src='https://via.placeholder.com/100?text=Sticker'">
                     <div class="addon-details">
                         <h5>Sticker Pack</h5>
@@ -145,7 +148,7 @@
                     <div class="checkbox"></div>
                 </div>
                 <!-- 5. Hair Clips -->
-                <div class="addon-card" onclick="toggleAddon(this, 'Hair Clips', 35)">
+                <div class="addon-card" onclick="toggleAddon(this, 'Aesthetic Clips', 35)">
                     <img src="assets/addon-clips.jpg" onerror="this.src='https://via.placeholder.com/100?text=Clips'">
                     <div class="addon-details">
                         <h5>Aesthetic Clips</h5>
@@ -154,7 +157,7 @@
                     <div class="checkbox"></div>
                 </div>
                 <!-- 6. Extra Letter -->
-                <div class="addon-card" onclick="toggleAddon(this, 'Extra Letter', 120)">
+                <div class="addon-card" onclick="toggleAddon(this, 'Extra Letter Sheet', 120)">
                     <img src="assets/letter-personalized.jpg" onerror="this.src='https://via.placeholder.com/100?text=Letter'">
                     <div class="addon-details">
                         <h5>Extra Letter Sheet</h5>
@@ -232,7 +235,7 @@
             <span class="close">&times;</span>
             <div class="modal-header"><h2>Your Keepsake Box</h2><p>Memories collected so far...</p></div>
             <ul id="cart-items"></ul>
-            <div class="cart-summary"><div class="total-row"><span>Total:</span><strong>P<span id="cart-total">0.00</span></strong></div><button class="cta-button" style="width:100%">Checkout via DM</button></div>
+            <div class="cart-summary"><div class="total-row"><span>Total:</span><strong>P<span id="cart-total">0.00</span></strong></div><button class="cta-button" style="width:100%">Proceed to Checkout →</button></div>
         </div>
     </div>
 
@@ -240,91 +243,90 @@
     <div id="toast-box"></div>
 
     <!-- RECEIPT MODAL SYSTEM -->
-<!-- DUAL-FILE RECEIPT MODAL -->
-<div id="receipt-modal" class="receipt-modal">
-    <div class="receipt-content">
-        
-        <!-- HEADER -->
-        <div class="modal-top-bar">
-            <h2>Your Order Files</h2>
-            <p>Please save the files below and send them to us.</p>
-        </div>
-
-        <!-- === SOURCE HTML (Hidden during view, visible during capture) === -->
-        <div id="source-html-container">
+    <div id="receipt-modal" class="receipt-modal">
+        <div class="receipt-content">
             
-            <!-- PAPER 1: ORDER SLIP (Financial) -->
-            <div id="receipt-preview" class="paper-source">
-                <div class="receipt-header">
-                    <img src="assets/sk-seal.png" class="receipt-logo" alt="SK">
-                    <div class="receipt-title">Order Slip</div>
-                    <div class="receipt-meta-grid">
-                        <div class="meta-row"><span>Ref:</span> <span id="r-ref">--</span></div>
-                        <div class="meta-row"><span>Date:</span> <span id="r-date">--</span></div>
-                        <div class="meta-row"><span>Time:</span> <span id="r-time">--</span></div>
-                        <div class="meta-row nickname-row"><span>Customer:</span> <span id="r-nickname">--</span></div>
+            <!-- HEADER -->
+            <div class="modal-top-bar">
+                <h2>Your Order Files</h2>
+                <p>Please save the files below and send them to us.</p>
+            </div>
+
+            <!-- === SOURCE HTML (Hidden during view, visible during capture) === -->
+            <div id="source-html-container">
+                
+                <!-- PAPER 1: ORDER SLIP (Financial) -->
+                <div id="receipt-preview" class="paper-source">
+                    <div class="receipt-header">
+                        <img src="assets/sk-seal.png" class="receipt-logo" alt="SK">
+                        <div class="receipt-title">Order Slip</div>
+                        <div class="receipt-meta-grid">
+                            <div class="meta-row"><span>Ref:</span> <span id="r-ref">--</span></div>
+                            <div class="meta-row"><span>Date:</span> <span id="r-date">--</span></div>
+                            <div class="meta-row"><span>Time:</span> <span id="r-time">--</span></div>
+                            <div class="meta-row nickname-row"><span>Customer:</span> <span id="r-nickname">--</span></div>
+                        </div>
+                    </div>
+                    <table class="receipt-items">
+                        <thead><tr><th>Item</th><th>Price</th></tr></thead>
+                        <tbody id="r-items-body"></tbody>
+                    </table>
+                    <div class="receipt-total">
+                        <span>TOTAL</span>
+                        <span>P<span id="r-total">0.00</span></span>
+                    </div>
+                    <div class="receipt-footer">
+                        <p>Thank you for writing with us.</p>
                     </div>
                 </div>
-                <table class="receipt-items">
-                    <thead><tr><th>Item</th><th>Price</th></tr></thead>
-                    <tbody id="r-items-body"></tbody>
-                </table>
-                <div class="receipt-total">
-                    <span>TOTAL</span>
-                    <span>P<span id="r-total">0.00</span></span>
-                </div>
-                <div class="receipt-footer">
-                    <p>Thank you for writing with us.</p>
+
+                <!-- PAPER 2: LETTER SLIP (Content) -->
+                <div id="letter-slip" class="paper-source letter-theme">
+                    <div class="letter-header">
+                        <span class="clip-icon">📎</span>
+                        <h3>Transcription Request</h3>
+                        <div class="mini-meta">Ref: <span id="l-ref">--</span> | <span id="l-nickname">--</span></div>
+                    </div>
+                    <div id="letter-content-body">
+                        <!-- Letters injected here -->
+                    </div>
+                    <div class="letter-footer">
+                        * Please handwrite on vintage paper *
+                    </div>
                 </div>
             </div>
-
-            <!-- PAPER 2: LETTER SLIP (Content) -->
-            <div id="letter-slip" class="paper-source letter-theme">
-                <div class="letter-header">
-                    <span class="clip-icon">📎</span>
-                    <h3>Transcription Request</h3>
-                    <div class="mini-meta">Ref: <span id="l-ref">--</span> | <span id="l-nickname">--</span></div>
-                </div>
-                <div id="letter-content-body">
-                    <!-- Letters injected here -->
-                </div>
-                <div class="letter-footer">
-                    * Please handwrite on vintage paper *
-                </div>
-            </div>
-        </div>
-        <!-- === END SOURCE HTML === -->
+            <!-- === END SOURCE HTML === -->
 
 
-        <!-- === GENERATED PREVIEWS (What the user sees) === -->
-        <div id="generated-files-area">
-            
-            <!-- FILE 1 PREVIEW -->
-            <div class="file-block">
-                <div class="file-label">📄 File 1: Order Slip</div>
-                <img id="img-preview-order" class="final-img" alt="Order Slip">
-                <a id="btn-dl-order" class="action-btn btn-download small-btn">📥 Save Order Slip</a>
+            <!-- === GENERATED PREVIEWS (What the user sees) === -->
+            <div id="generated-files-area">
+                
+                <!-- FILE 1 PREVIEW -->
+                <div class="file-block">
+                    <div class="file-label">📄 File 1: Order Slip</div>
+                    <img id="img-preview-order" class="final-img" alt="Order Slip">
+                    <a id="btn-dl-order" class="action-btn btn-download small-btn">📥 Save Order Slip</a>
+                </div>
+
+                <!-- FILE 2 PREVIEW (Hidden if no letters) -->
+                <div class="file-block" id="block-letter" style="display:none;">
+                    <div class="file-label">💌 File 2: Letter Content</div>
+                    <img id="img-preview-letter" class="final-img" alt="Letter Slip">
+                    <a id="btn-dl-letter" class="action-btn btn-download small-btn">📥 Save Letter Content</a>
+                </div>
+
             </div>
 
-            <!-- FILE 2 PREVIEW (Hidden if no letters) -->
-            <div class="file-block" id="block-letter" style="display:none;">
-                <div class="file-label">💌 File 2: Letter Content</div>
-                <img id="img-preview-letter" class="final-img" alt="Letter Slip">
-                <a id="btn-dl-letter" class="action-btn btn-download small-btn">📥 Save Letter Content</a>
+            <!-- FINAL ACTIONS -->
+            <div class="receipt-actions">
+                <a href="https://www.instagram.com/sulatkamay_ph/" target="_blank" class="action-btn btn-instagram">
+                    📸 Send Files to Instagram
+                </a>
+                <button class="action-btn btn-close-receipt" onclick="closeReceipt()">Close</button>
             </div>
 
         </div>
-
-        <!-- FINAL ACTIONS -->
-        <div class="receipt-actions">
-            <a href="https://www.instagram.com/sulatkamay_ph/" target="_blank" class="action-btn btn-instagram">
-                📸 Send Files to Instagram
-            </a>
-            <button class="action-btn btn-close-receipt" onclick="closeReceipt()">Close</button>
-        </div>
-
     </div>
-</div>
 
     <!-- Main Logic Script -->
     <script type="module" src="js/main.js"></script>
